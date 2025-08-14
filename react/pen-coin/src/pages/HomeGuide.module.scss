@@ -1,5 +1,36 @@
 .HomeGuide {
+  display: block;
   width: 1180px;
   height: 680px;
-  background-color: aqua;
+}
+
+.Left {
+  float: left;
+  height: 100%;
+  width: 640px;
+}
+
+.Right {
+  float: right;
+  height: 100%;
+  width: 440px;
+}
+
+.ArrowArea {
+  float: left;
+  height: 100%;
+  width: 100px;
+}
+
+.Arrow {
+  height: 28px;
+  width: 20px;
+  transform: rotate(180deg);
+  background: url(https://img.js.design/assets/img/6897161bba276a0e8a23438e.gif#56debd504ca2021da4b2fa6a8e3652d4);
+  float: right;
+  margin-right: 20px;
+}
+
+.NoticeArea {
+  margin-top: 500px;
 }

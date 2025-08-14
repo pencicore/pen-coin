@@ -5,8 +5,54 @@
     font-style: normal;
 }
 
-* {
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    height: 35px;
+    line-height: 35px;
+    vertical-align: middle;
+    color: black;
+    margin: 0;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 700;
+    height: 30px;
+    line-height: 30px;
+    color: rgba(96, 98, 102, 1);
+    margin: 0;
+}
+
+small {
+    font-size: 14px;
+    font-weight: 700;
+    height: 16px;
+    line-height: 16px;
+    color: rgba(144, 147, 153, 1);
+    margin: 0;
+}
+
+strong {
+    font-size: 18px;
+    font-weight: 700;
+    height: 24px;
+    line-height: 24px;
+    color: black;
+}
+
+a {
+    color: rgba(21, 126, 250, 1);
     text-decoration: none;
+}
+
+i {
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat; /* 只出现一次 */
+    background-position: center;  /* 居中 */
+    background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
+    display: inline-block;        /* 让宽高生效 */
 }
 
 .pixel-16-000 {

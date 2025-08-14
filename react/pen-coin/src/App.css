@@ -1,6 +1,8 @@
 .App {
     height: 100%;
     width: 100%;
+    min-width: 1440px;  /* 不小于1180px */
+    min-height: 760px;
 }
 
 .Menu {

@@ -1,0 +1,14 @@
+.Button {
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  background-size: cover; /* 拉伸或裁剪，覆盖整个容器 */
+  margin: 16px;
+}
+
+.Green {
+  background-image: url("../assets/images/button-green-back.png");
+}
