@@ -108,6 +108,12 @@ div-container {
     box-shadow: 0px 1px 4px  rgba(0, 0, 0, 0.15);
 }
 
+div-main {
+    display: block;
+    width: 1180px;
+    height: 680px;
+}
+
 .pixel-16-000 {
     font-family: 'Pixel', serif;
     font-size: 16px;

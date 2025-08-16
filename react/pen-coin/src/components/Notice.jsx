@@ -3,7 +3,7 @@ import style from './Notice.module.scss'
 function Notice({textArr}) {
 
     return (
-        <div className={style.Numbered}>
+        <div className={style.Notice}>
             <i></i>
             {textArr.map((text, index) => (
                 <div className={style.textArea} key={index}>

@@ -38,10 +38,6 @@ div-back {
   }
 }
 
-h2 {
-  display: inline-block;
-}
-
 .NoticeArea {
   margin-top: 80px;
 }
@@ -52,11 +48,19 @@ h2 {
   left: 430px;
 }
 
-p mark {
-  font-size: 26px;
-  font-weight: 500;
-  height: 30px;
-  line-height: 30px;
-  color: black;
-  margin: 0;
+.HomeCheckin {
+
+  h2 {
+    display: inline-block;
+  }
+
+  p mark {
+    font-size: 26px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 30px;
+    color: black;
+    margin: 0;
+  }
+
 }

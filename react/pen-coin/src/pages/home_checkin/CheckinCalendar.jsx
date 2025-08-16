@@ -84,7 +84,7 @@ function CheckinCalendar({year, month}) {
     // }, []);
 
     return (
-        <div-container>
+        <div-container className={style.Calendar}>
             <div className={style.CalendarTitle} ref={titleRef}>
                 <span className={style.DateCurrentDay}>Sun</span>
                 <span>Mon</span>

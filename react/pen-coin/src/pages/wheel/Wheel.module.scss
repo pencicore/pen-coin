@@ -1,0 +1,30 @@
+.Wheel {
+  mark {
+    font-size: 26px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 30px;
+    color: rgba(61, 197, 93, 1);
+    margin: 0;
+  }
+
+  p {
+    margin-top: 8px;
+  }
+}
+
+.Left {
+  float: left;
+  height: 100%;
+  width: 680px;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-top: 30px;
+  position: relative; /* 作为定位参考 */
+}
+
+.ButtonArea {
+  position: absolute;
+  top: 50px;
+  left: 400px;
+}

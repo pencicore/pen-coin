@@ -6,6 +6,7 @@ import MenuButton from "./components/MenuButton.jsx";
 import LoginButton from "./components/LoginButton.jsx";
 import HomeGuide from "./pages/home_guide/HomeGuide.jsx";
 import HomeCheckin from "./pages/home_checkin/HomeCheckin.jsx";
+import Wheel from "./pages/wheel/Wheel.jsx";
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
           <div className="Menu">
               <MenuButton name={"home"} url={"/"}></MenuButton>
               <MenuButton name={"guide"} url={"/guide"}></MenuButton>
+              <MenuButton name={"wheel"} url={"/wheel"}></MenuButton>
               <MenuButton name={"page1"} url={"/page1"}></MenuButton>
               <MenuButton name={"page2"} url={"/page2"}></MenuButton>
           </div>
@@ -24,6 +26,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomeCheckin />} />
                     <Route path="/guide" element={<HomeGuide />} />
+                    <Route path="/wheel" element={<Wheel />} />
                     <Route path="/page1" element={<Place name={"page1"} />} />
                     <Route path="/page2" element={<Place name={"page2"} />} />
                 </Routes>
