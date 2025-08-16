@@ -1,0 +1,24 @@
+.DrawHistory {
+  width: 510px;
+  height: 380px;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-top: 12px;
+}
+
+.DrawHistory {
+  i {
+    background-image: url("../../assets/images/i-history.png");
+  }
+
+  p {
+    display: inline-block;
+    margin-top: 0;
+  }
+
+  tr {
+    height: 30px;
+    width: 500px;
+    margin-left: 10px;
+  }
+}

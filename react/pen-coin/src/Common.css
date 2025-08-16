@@ -49,6 +49,7 @@ p {
     line-height: 30px;
     color: rgba(96, 98, 102, 1);
     margin: 0;
+    vertical-align: top; /* top | middle | bottom */
 }
 
 small {
@@ -81,10 +82,12 @@ a {
 i {
     height: 20px;
     width: 20px;
+    margin: 5px;
     background-repeat: no-repeat; /* 只出现一次 */
     background-position: center;  /* 居中 */
     background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
     display: inline-block;        /* 让宽高生效 */
+    vertical-align: top; /* top | middle | bottom */
 }
 
 button {

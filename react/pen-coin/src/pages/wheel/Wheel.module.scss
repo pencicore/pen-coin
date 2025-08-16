@@ -16,7 +16,7 @@
 .Left {
   float: left;
   height: 100%;
-  width: 680px;
+  width: 620px;
   box-sizing: border-box;
   padding-left: 50px;
   padding-top: 30px;
@@ -27,4 +27,18 @@
   position: absolute;
   top: 50px;
   left: 400px;
+}
+
+.Right {
+  float: left;
+  height: 100%;
+  width: 560px;
+  box-sizing: border-box;
+  padding-top: 50px;
+  position: relative; /* 作为定位参考 */
+  //background-color: wheat;
+}
+
+.NoticeArea {
+  margin-top: 80px;
 }

@@ -45,7 +45,7 @@ function HomeCheckin()
                     ]}></Notice>
                 </div>
                 <div className={style.ButtonArea}>
-                    <GreenButton>立即签到</GreenButton>
+                    <GreenButton name={"立即签到"}></GreenButton>
                 </div>
             </div>
             <div className={style.Right}>

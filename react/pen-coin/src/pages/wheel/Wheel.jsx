@@ -2,6 +2,8 @@ import style from './Wheel.module.scss'
 import WheelDraw from "./WheelDraw.jsx";
 import {GreenButton} from "../../components/Button.jsx";
 import {useRef} from "react";
+import DrawHistory from "./DrawHistory.jsx";
+import Notice from "../../components/Notice.jsx";
 
 function Wheel()
 {
@@ -37,10 +39,18 @@ function Wheel()
                 >
                 </WheelDraw>
                 <div className={style.ButtonArea}>
-                    <GreenButton clickHandle={handleDraw}>抽奖</GreenButton>
+                    <GreenButton clickHandle={handleDraw} name={"抽奖"}></GreenButton>
                 </div>
             </div>
-            {/*<div className={style.Right}></div>*/}
+            <div className={style.Right}>
+                <DrawHistory></DrawHistory>
+                <div className={style.NoticeArea}>
+                    <Notice textArr={[
+                        "每个账户每天有3次抽奖机会（一般情况）<br>首次免费、第二次需消耗100SATS、第三次消耗200SATS",
+                        "神秘Token为8位，由某一拥有代币账户的地址生成"
+                    ]}></Notice>
+                </div>
+            </div>
         </div-main>
     )
 }

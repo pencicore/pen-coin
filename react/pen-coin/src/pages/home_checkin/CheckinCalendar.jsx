@@ -75,14 +75,6 @@ function CheckinCalendar({year, month}) {
 
     }, [currentYear, currentMonth]);
 
-    // useEffect(() => {
-    //     const spans = titleRef.current.querySelectorAll("span");
-    //     const i = new Date().getDay() % 7;
-    //     if (spans[i]) {
-    //         spans[i].classList.add(style.DateCurrentDay);
-    //     }
-    // }, []);
-
     return (
         <div-container className={style.Calendar}>
             <div className={style.CalendarTitle} ref={titleRef}>
