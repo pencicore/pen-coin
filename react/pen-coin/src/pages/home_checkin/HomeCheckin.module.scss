@@ -1,0 +1,62 @@
+.HomeCheckin {
+  display: block;
+  width: 1180px;
+  height: 680px;
+}
+
+.Left {
+  float: left;
+  height: 100%;
+  width: 680px;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-top: 30px;
+  position: relative; /* 作为定位参考 */
+}
+
+.Right {
+  float: right;
+  height: 100%;
+  width: 500px;
+}
+
+div-back {
+  height: 85px;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-top: 6px;
+  padding-right: 16px;
+  margin-top: 25px;
+  margin-right: 20px;
+}
+
+.LastCheckinInfo {
+  margin-right: 0;
+
+  small {
+    display: inline-block;
+  }
+}
+
+h2 {
+  display: inline-block;
+}
+
+.NoticeArea {
+  margin-top: 80px;
+}
+
+.ButtonArea {
+  position: absolute;
+  top: 35px;
+  left: 430px;
+}
+
+p mark {
+  font-size: 26px;
+  font-weight: 500;
+  height: 30px;
+  line-height: 30px;
+  color: black;
+  margin: 0;
+}

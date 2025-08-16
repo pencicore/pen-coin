@@ -6,9 +6,8 @@ function Notice({textArr}) {
         <div className={style.Numbered}>
             <i></i>
             {textArr.map((text, index) => (
-                <div className={style.textArea}>
-                    <p
-                        key={index}
+                <div className={style.textArea} key={index}>
+                    <small
                         dangerouslySetInnerHTML={{ __html: text }}
                     />
                 </div>

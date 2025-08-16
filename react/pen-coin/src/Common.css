@@ -6,12 +6,39 @@
 }
 
 h1 {
+    font-size: 36px;
+    font-weight: 500;
+    height: 50px;
+    line-height: 50px;
+    color: black;
+    margin: 0;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 30px;
+    color: black;
+    margin: 0;
+}
+
+h3 {
     font-size: 24px;
     font-weight: 700;
     height: 35px;
     line-height: 35px;
     vertical-align: middle;
     color: black;
+    margin: 0;
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 500;
+    height: 24px;
+    line-height: 24px;
+    color: rgba(144, 147, 153, 1);
     margin: 0;
 }
 
@@ -41,6 +68,11 @@ strong {
     color: black;
 }
 
+mark {
+    color: black;
+    background-color: transparent;
+}
+
 a {
     color: rgba(21, 126, 250, 1);
     text-decoration: none;
@@ -53,6 +85,27 @@ i {
     background-position: center;  /* 居中 */
     background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
     display: inline-block;        /* 让宽高生效 */
+}
+
+button {
+    border: none;
+    margin: 0;
+    background: none;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+}
+
+div-back {
+    display: inline-block;
+    border-radius: 8px;
+    background: rgba(243, 243, 243, 1);
+}
+
+div-container {
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: 0px 1px 4px  rgba(0, 0, 0, 0.15);
 }
 
 .pixel-16-000 {

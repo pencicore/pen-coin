@@ -3,15 +3,12 @@ i {
 }
 
 
-p {
+small {
   line-height: 1.5; /* 增加行距防止重叠 */
   display: inline-block;   /* 确保是块级元素 */
   word-wrap: break-word; /* 超长单词/链接自动换行 */
   margin-right: 5px;
-}
-
-strong {
-  font-size: 16px
+  color: rgba(96, 98, 102, 1);;
 }
 
 .textArea {
@@ -21,12 +18,12 @@ strong {
 .Numbered {
   counter-reset: paragraph; /* 重置计数器 */
 }
-.Numbered p {
+.Numbered small {
   position: relative;
   padding-left: 24px; /* 给数字留位置 */
   counter-increment: paragraph; /* 计数 +1 */
 }
-.Numbered p::before {
+.Numbered small::before {
   content: counter(paragraph) ".";
   position: absolute;
   left: 0;
