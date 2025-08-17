@@ -1,12 +1,13 @@
 import './App.css'
 import './Common.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Place from "./components/Place.jsx";
 import MenuButton from "./components/MenuButton.jsx";
 import LoginButton from "./components/LoginButton.jsx";
 import HomeGuide from "./pages/home_guide/HomeGuide.jsx";
 import HomeCheckin from "./pages/home_checkin/HomeCheckin.jsx";
 import Wheel from "./pages/wheel/Wheel.jsx";
+import Auction from "./pages/auction/Auction.jsx";
+import NftTrade from "./pages/nft/NftTrade.jsx";
 function App() {
 
   return (
@@ -16,8 +17,8 @@ function App() {
               <MenuButton name={"home"} url={"/"}></MenuButton>
               <MenuButton name={"guide"} url={"/guide"}></MenuButton>
               <MenuButton name={"wheel"} url={"/wheel"}></MenuButton>
-              <MenuButton name={"page1"} url={"/page1"}></MenuButton>
-              <MenuButton name={"page2"} url={"/page2"}></MenuButton>
+              <MenuButton name={"Auction"} url={"/Auction"}></MenuButton>
+              <MenuButton name={"NFT"} url={"/NFT"}></MenuButton>
           </div>
             <div className="Header">
                 <LoginButton name={"login"} handleClick={()=>{alert("click login")}}></LoginButton>
@@ -27,8 +28,8 @@ function App() {
                     <Route path="/" element={<HomeCheckin />} />
                     <Route path="/guide" element={<HomeGuide />} />
                     <Route path="/wheel" element={<Wheel />} />
-                    <Route path="/page1" element={<Place name={"page1"} />} />
-                    <Route path="/page2" element={<Place name={"page2"} />} />
+                    <Route path="/Auction" element={<Auction />} />
+                    <Route path="/NFT" element={<NftTrade />} />
                 </Routes>
             </div>
         </div>

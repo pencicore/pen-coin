@@ -1,0 +1,25 @@
+.Auction {
+
+}
+
+.Left {
+  float: left;
+  height: 100%;
+  width: 660px;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-top: 30px;
+  position: relative; /* 作为定位参考 */
+}
+
+.Right {
+  float: right;
+  height: 100%;
+  width: 520px;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+.NoticeArea {
+  margin-top: 20px;
+}

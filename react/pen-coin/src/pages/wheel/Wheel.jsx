@@ -47,7 +47,7 @@ function Wheel()
                 <div className={style.NoticeArea}>
                     <Notice textArr={[
                         "每个账户每天有3次抽奖机会（一般情况）<br>首次免费、第二次需消耗100SATS、第三次消耗200SATS",
-                        "神秘Token为8位，由某一拥有代币账户的地址生成"
+                        "神秘Token为8位，由某一拥有代币账户的地址生成",
                     ]}></Notice>
                 </div>
             </div>
