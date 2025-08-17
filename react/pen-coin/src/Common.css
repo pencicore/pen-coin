@@ -113,6 +113,29 @@ img {
     image-rendering: pixelated;      /* 强制像素化缩放 */
 }
 
+input {
+    border: none;
+    border-bottom: 2px solid rgba(96, 98, 102, 1);
+    height: 20px;
+    width: 120px;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(85, 85, 85, 1);
+}
+
+input::placeholder {
+    line-height: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(144, 147, 153, 1);
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid rgba(254, 203, 47, 1);
+}
+
 div-back {
     display: inline-block;
     border-radius: 8px;

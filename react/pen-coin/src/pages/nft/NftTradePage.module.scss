@@ -1,0 +1,76 @@
+.NftTradePage {
+  height: 460px;
+  width: 580px;
+}
+
+.Title {
+  height: 30px;
+  width: 540px;
+
+  p {
+    display: inline-block;
+  }
+
+  mark {
+    font-size: 16px;
+    color: rgba(96, 98, 102, 1)
+  }
+
+  small {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  i {
+    margin-top: 7px;
+    margin-bottom: 3px;
+  }
+}
+
+.Order {
+  display: inline-block;
+  height: 40px;
+  width: 250px;
+  margin-top: 20px;
+  margin-right: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  img {
+    height: 40px;
+    width: 40px;
+    float: left;
+    margin-right: 10px;
+  }
+
+  small {
+    height: 20px;
+    float: left;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  mark {
+    font-size: 12px;
+    color: rgba(85, 85, 85, 1);
+  }
+}
+
+.Order:hover {
+  background-color: #F3F3F3;
+  box-shadow: 0 1px 4px  rgba(0, 0, 0, 0.15);
+}
+
+.IconFind {
+  background-image: url("../../assets/images/i-find.png");
+}
+
+.IconLeft {
+  background-image: url("../../assets/images/i-pageleft.png");
+}
+
+.IconRight {
+  background-image: url("../../assets/images/i-pageright.png");
+}

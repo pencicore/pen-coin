@@ -1,0 +1,40 @@
+.NftTradeHistory {
+  height: 330px;
+  width: 466px;
+
+  i {
+    background-image: url("../../assets/images/i-tradehistory.png");
+  }
+}
+
+
+.Order {
+  height: 40px;
+  width: 440px;
+  margin-top: 15px;
+  margin-right: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  img {
+    height: 40px;
+    width: 40px;
+    float: left;
+    margin-right: 10px;
+  }
+
+  small {
+    display: inline-block;
+    height: 20px;
+    width: 190px;
+    float: left;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  mark {
+    font-size: 12px;
+    color: rgba(85, 85, 85, 1);
+  }
+}

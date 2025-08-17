@@ -1,11 +1,17 @@
 .NftTrade {
+  div-back {
+    height: 47px;
 
+    mark {
+      font-size: 24px;
+    }
+  }
 }
 
 .Left {
   float: left;
   height: 100%;
-  width: 660px;
+  width: 680px;
   box-sizing: border-box;
   padding-left: 50px;
   padding-top: 30px;
@@ -13,5 +19,15 @@
 }
 
 .Right {
+  float: left;
+  height: 100%;
+  width: 500px;
+  box-sizing: border-box;
+  padding-top: 60px;
+}
 
+.ButtonArea {
+  position: absolute;
+  top: 90px;
+  left: 450px;
 }
