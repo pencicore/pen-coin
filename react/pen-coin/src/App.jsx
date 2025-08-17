@@ -8,31 +8,34 @@ import HomeCheckin from "./pages/home_checkin/HomeCheckin.jsx";
 import Wheel from "./pages/wheel/Wheel.jsx";
 import Auction from "./pages/auction/Auction.jsx";
 import NftTrade from "./pages/nft/NftTrade.jsx";
+import User from "./pages/user/User.jsx";
 function App() {
 
   return (
       <BrowserRouter>
-        <div className="App">
-          <div className="Menu">
-              <MenuButton name={"home"} url={"/"}></MenuButton>
-              <MenuButton name={"guide"} url={"/guide"}></MenuButton>
-              <MenuButton name={"wheel"} url={"/wheel"}></MenuButton>
-              <MenuButton name={"Auction"} url={"/Auction"}></MenuButton>
-              <MenuButton name={"NFT"} url={"/NFT"}></MenuButton>
-          </div>
-            <div className="Header">
-                <LoginButton name={"login"} handleClick={()=>{alert("click login")}}></LoginButton>
-            </div>
-            <div className="Main">
+          <div className="App">
+              <div className="Menu">
+                  <MenuButton name={"home"} url={"/"}></MenuButton>
+                  <MenuButton name={"guide"} url={"/guide"}></MenuButton>
+                  <MenuButton name={"wheel"} url={"/wheel"}></MenuButton>
+                  <MenuButton name={"Auction"} url={"/Auction"}></MenuButton>
+                  <MenuButton name={"NFT"} url={"/NFT"}></MenuButton>
+                  <MenuButton name={"User"} url={"/User"}></MenuButton>
+              </div>
+              <div className="Header">
+                  <LoginButton name={"login"} handleClick={()=>{alert("click login")}}></LoginButton>
+              </div>
+              <div className="Main">
                 <Routes>
                     <Route path="/" element={<HomeCheckin />} />
                     <Route path="/guide" element={<HomeGuide />} />
                     <Route path="/wheel" element={<Wheel />} />
                     <Route path="/Auction" element={<Auction />} />
                     <Route path="/NFT" element={<NftTrade />} />
+                    <Route path="/User" element={<User />} />
                 </Routes>
-            </div>
-        </div>
+              </div>
+          </div>
       </BrowserRouter>
   )
 }

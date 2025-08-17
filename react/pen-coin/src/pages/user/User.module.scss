@@ -1,0 +1,29 @@
+.User {
+  div-back {
+    width: 227px;
+    height: 97px;
+
+    small {
+      font-size: 12px;
+    }
+  }
+}
+
+
+.Left {
+  float: left;
+  height: 100%;
+  width: 640px;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-top: 30px;
+  position: relative; /* 作为定位参考 */
+}
+
+.Up {
+  color: rgba(61, 197, 93, 1);
+}
+
+.Down {
+  color: rgba(252, 61, 57, 1);
+}
