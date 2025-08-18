@@ -27,3 +27,23 @@
 .Down {
   color: rgba(252, 61, 57, 1);
 }
+
+.ButtonAreaAdd {
+  position: absolute;
+  top: 540px;
+  left: 100px;
+}
+
+.ButtonAreaRate {
+  position: absolute;
+  top: 540px;
+  left: 350px;
+}
+
+.Right {
+  float: left;
+  height: 100%;
+  width: 540px;
+  box-sizing: border-box;
+  padding-top: 50px;
+}

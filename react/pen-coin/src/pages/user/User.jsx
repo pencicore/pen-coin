@@ -1,5 +1,7 @@
 import style from './User.module.scss'
 import LineChart from "../../components/LineChart.jsx";
+import {GreenButton} from "../../components/Button.jsx";
+import UserHistory from "./UserHistory.jsx";
 
 const User = () => {
     return (
@@ -20,6 +22,17 @@ const User = () => {
                 </div-back>
                 <br></br><br></br>
                 <LineChart arr={[1,2,3,5,7,9,11,11.9,12.1,12.2,12.2,12.2,11,11,1,2,4,8,9,19,9,8,4,2,1,3,6,8,9,8,9,8,9,8]}></LineChart>
+                <div className={style.ButtonAreaAdd}>
+                    <GreenButton name={"添加到钱包"}></GreenButton>
+                    <small>将pen代币添加到钱包中</small>
+                </div>
+                <div className={style.ButtonAreaRate}>
+                    <GreenButton name={"查看排行榜"}></GreenButton>
+                    <small>查看pen代币资产排行榜与活跃度排行榜</small>
+                </div>
+            </div>
+            <div className={style.Right}>
+                <UserHistory></UserHistory>
             </div>
         </div-main>
     )

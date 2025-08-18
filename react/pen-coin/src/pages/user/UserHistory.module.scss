@@ -1,0 +1,26 @@
+.UserHistory {
+  width: 466px;
+  height: 394px;
+
+  i {
+    background-image: url("../../assets/images/i-activity.png");
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  tr {
+    margin: 0;
+    padding: 0;
+  }
+
+}
+
+.Up {
+  color: rgba(61, 197, 93, 1);
+}
+
+.Down {
+  color: rgba(252, 61, 57, 1);
+}
