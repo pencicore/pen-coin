@@ -9,6 +9,7 @@ import Wheel from "./pages/wheel/Wheel.jsx";
 import Auction from "./pages/auction/Auction.jsx";
 import NftTrade from "./pages/nft/NftTrade.jsx";
 import User from "./pages/user/User.jsx";
+import Trade from "./pages/trade/Trade.jsx";
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
                   <MenuButton name={"Auction"} url={"/Auction"}></MenuButton>
                   <MenuButton name={"NFT"} url={"/NFT"}></MenuButton>
                   <MenuButton name={"User"} url={"/User"}></MenuButton>
+                  <MenuButton name={"Trade"} url={"/trade"}></MenuButton>
               </div>
               <div className="Header">
                   <LoginButton name={"login"} handleClick={()=>{alert("click login")}}></LoginButton>
@@ -33,6 +35,7 @@ function App() {
                     <Route path="/Auction" element={<Auction />} />
                     <Route path="/NFT" element={<NftTrade />} />
                     <Route path="/User" element={<User />} />
+                    <Route path="/Trade" element={<Trade />} />
                 </Routes>
               </div>
           </div>

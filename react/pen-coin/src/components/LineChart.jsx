@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import style from './LineChart.module.scss';
 
-const LineChart = ({ arr = [], unit = 'PEN' }) => {
+const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280}) => {
     const canvasRef = useRef(null);
     const [labels, setLabels] = useState([]);
 
@@ -96,7 +96,7 @@ const LineChart = ({ arr = [], unit = 'PEN' }) => {
     return (
         <div className={style.LineChart} style={{ position: 'relative' }}>
             <div className={style.Map}>
-                <canvas ref={canvasRef} width={550} height={280}></canvas>
+                <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}></canvas>
             </div>
             {labels.map((label, idx) => (
                 <div

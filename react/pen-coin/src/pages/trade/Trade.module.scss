@@ -1,0 +1,108 @@
+.Trade {
+
+  div-back {
+    height: 60px;
+    width: 137px;
+    padding-top: 0;
+
+    p {
+      font-size: 14px;
+      height: 20px;
+    }
+    h4 {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+
+  small {
+    color: rgba(96, 98, 102, 1);
+  }
+}
+
+.Left {
+  float: left;
+  height: 100%;
+  width: 600px;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-top: 30px;
+  position: relative; /* 作为定位参考 */
+}
+
+.ChangeDir {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  background: rgba(243, 243, 243, 1);
+  margin-right: 50px;
+  margin-left: 30px;
+  margin-top: 40px;
+
+  i {
+    background-image: url("../../assets/images/i-changedir.png");
+  }
+}
+
+.Input {
+  height: 37px;
+  width: 400px;
+  background-color: rgba(243, 243, 243, 1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  margin-bottom: 10px;
+
+  input {
+    background: none;
+    border: none;
+    height: 37px;
+    width: 285px;
+    line-height: 37px;
+    font-size: 16px;
+    vertical-align: top; /* 或 middle, bottom，看你需要 */
+  }
+
+  input::placeholder {
+    line-height: 37px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  button {
+    width: 36px;
+    height: 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 1);
+    vertical-align: top; /* 或 middle, bottom，看你需要 */
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-top: 8.5px;
+    margin-left: 10px;
+  }
+
+  span {
+    height: 37px;
+    line-height: 37px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(96, 98, 102, 1);
+    margin-left: 10px;
+  }
+}
+
+.ButtonArea {
+  position: absolute;
+  top: 350px;
+  left: 160px;
+}
+
+.Right {
+  float: left;
+  height: 100%;
+  width: 580px;
+  box-sizing: border-box;
+  padding-top: 50px;
+}
