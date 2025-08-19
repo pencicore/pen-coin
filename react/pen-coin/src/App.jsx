@@ -10,7 +10,14 @@ import Auction from "./pages/auction/Auction.jsx";
 import NftTrade from "./pages/nft/NftTrade.jsx";
 import User from "./pages/user/User.jsx";
 import Trade from "./pages/trade/Trade.jsx";
+import {useState} from "react";
+import ScreenWindow, {FullWindowController} from "./containers/ScreenWindow.jsx";
+import Place from "./components/Place.jsx";
+import Login from "./pages/login/Login.jsx";
+
 function App() {
+
+    const [login, setLogin] = useState(false)
 
   return (
       <BrowserRouter>
@@ -25,7 +32,7 @@ function App() {
                   <MenuButton name={"Trade"} url={"/trade"}></MenuButton>
               </div>
               <div className="Header">
-                  <LoginButton name={"login"} handleClick={()=>{alert("click login")}}></LoginButton>
+                  <LoginButton name={"login"} handleClick={()=>{FullWindowController.open(<Login></Login>)}}></LoginButton>
               </div>
               <div className="Main">
                 <Routes>
@@ -39,6 +46,7 @@ function App() {
                 </Routes>
               </div>
           </div>
+          <ScreenWindow></ScreenWindow>
       </BrowserRouter>
   )
 }

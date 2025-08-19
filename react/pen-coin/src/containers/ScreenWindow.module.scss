@@ -1,0 +1,44 @@
+.ScreenWindow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  min-height: 760px;
+  min-width: 1440px;
+
+  // 初始状态
+  transform: scale(0);
+  transition: transform 0.1s ease;
+}
+
+.ScreenWindow.show {
+  transform: scale(1);
+}
+
+.ScreenWindow.hide {
+  transform: scale(0);
+}
+
+.ExitButton {
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  right: 50px;
+  top: 30px;
+  background-image: url("../assets/images/i-exit.png");
+  background-repeat: no-repeat; /* 只出现一次 */
+  background-position: center;  /* 居中 */
+  background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
+  image-rendering: pixelated;   /* 强制像素化缩放 */
+  cursor: pointer;
+}
+
+.ExitButton:hover {
+  background-image: url("../assets/images/i-exit-hover.png");
+}
