@@ -79,6 +79,7 @@
 
 .ButtonReady {
   position: absolute;
+  cursor: pointer;
   left: 40px;
   top: 440px;
   width: 320px;
@@ -92,4 +93,31 @@
 
   background-color: rgba(243, 243, 243, 1);
   color: rgba(96, 98, 102, 1);
+}
+
+.ButtonOk {
+  cursor: pointer;
+  position: absolute;
+  left: 40px;
+  top: 440px;
+  width: 320px;
+  height: 32px;
+  opacity: 1;
+  border-radius: 16px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+
+  background-color: rgba(21, 126, 250, 1) ;
+  color: white;
+}
+
+.Address {
+  position: absolute;
+  left: 30px;
+  top: 390px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(61, 197, 93, 1);
 }

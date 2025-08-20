@@ -1,0 +1,68 @@
+.LogoutInfo {
+  width: 200px;
+  height: 420px;
+  margin: 0;
+  padding-left: 25px;
+  position: relative;
+
+  p {
+    display: inline-block;
+    height: 20px;
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: 500;
+    vertical-align: top;
+  }
+
+  small {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    vertical-align: top;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  strong {
+    display: block;
+    height: 30px;
+    width: 150px;
+    line-height: 14px;
+    font-size: 10px;
+    font-weight: 700;
+    overflow-wrap: break-word;  /* 允许长单词换行 */
+  }
+
+  button {
+    width: 150px;
+    height: 28px;
+    border-radius: 12px;
+    background: rgba(252, 61, 57, 1);
+    position: relative;
+    top: 66px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #F3F3F3;
+  }
+}
+
+.LogoutInfo>p {
+  margin-bottom: 10px;
+}
+
+.AvatarArea {
+  height: 80px;
+  width: 80px;
+  margin: 30px 35px 20px 35px;
+}
+
+.Balance {
+  margin-right: 5px;
+  height: 50px;
+  width: 150px;
+  display: inline-block;
+  vertical-align: top;
+}

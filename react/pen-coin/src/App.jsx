@@ -10,14 +10,30 @@ import Auction from "./pages/auction/Auction.jsx";
 import NftTrade from "./pages/nft/NftTrade.jsx";
 import User from "./pages/user/User.jsx";
 import Trade from "./pages/trade/Trade.jsx";
-import {useState} from "react";
 import ScreenWindow, {FullWindowController} from "./containers/ScreenWindow.jsx";
-import Place from "./components/Place.jsx";
 import Login from "./pages/login/Login.jsx";
+import {ToastContainer} from "react-toastify";
+import userStore from "./store/userStore.js";
+import HeaderInfo from "./components/HeaderInfo.jsx";
+import {useEffect} from "react";
+import maskUtil from "./utils/maskUtil.js";
+import Logout from "./pages/logout/Logout.jsx";
 
 function App() {
 
-    const [login, setLogin] = useState(false)
+    const {login, setLogin, setAddress} = userStore()
+
+    useEffect(() => {
+        if(!maskUtil.isEmpty()){
+            setLogin(true)
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!login) return
+        setAddress(maskUtil.getAddress())
+        console.log("登录成功", maskUtil.getAddress())
+    }, [login]);
 
   return (
       <BrowserRouter>
@@ -32,7 +48,8 @@ function App() {
                   <MenuButton name={"Trade"} url={"/trade"}></MenuButton>
               </div>
               <div className="Header">
-                  <LoginButton name={"LOGIN"} handleClick={()=>{FullWindowController.open(<Login></Login>)}}></LoginButton>
+                  {!login && <LoginButton name={"LOGIN"} handleClick={()=>{FullWindowController.open(<Login></Login>)}}></LoginButton>}
+                  {login && <HeaderInfo handleClick={()=>{FullWindowController.open(<Logout></Logout>)}}></HeaderInfo>}
               </div>
               <div className="Main">
                 <Routes>
@@ -47,6 +64,7 @@ function App() {
               </div>
           </div>
           <ScreenWindow></ScreenWindow>
+          <ToastContainer />
       </BrowserRouter>
   )
 }

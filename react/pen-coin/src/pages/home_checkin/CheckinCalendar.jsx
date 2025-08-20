@@ -56,7 +56,6 @@ function CheckinCalendar({year, month}) {
         }
 
         const dateArr = getDateArr(currentYear, currentMonth);
-        console.log(currentDate)
 
         const weeksTemp = dateArr.map((dayObj, index) => {
             let spanStyle = (dayObj.month === currentMonth) ? style.DateCurrentMonth : style.DateNotCurrentMonth;

@@ -1,12 +1,13 @@
 import style from './Login.module.scss'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import RndWindow from "../../containers/RndWindow.jsx";
-import Place from "../../components/Place.jsx";
 import LoginMask from "./LoginMask.jsx";
 import LoginKey from "./LoginKey.jsx";
+import userStore from "../../store/userStore.js";
+import maskUtil from "../../utils/maskUtil.js";
 
 function Login() {
-
+    const {login, setAddress} = userStore()
     const [mask, setMask] = useState(false);
     const [key, setKey] = useState(false);
 
@@ -28,13 +29,13 @@ function Login() {
         </button>
         {mask &&
             <RndWindow closeHandle={()=>setMask(false)}>
-                <LoginMask></LoginMask>
+                <LoginMask closeHandle={()=>setMask(false)}></LoginMask>
             </RndWindow>
         }
         {
             key &&
             <RndWindow closeHandle={()=>setKey(false)}>
-                <LoginKey></LoginKey>
+                <LoginKey closeHandle={()=>setMask(false)}></LoginKey>
             </RndWindow>
         }
     </div>

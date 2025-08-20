@@ -1,0 +1,53 @@
+.HeaderInfo {
+  width: 800px;
+  height: 48px;
+
+  margin-right: 30px;
+  margin-top: 16px;
+
+  float: right;
+  direction: rtl;
+}
+
+.AvatarArea {
+  height: 48px;
+  width: 48px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.Balance {
+  margin-right: 5px;
+  height: 48px;
+  width: 150px;
+  display: inline-block;
+  vertical-align: top;
+  direction: ltr;
+
+  p {
+    display: inline-block;
+    height: 20px;
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: 500;
+    vertical-align: top;
+  }
+
+  small {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    vertical-align: top;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  h4 {
+    height: 28px;
+    line-height: 28px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
