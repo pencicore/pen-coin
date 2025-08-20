@@ -32,7 +32,7 @@ function App() {
                   <MenuButton name={"Trade"} url={"/trade"}></MenuButton>
               </div>
               <div className="Header">
-                  <LoginButton name={"login"} handleClick={()=>{FullWindowController.open(<Login></Login>)}}></LoginButton>
+                  <LoginButton name={"LOGIN"} handleClick={()=>{FullWindowController.open(<Login></Login>)}}></LoginButton>
               </div>
               <div className="Main">
                 <Routes>

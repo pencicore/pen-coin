@@ -1,0 +1,23 @@
+.RndWindow {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.Close {
+  top: 10px;
+  right: 10px;
+  height: 28px;
+  width: 28px;
+  position: absolute;
+  background-image: url("../assets/images/i-back.png");
+  background-repeat: no-repeat; /* 只出现一次 */
+  background-position: center;  /* 居中 */
+  background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
+  display: inline-block;        /* 让宽高生效 */
+  image-rendering: pixelated;      /* 强制像素化缩放 */
+}
+
+.Close:hover {
+  background-image: url("../assets/images/i-back-hover.png");
+}

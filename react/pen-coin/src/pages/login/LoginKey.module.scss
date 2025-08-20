@@ -1,0 +1,95 @@
+.LoginKey {
+  height: 500px;
+  width: 400px;
+  box-shadow: 0 1px 8px  rgba(0, 0, 0, 0.35);
+  background-repeat: no-repeat; /* 只出现一次 */
+  background-position: center;  /* 居中 */
+  background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
+  display: inline-block;        /* 让宽高生效 */
+  image-rendering: pixelated;      /* 强制像素化缩放 */
+  position: relative;
+  background-image: url(https://img.js.design/assets/img/68a46947d94adb56e49be2e2.png#0372cc085149236a6d88bda4bf77860e);
+
+  h4 {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 20px;
+  }
+
+  textarea {
+    position: absolute;
+    left: 20px;
+    top: 70px;
+    //background-color: wheat;
+    height: 80px;
+    width: 360px;
+    border: 0;
+    padding: 0;
+    resize: none;
+
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  textarea:focus {
+    border: 0;
+    outline: none;
+  }
+
+  textarea::placeholder {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(144, 147, 153, 1);
+    font-style: normal; /* 改为正常字体 */
+    letter-spacing: 1px;
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  button {
+    position: absolute;
+    width: 70px;
+    height: 20px;
+    opacity: 1;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    background: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  button:hover {
+    background-image: none;
+    background-color: rgba(243, 243, 243, 1);
+  }
+
+  button:nth-of-type(1) {
+    left: 303px;
+    top: 149px;
+  }
+  button:nth-of-type(2) {
+    left: 303px;
+    top: 181px;
+  }
+}
+
+.ButtonReady {
+  position: absolute;
+  left: 40px;
+  top: 440px;
+  width: 320px;
+  height: 32px;
+  opacity: 1;
+  border-radius: 16px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+
+  background-color: rgba(243, 243, 243, 1);
+  color: rgba(96, 98, 102, 1);
+}

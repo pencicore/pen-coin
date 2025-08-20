@@ -1,0 +1,11 @@
+.LoginMask {
+  width: 320px;
+  height: 240px;
+  box-shadow: 0 1px 8px  rgba(0, 0, 0, 0.35);
+  background-repeat: no-repeat; /* 只出现一次 */
+  background-position: center;  /* 居中 */
+  background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
+  display: inline-block;        /* 让宽高生效 */
+  image-rendering: pixelated;      /* 强制像素化缩放 */
+  background-image: url(https://img.js.design/assets/img/68a46db6b5e8b987e593e1fe.png#baaaf5bd2d07ae0e1239589c3cb3763e);
+}
