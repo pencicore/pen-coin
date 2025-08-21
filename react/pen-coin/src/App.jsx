@@ -24,15 +24,21 @@ function App() {
     const {login, setLogin, setAddress} = userStore()
 
     useEffect(() => {
-        if(!maskUtil.isEmpty()){
-            setLogin(true)
+        async function fun() {
+            if(!await maskUtil.isEmpty()){
+                setLogin(true)
+            }
         }
+        fun().then()
     }, []);
 
     useEffect(() => {
-        if (!login) return
-        setAddress(maskUtil.getAddress())
-        console.log("登录成功", maskUtil.getAddress())
+        async function fun() {
+            if (!login) return
+            setAddress(await maskUtil.getAddress())
+            console.log("登录成功", await maskUtil.getAddress())
+        }
+        fun().then()
     }, [login]);
 
   return (

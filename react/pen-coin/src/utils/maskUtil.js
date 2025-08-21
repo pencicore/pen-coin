@@ -1,17 +1,22 @@
 import {localMaskUtil} from './localMaskUtil';
+import metaMaskUtil from "./metaMaskUtil.js";
 
 const maskUtil = {
-    isEmpty() {
-        return localMaskUtil.isEmpty()
+    async isEmpty() {
+        return localMaskUtil.isEmpty() && await metaMaskUtil.isEmpty()
     },
-    getAddress() {
+    async getAddress() {
         if (!localMaskUtil.isEmpty()) {
             return localMaskUtil.getAddressHandle()
+        }
+        if (!await metaMaskUtil.isEmpty()) {
+            return await metaMaskUtil.getAddress()
         }
         return null
     },
     logout() {
         localMaskUtil.logout()
+        metaMaskUtil.logout()
     }
 }
 

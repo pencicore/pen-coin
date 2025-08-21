@@ -38,7 +38,6 @@ const memoryParticle = {
 
 export const localMaskUtil = {
     isEmpty() {
-        console.log(privateKeyVar.getPrivateKey())
         return privateKeyVar.getPrivateKey() === null || privateKeyVar.getPrivateKey() === "null"
     },
     login(privateKey) {
