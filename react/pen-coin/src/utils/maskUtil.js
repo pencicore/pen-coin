@@ -1,5 +1,7 @@
 import {localMaskUtil} from './localMaskUtil';
 import metaMaskUtil from "./metaMaskUtil.js";
+import {ethers} from "ethers";
+import {ContractAddressConfig} from "../config/contractAddressConfig.js";
 
 const maskUtil = {
     async isEmpty() {
@@ -17,7 +19,15 @@ const maskUtil = {
     logout() {
         localMaskUtil.logout()
         metaMaskUtil.logout()
-    }
+    },
+    getProvider() {
+        return new ethers.JsonRpcProvider(`${window.location.origin}/rpc`)
+    },
+    async getBalance() {
+        const address = await this.getAddress()
+        const provider = this.getProvider()
+        return await provider.getBalance(address)
+    },
 }
 
 export default maskUtil

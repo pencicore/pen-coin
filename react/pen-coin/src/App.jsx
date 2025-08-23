@@ -36,6 +36,7 @@ function App() {
         async function fun() {
             if (!login) return
             setAddress(await maskUtil.getAddress())
+            console.log(await maskUtil.getBalance())
             console.log("登录成功", await maskUtil.getAddress())
         }
         fun().then()
