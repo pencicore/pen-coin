@@ -5,15 +5,17 @@ import Notice from "../../components/Notice.jsx";
 import {FullWindowController} from "../../containers/ScreenWindow.jsx";
 import Login from "../login/Login.jsx";
 import maskUtil from "../../utils/maskUtil.js";
-import {AccountAddress} from "../../config/contractAddressConfig.js";
+import {AccountAddress, ContractAddressConfig} from "../../config/contractAddressConfig.js";
 import strUtil from "../../utils/strUtil.js";
 import {GetEthFaucet, GetHaveEthFaucet, GetReceiveBalance} from "../../api/faucetBackendApi.js";
 import userStore from "../../store/userStore.js";
 import toastUtil from "../../utils/toastUtil.js";
+import erc20ContractApi from "../../api/erc20ContractApi.js";
+import faucetContractApi from "../../api/faucetContractApi.js";
 
 function HomeGuide() {
 
-    const {address, login} = userStore()
+    const {address, login, setEthCount, setPenCount} = userStore()
     const [arrowMargin, setArrowMargin] = useState("25px");
 
     const [ETHReceived, setETHReceived] = useState(0)
@@ -34,24 +36,45 @@ function HomeGuide() {
         setETHBalance(await provide.getBalance(AccountAddress.ETHFaucetAccount))
         setETHReceived((await GetReceiveBalance()).data)
 
-        setHaveReceivedETH((await GetHaveEthFaucet(useAddress)).data > 0)
+        setPENBalance(await erc20ContractApi.balanceOf(ContractAddressConfig.Faucet))
+
+        const useHaveReceivedETH = (await GetHaveEthFaucet(useAddress)).data > 0
+        setHaveReceivedETH(useHaveReceivedETH)
+        const useHaveReceivedPEN = (await faucetContractApi.requestedAddress(useAddress))
+        setHaveReceivedPEN(useHaveReceivedPEN)
+
+        if (useHaveReceivedPEN) {
+            setArrowMargin("600px");
+        }
+        else if (useHaveReceivedETH) {
+            setArrowMargin("380px");
+        }
+        else if (useAddress!=null) {
+            setArrowMargin("160px");
+        }
+
+        setEthCount((await maskUtil.getBalance()).toString())
+        setPenCount((await erc20ContractApi.balanceOf(address)).toString())
     }
 
     useEffect(()=>{
         updateInfo().then()
-    }, [])
+    }, [login])
 
     const receiveETH = async () => {
         const res = await GetEthFaucet(address)
         if(res.code === 0) {
-            toastUtil.log("领取成功")
-            setArrowMargin("160px");
             updateInfo().then()
+            toastUtil.log("领取成功")
         }
     }
 
-    const receivePEN = () => {
-        setArrowMargin("380px");
+    const receivePEN = async () => {
+        const res = await faucetContractApi.requestTokens()
+        if(res) {
+            updateInfo().then()
+            toastUtil.log("领取成功")
+        }
     }
 
     return (
@@ -87,13 +110,14 @@ function HomeGuide() {
                 <br></br>
                 <h3>第三步  领取代币水龙头</h3>
                 <p>点击下方领取按钮，领取PEN代币</p>
-                <MiniBlueButton name={"领取"} clickHandle={receivePEN}>领取</MiniBlueButton>
+                {!haveReceivedPEN && <MiniGreenButton name={"领取"} clickHandle={receivePEN}></MiniGreenButton>}
+                {haveReceivedPEN && <MiniGreenButtonStop name={"已领取"}></MiniGreenButtonStop>}
                 <small>
                     当前已领取：
                     <mark>{PENReceived} PEN</mark>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     当前未领取：
-                    <mark>{PENBalance} PEN</mark>
+                    <mark>{strUtil.ethBalanceToString(PENBalance)} PEN</mark>
                 </small>
                 <br></br>
                 <br></br>

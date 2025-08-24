@@ -6,7 +6,7 @@ import "./interface/IERC20.sol";
 // ERC20代币的水龙头合约
 contract Faucet {
 
-    uint256 public amountAllowed = 1000 * 10 * 12; // 每次领 100单位代币
+    uint256 public amountAllowed = 1000 * 10 ** 12; // 每次领 100单位代币
     address public tokenContract;   // token合约地址
     mapping(address => bool) public requestedAddress;   // 记录领取过代币的地址
 

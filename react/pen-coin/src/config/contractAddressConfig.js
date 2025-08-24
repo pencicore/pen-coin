@@ -1,7 +1,7 @@
 export const ContractAddressConfig = {
     URL: `${window.location.origin}/rpc`,
-    ERC20: "0x08C15888fc984C175E2abcD0CfD4A2Ec6b521e2e",
-    Faucet: "0x0315358E4EfB6Fb3830a21baBDb28f6482c15aCa",
+    ERC20: "0x356Be1db672aFEC735B4b757f9781D40b1dE4f06",
+    Faucet: "0x3FF7573961a252b652d32B3910D3B2b90D8A3Bd8",
 }
 
 export const AccountAddress = {
