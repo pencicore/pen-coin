@@ -1,8 +1,7 @@
 import style from './LoginMask.module.scss'
 import {MiniGreenButton} from "../../components/Button.jsx";
 import {useEffect, useState} from "react";
-import metamaskApi from "../../api/metamaskApi.js";
-import metaMaskUtil from "../../utils/metaMaskUtil.js";
+import metaMaskUtil, {metamaskApi} from "../../utils/metaMaskUtil.js";
 import userStore from "../../store/userStore.js";
 import {FullWindowController} from "../../containers/ScreenWindow.jsx";
 import toastUtil from "../../utils/toastUtil.js";

@@ -18,10 +18,11 @@ import HeaderInfo from "./components/HeaderInfo.jsx";
 import {useEffect} from "react";
 import maskUtil from "./utils/maskUtil.js";
 import Logout from "./pages/logout/Logout.jsx";
+import erc20ContractApi from "./api/erc20ContractApi.js";
 
 function App() {
 
-    const {login, setLogin, setAddress} = userStore()
+    const {login, setLogin, setAddress, setEthCount, setPenCount} = userStore()
 
     useEffect(() => {
         async function fun() {
@@ -35,9 +36,11 @@ function App() {
     useEffect(() => {
         async function fun() {
             if (!login) return
-            setAddress(await maskUtil.getAddress())
-            console.log(await maskUtil.getBalance())
-            console.log("登录成功", await maskUtil.getAddress())
+            const address = await maskUtil.getAddress()
+            setAddress(address)
+            setEthCount((await maskUtil.getBalance()).toString())
+            setPenCount((await erc20ContractApi.balanceOf(address)).toString())
+            console.log("登录成功", address)
         }
         fun().then()
     }, [login]);

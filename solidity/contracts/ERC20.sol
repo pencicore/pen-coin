@@ -18,8 +18,7 @@ contract ERC20 is IERC20 {
         symbol = symbol_;
         // Use unchecked to avoid overflow checks in constructor
         unchecked {
-            mint(owner_, 100 * 10 ** uint256(decimals));
-            // mint(owner_, 10000);
+            mint(owner_, 20 * 10 ** uint256(decimals));
         }
     }
 

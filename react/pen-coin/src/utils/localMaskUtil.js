@@ -1,4 +1,6 @@
-import {getAddress, Mnemonic, Wallet} from "ethers";
+import {ethers, getAddress, Mnemonic, Wallet} from "ethers";
+import {networkData} from "../config/metamaskConfig.js";
+import {ContractAddressConfig} from "../config/contractAddressConfig.js";
 
 const PRIVATE_KEY = "private_key";
 
@@ -65,5 +67,12 @@ export const localMaskUtil = {
     },
     logout() {
         privateKeyVar.setPrivateKey(null)
+    },
+    getSingle() {
+        const provider = new ethers.JsonRpcProvider(ContractAddressConfig.URL)
+        const privateKey = privateKeyVar.getPrivateKey()
+        const singer = new ethers.Wallet(privateKey, provider)
+        console.log("Connected wallet:", singer.address);
+        return singer
     }
 }

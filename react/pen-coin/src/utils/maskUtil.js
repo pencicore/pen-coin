@@ -21,13 +21,22 @@ const maskUtil = {
         metaMaskUtil.logout()
     },
     getProvider() {
-        return new ethers.JsonRpcProvider(`${window.location.origin}/rpc`)
+        return new ethers.JsonRpcProvider(ContractAddressConfig.URL)
     },
     async getBalance() {
         const address = await this.getAddress()
         const provider = this.getProvider()
         return await provider.getBalance(address)
     },
+    async getSingle() {
+        if (!localMaskUtil.isEmpty()) {
+            return localMaskUtil.getSingle()
+        }
+        if (!await metaMaskUtil.isEmpty()) {
+            return await metaMaskUtil.getSingle()
+        }
+        return null
+    }
 }
 
 export default maskUtil

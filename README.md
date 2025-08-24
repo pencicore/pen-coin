@@ -7,14 +7,12 @@
 前端部分使用 React + Vite 构建
 
 组件使用了
+- ethers.js v6 框架
 - react-router-dom 路由
 - sass 样式
 - zustand 变量管理
 - react-toastify 提示框
 - react-avatar 头像
-
-编程套路
-- 一个jsx文件，对应一个组件，对应一个css文件
 
 文件描述
 - src/main.jsx 入口文件：渲染根组件, 不做任何更改

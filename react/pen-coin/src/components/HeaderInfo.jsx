@@ -32,12 +32,12 @@ const HeaderInfo = ({handleClick}) => {
             <div className={style.Balance}>
                 <p>以太坊账户余额</p>
                 <small onClick={() => setShowETH(!showETH)}>{showETH ? '显示' : '隐藏'}</small>
-                <h4>{showETH ? ethCount : '********'} ETH</h4>
+                <h4>{showETH ? strUtil.ethBalanceToString(ethCount) : '********'} ETH</h4>
             </div>
             <div className={style.Balance}>
                 <p>PEN代币余额</p>
                 <small onClick={() => setShowPEN(!showPEN)}>{showPEN ? '显示' : '隐藏'}</small>
-                <h4>{showPEN ? penCount : '********'} PEN</h4>
+                <h4>{showPEN ? strUtil.ethBalanceToString(penCount) : '********'} PEN</h4>
             </div>
         </div>
     )

@@ -292,11 +292,11 @@
 	},
 	"sources": {
 		"contracts/ERC20.sol": {
-			"keccak256": "0xe3cf171eb381724d285d4d68f72170c0bfb42eb90196b3ca8deca3c0dd04a142",
+			"keccak256": "0x8f8685c2e3a4eb2502ca23e47e0eeee8468cf850b799d818819f28ce4c00d2f5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://afaeb41559886e5d706d28abc6ee5092aae4c58c55b6ba9886441d7b0122c147",
-				"dweb:/ipfs/QmS8MCAp7THAFRZqP2f8Wts2gRTz8TiQnic6SHWpbUXuKd"
+				"bzz-raw://c851a78ae4599b14ac36797e6eb8eff3555f10e500ccfe2367d4e587125c1570",
+				"dweb:/ipfs/QmSaLcRuoNKEz4XqWyMEBnjAJoVQqPYmFzXYu7gD3ej7cm"
 			]
 		},
 		"contracts/interface/IERC20.sol": {

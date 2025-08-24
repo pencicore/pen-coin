@@ -8,3 +8,6 @@
 *.njsproj
 *.sln
 *.sw?
+/solidity/.remix/
+/solidity/.states/
+/solidity/.deps/
