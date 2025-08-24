@@ -13,6 +13,7 @@
 - zustand 变量管理
 - react-toastify 提示框
 - react-avatar 头像
+- axios 请求框架
 
 文件描述
 - src/main.jsx 入口文件：渲染根组件, 不做任何更改

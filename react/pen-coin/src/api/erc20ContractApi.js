@@ -2,6 +2,21 @@ import {ethers} from "ethers";
 import maskUtil from "../utils/maskUtil.js";
 import {ContractAddressConfig} from "../config/contractAddressConfig.js";
 
+const erc20ContractApi = {
+    contract: null,
+    async getContract() {
+        if (this.contract === null) {
+            this.contract = new ethers.Contract(ContractAddressConfig.ERC20, ABI, await maskUtil.getSingle())
+        }
+        return this.contract
+    },
+    async balanceOf(address) {
+        return (await this.getContract()).balanceOf(address)
+    }
+}
+
+export default erc20ContractApi
+
 const ABI = [
     {
         "inputs": [
@@ -247,18 +262,3 @@ const ABI = [
         "type": "function"
     }
 ]
-
-const erc20ContractApi = {
-    contract: null,
-    async getContract() {
-        if (this.contract === null) {
-            this.contract = new ethers.Contract(ContractAddressConfig.ERC20, ABI, await maskUtil.getSingle())
-        }
-        return this.contract
-    },
-    async balanceOf(address) {
-        return (await this.getContract()).balanceOf(address)
-    }
-}
-
-export default erc20ContractApi

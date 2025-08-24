@@ -3,3 +3,7 @@ export const ContractAddressConfig = {
     ERC20: "0x08C15888fc984C175E2abcD0CfD4A2Ec6b521e2e",
     Faucet: "0x0315358E4EfB6Fb3830a21baBDb28f6482c15aCa",
 }
+
+export const AccountAddress = {
+    ETHFaucetAccount: "0xb55383173035093f74682bfa7282A3D541942aBb"
+}

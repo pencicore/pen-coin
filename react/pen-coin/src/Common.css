@@ -86,6 +86,11 @@ mark {
 a {
     color: rgba(21, 126, 250, 1);
     text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 i {
