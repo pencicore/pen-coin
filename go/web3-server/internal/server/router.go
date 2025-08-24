@@ -33,6 +33,7 @@ func SetupRouter() *gin.Engine {
 		faucet.GET("/receiveETHBalance", service.ReceiveETHBalanceHandler)
 		faucet.GET("/receivePENBalance", service.ReceivePENBalanceHandler)
 		faucet.GET("/ethFaucet", service.ETHFaucetHandler)
+		faucet.GET("/haveEthFaucet", service.HaveEthFaucetHandler)
 	}
 	return r
 }

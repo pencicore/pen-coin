@@ -9,10 +9,18 @@ import (
 	"web3-server/internal/config"
 	"web3-server/internal/db"
 	model "web3-server/internal/models"
+	"web3-server/internal/utils"
 )
 
 func ReceiveETHBalanceHandler(c *gin.Context) {
-	c.JSON(200, gin.H{"data": 10086})
+	var totalStr string
+	err := db.D.Model(&model.FaucetHistory{}).
+		Select("SUM(amount) as total").
+		Scan(&totalStr).Error
+	if err != nil {
+		panic(err)
+	}
+	c.JSON(200, utils.Success(totalStr))
 }
 
 func ReceivePENBalanceHandler(c *gin.Context) {
@@ -25,29 +33,22 @@ func ETHFaucetHandler(c *gin.Context) {
 	amountDecimal := decimal.NewFromBigInt(config.FaucetAmount, -18) // Wei → ETH
 
 	if !common.IsHexAddress(address) {
-		c.JSON(400, gin.H{"error": "invalid address"})
+		c.JSON(400, utils.Error("账户地址格式错误"))
 		return
 	}
 
 	// 1. 检查是否已经领取过
 	var count int64
-	if err := db.D.Model(&model.FaucetHistory{}).
-		Where("to_address = ?", address).
-		Count(&count).Error; err != nil {
-		log.Println("db error:", err)
-		c.JSON(500, gin.H{"error": "internal error"})
-		return
-	}
+	db.D.Model(&model.FaucetHistory{}).Where("to_address = ?", address).Count(&count)
 	if count > 0 {
-		c.JSON(403, gin.H{"error": "this address has already claimed"})
+		c.JSON(403, utils.Error("该账户已领取"))
 		return
 	}
 
 	// 2. 发放 ETH
 	txHash, err := blockchain.SendETH(address)
 	if err != nil {
-		log.Println("SendETH failed:", err)
-		c.JSON(500, gin.H{"error": "send tx failed"})
+		c.JSON(500, utils.Error("ETH发送失败"))
 		return
 	}
 
@@ -62,10 +63,18 @@ func ETHFaucetHandler(c *gin.Context) {
 	}
 
 	// 4. 返回结果
-	c.JSON(200, gin.H{
+	data := map[string]interface{}{
 		"status":  "success",
 		"address": address,
-		"amount":  config.FaucetAmount.String(), // big.Int 转字符串显示
+		"amount":  config.FaucetAmount.String(),
 		"txHash":  txHash,
-	})
+	}
+	c.JSON(200, utils.Success(data))
+}
+
+func HaveEthFaucetHandler(c *gin.Context) {
+	address := c.Query("address")
+	var count int64
+	db.D.Model(&model.FaucetHistory{}).Where("to_address = ?", address).Count(&count)
+	c.JSON(200, utils.Success(count))
 }

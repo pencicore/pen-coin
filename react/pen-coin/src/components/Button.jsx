@@ -6,6 +6,12 @@ export const MiniGreenButton = ({name, clickHandle}) => {
         )
 }
 
+export const MiniGreenButtonStop = ({name}) => {
+    return  (
+        <div className={style.MiniButton + ' ' + style.MiniGreen + ' ' + style.Stop}>{name}</div>
+    )
+}
+
 export const MiniBlueButton = ({name, clickHandle}) => {
     return  (
         <div className={style.MiniButton + ' ' + style.MiniGreen} onClick={clickHandle}>{name}</div>

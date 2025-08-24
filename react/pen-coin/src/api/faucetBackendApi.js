@@ -21,3 +21,12 @@ export const GetEthFaucet = async (address) => {
     })
     return response.data
 }
+
+export const GetHaveEthFaucet = async (address) => {
+    const response = await api.get('/haveEthFaucet', {
+        params: {
+            address: address
+        }
+    })
+    return response.data
+}

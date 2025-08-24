@@ -1,4 +1,5 @@
 import {ethers} from "ethers";
+import Decimal from "decimal.js";
 
 const strUtil = {
     maskAddress(address, start = 4, end = 4) {
@@ -11,6 +12,10 @@ const strUtil = {
         const ethValue = ethers.formatEther(BigInt(balance));
         const num = Number(ethValue);
         return num.toPrecision(8);
+    },
+    ethStringToString(balance) {
+        const d = new Decimal(balance);
+        return d.toSignificantDigits(8).toString();
     }
 }
 
