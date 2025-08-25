@@ -30,3 +30,8 @@ export const GetHaveEthFaucet = async (address) => {
     })
     return response.data
 }
+
+export const GetReceivePENBalance = async () => {
+    const response = await api.get('/receivePENBalance')
+    return response.data
+}

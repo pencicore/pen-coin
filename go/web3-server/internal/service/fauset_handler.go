@@ -23,10 +23,6 @@ func ReceiveETHBalanceHandler(c *gin.Context) {
 	c.JSON(200, utils.Success(totalStr))
 }
 
-func ReceivePENBalanceHandler(c *gin.Context) {
-	c.JSON(200, gin.H{"data": 10086})
-}
-
 func ETHFaucetHandler(c *gin.Context) {
 	address := c.Query("address")
 	fromAddress := config.MainAccountAddress
@@ -77,4 +73,15 @@ func HaveEthFaucetHandler(c *gin.Context) {
 	var count int64
 	db.D.Model(&model.FaucetHistory{}).Where("to_address = ?", address).Count(&count)
 	c.JSON(200, utils.Success(count))
+}
+
+func ReceivePENBalanceHandler(c *gin.Context) {
+	var totalStr string
+	err := db.D.Model(&model.FaucetPenHistory{}).
+		Select("SUM(amount) as total").
+		Scan(&totalStr).Error
+	if err != nil {
+		panic(err)
+	}
+	c.JSON(200, utils.Success(totalStr))
 }

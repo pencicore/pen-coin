@@ -7,7 +7,7 @@ import Login from "../login/Login.jsx";
 import maskUtil from "../../utils/maskUtil.js";
 import {AccountAddress, ContractAddressConfig} from "../../config/contractAddressConfig.js";
 import strUtil from "../../utils/strUtil.js";
-import {GetEthFaucet, GetHaveEthFaucet, GetReceiveBalance} from "../../api/faucetBackendApi.js";
+import {GetEthFaucet, GetHaveEthFaucet, GetReceiveBalance, GetReceivePENBalance} from "../../api/faucetBackendApi.js";
 import userStore from "../../store/userStore.js";
 import toastUtil from "../../utils/toastUtil.js";
 import erc20ContractApi from "../../api/erc20ContractApi.js";
@@ -27,31 +27,37 @@ function HomeGuide() {
     const [haveReceivedPEN, setHaveReceivedPEN] = useState(false)
 
     const updateInfo = async () => {
-        let useAddress = address
-        if (address === null) {
-            useAddress = await maskUtil.getAddress()
+        let useETHReceived = 0
+        let useETHBalance = 0
+        let usePENReceived = 0
+        let usePENBalance = 0
+        let useHaveReceivedETH = false
+        let useHaveReceivedPEN = false
+
+        const useAddress = await maskUtil.getAddress()
+        if (useAddress !== null) {
+            const provide = maskUtil.getProvider()
+
+            useETHBalance = await provide.getBalance(AccountAddress.ETHFaucetAccount)
+            useETHReceived = (await GetReceiveBalance()).data
+            usePENReceived = (await GetReceivePENBalance()).data
+            usePENBalance = await erc20ContractApi.balanceOf(ContractAddressConfig.Faucet)
+
+            useHaveReceivedETH = (await GetHaveEthFaucet(useAddress)).data > 0
+            useHaveReceivedPEN = (await faucetContractApi.requestedAddress(useAddress))
         }
 
-        const provide = maskUtil.getProvider()
-        setETHBalance(await provide.getBalance(AccountAddress.ETHFaucetAccount))
-        setETHReceived((await GetReceiveBalance()).data)
+        if (useHaveReceivedPEN) setArrowMargin("600px")
+        else if (useHaveReceivedETH) setArrowMargin("380px")
+        else if (useAddress!=null) setArrowMargin("160px")
+        else setArrowMargin("25px")
 
-        setPENBalance(await erc20ContractApi.balanceOf(ContractAddressConfig.Faucet))
-
-        const useHaveReceivedETH = (await GetHaveEthFaucet(useAddress)).data > 0
+        setETHReceived(useETHReceived)
+        setETHBalance(useETHBalance)
+        setPENReceived(usePENReceived)
+        setPENBalance(usePENBalance)
         setHaveReceivedETH(useHaveReceivedETH)
-        const useHaveReceivedPEN = (await faucetContractApi.requestedAddress(useAddress))
         setHaveReceivedPEN(useHaveReceivedPEN)
-
-        if (useHaveReceivedPEN) {
-            setArrowMargin("600px");
-        }
-        else if (useHaveReceivedETH) {
-            setArrowMargin("380px");
-        }
-        else if (useAddress!=null) {
-            setArrowMargin("160px");
-        }
 
         setEthCount((await maskUtil.getBalance()).toString())
         setPenCount((await erc20ContractApi.balanceOf(address)).toString())
@@ -64,7 +70,7 @@ function HomeGuide() {
     const receiveETH = async () => {
         const res = await GetEthFaucet(address)
         if(res.code === 0) {
-            updateInfo().then()
+            await updateInfo()
             toastUtil.log("领取成功")
         }
     }
@@ -72,7 +78,7 @@ function HomeGuide() {
     const receivePEN = async () => {
         const res = await faucetContractApi.requestTokens()
         if(res) {
-            updateInfo().then()
+            await updateInfo()
             toastUtil.log("领取成功")
         }
     }
