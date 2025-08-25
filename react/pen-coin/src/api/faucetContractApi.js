@@ -5,8 +5,12 @@ import {ethers} from "ethers";
 const faucetContractApi = {
     contract: null,
     async getContract() {
-        if (this.contract === null) {
-            this.contract = new ethers.Contract(ContractAddressConfig.Faucet, ABI, await maskUtil.getSingle())
+        const single = await maskUtil.getSingle()
+        if (single) {
+            this.contract = new ethers.Contract(ContractAddressConfig.Faucet, ABI, single)
+        }
+        else {
+            this.contract = new ethers.Contract(ContractAddressConfig.Faucet, ABI, maskUtil.getProvider())
         }
         return this.contract
     },

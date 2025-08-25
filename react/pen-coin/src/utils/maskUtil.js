@@ -26,6 +26,7 @@ const maskUtil = {
     async getBalance() {
         const address = await this.getAddress()
         const provider = this.getProvider()
+        if (address===null) return 0
         return await provider.getBalance(address)
     },
     async getSingle() {

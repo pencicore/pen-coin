@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 const toastUtil = {
     log(msg) {
         toast(msg, {
-            position: 'bottom-right',
+            position: 'top-right',
             autoClose: 3000,
             hideProgressBar: true,
             icon: false,

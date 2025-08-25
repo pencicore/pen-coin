@@ -5,12 +5,17 @@ import {ContractAddressConfig} from "../config/contractAddressConfig.js";
 const erc20ContractApi = {
     contract: null,
     async getContract() {
-        if (this.contract === null) {
-            this.contract = new ethers.Contract(ContractAddressConfig.ERC20, ABI, await maskUtil.getSingle())
+        const single = await maskUtil.getSingle()
+        if (single) {
+            this.contract = new ethers.Contract(ContractAddressConfig.ERC20, ABI, single)
+        }
+        else {
+            this.contract = new ethers.Contract(ContractAddressConfig.ERC20, ABI, maskUtil.getProvider())
         }
         return this.contract
     },
     async balanceOf(address) {
+        if (address === null) return 0
         return (await this.getContract()).balanceOf(address)
     }
 }
