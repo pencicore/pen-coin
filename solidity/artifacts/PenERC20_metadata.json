@@ -57,6 +57,31 @@
 					{
 						"indexed": true,
 						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "reward",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "streak",
+						"type": "uint256"
+					}
+				],
+				"name": "Checkin",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
 						"name": "from",
 						"type": "address"
 					},
@@ -145,12 +170,95 @@
 			},
 			{
 				"inputs": [],
+				"name": "checkin",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "reward",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkinBase",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "checkinDate",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "checkinStreak",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "decimals",
 				"outputs": [
 					{
 						"internalType": "uint8",
 						"name": "",
 						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "oldCheckinStreak",
+						"type": "uint256"
+					}
+				],
+				"name": "getCheckinReward",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -277,7 +385,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ERC20.sol": "ERC20"
+			"contracts/PenERC20.sol": "PenERC20"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -291,12 +399,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/ERC20.sol": {
-			"keccak256": "0xf731dc584e6bc20ea4ae1c1303c61607a63421831cb8fc0e257f36fe07edf629",
+		"contracts/PenERC20.sol": {
+			"keccak256": "0x8a6a4b7b1420c9b7dba049171f871813f765a57632603884ff29b03b6a12724e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ec8ca34aa466d5f491388577bca91823979bd147f0c764813a05e9eed4e1fad",
-				"dweb:/ipfs/QmdhbHWr9kKKTUs1mBmhmPgFzXthr93kiBDBZy5hcvZfqq"
+				"bzz-raw://8b97d4812794d692f8744bbd022b7b80e3ca7e0f7bc0edb4f100227c6e1706a6",
+				"dweb:/ipfs/QmR7XYvnWFzBd8BtprK3Lymq1Hy2PyEykCRuGBUeH8fKBZ"
 			]
 		},
 		"contracts/interface/IERC20.sol": {

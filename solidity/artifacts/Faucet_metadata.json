@@ -116,11 +116,11 @@
 	},
 	"sources": {
 		"contracts/Faucet.sol": {
-			"keccak256": "0xf3733bde753fea496a5d317e78c9837dfab33dc33cf91a014daa68d5551f1f7c",
+			"keccak256": "0x1c533498deb176b843a3bb2ca010f4062b0b351d3f0f6e1c489b37523e149457",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5f2013a21342eb459332445d73f140f264dd18dde6da119c957b8cb855dda97b",
-				"dweb:/ipfs/QmeE8vQkYPFGkEEUikC4iwxMQUd1KkujLf7DYFPKYpPqvc"
+				"bzz-raw://38f4cc0f2b3e14b5d5bc3ba3c3d259c311d7a7655a47d172ab0912c65565a7b0",
+				"dweb:/ipfs/QmVU315yy27VaM9T9ovBPzMvgsj4MnG2vyGEJnW6UwXqtd"
 			]
 		},
 		"contracts/interface/IERC20.sol": {
