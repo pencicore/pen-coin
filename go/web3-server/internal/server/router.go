@@ -35,5 +35,9 @@ func SetupRouter() *gin.Engine {
 		faucet.GET("/ethFaucet", service.ETHFaucetHandler)
 		faucet.GET("/haveEthFaucet", service.HaveEthFaucetHandler)
 	}
+	erc20 := r.Group("/erc20")
+	{
+		erc20.GET("/getMonthCheckin", service.GetMonthCheckin)
+	}
 	return r
 }

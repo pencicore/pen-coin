@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"github.com/shopspring/decimal"
 	"log"
 	"time"
@@ -13,7 +12,6 @@ func init() {
 	if err != nil {
 		log.Fatal("failed to migrate database:", err)
 	}
-	fmt.Println("Migration completed ✅")
 }
 
 type FaucetHistory struct {
