@@ -1,18 +1,24 @@
 import {useEffect, useRef, useState} from 'react';
 import style from './CheckinCalendar.module.scss';
+import dateUtil from "../../utils/dateUtil.js";
+import erc20ContractApi from "../../api/erc20ContractApi.js";
+import {metamaskApi} from "../../utils/metaMaskUtil.js";
+import {GetMonthCheckin} from "../../api/erc20BackendApi.js";
+import userStore from "../../store/userStore.js";
 
-function CheckinCalendar({year, month}) {
+function CheckinCalendar() {
 
-    const titleRef = useRef(null);
+    const {login} = userStore()
+    const [year, setYear] = useState(dateUtil.getCurrentYear)
+    const [month, setMonth] = useState(dateUtil.getCurrentMonth)
 
-    const [currentYear, setCurrentYear] = useState(year)
-    const [currentMonth, setCurrentMonth] = useState(month)
-    const currentDate = new Date().getDate();
-    const checkinDates = [new Date(2025, 8, 13), new Date(2025, 8, 12), new Date(2025, 8, 14)]
     const [weeks, setWeeks] = useState([])
+    const currentYear = dateUtil.getCurrentYear();
+    const currentMonth = dateUtil.getCurrentMonth();
+    const currentDate = dateUtil.getCurrentDay();
 
     // 获取当前月份的日期，创建一个数组，从周日开始，共六周，大小为42天，填充下个月或上个月的日期
-    function getDateArr(year, month) {
+    function getDateArrHandler(year, month) {
         const result = [];
 
         const firstDay = new Date(year, month - 1, 1);
@@ -47,36 +53,63 @@ function CheckinCalendar({year, month}) {
         return result;
     }
 
-    useEffect(() => {
-        if (currentYear === undefined) {
-            setCurrentYear(new Date().getFullYear());
-        }
-        if (currentMonth === undefined) {
-            setCurrentMonth(new Date().getMonth() + 1);
-        }
-
-        const dateArr = getDateArr(currentYear, currentMonth);
-
-        const weeksTemp = dateArr.map((dayObj, index) => {
-            let spanStyle = (dayObj.month === currentMonth) ? style.DateCurrentMonth : style.DateNotCurrentMonth;
-
-            if (dayObj.month === currentMonth && dayObj.day === currentDate) spanStyle += ' ' + style.DateCurrentDate;
-
-            if (checkinDates && checkinDates.some(date => date.getFullYear() === dayObj.year && date.getMonth() === dayObj.month && date.getDate() === dayObj.day)) {
-                spanStyle += ' ' + style.DateCheckinDate;
+    const setCheckinMonthHandler = async () => {
+        const checkinMonth = []
+        const address = await metamaskApi.getAddress();
+        if (address) {
+            const data = (await GetMonthCheckin(address, year, month)).data
+            for (let i = 0; i < 31; i++) {
+                if ((data & (2 ** i)) !== 0) {
+                    checkinMonth.push(new Date(year, month, i+1))
+                }
             }
+        }
+        return checkinMonth
+    }
 
-            return <span key={index} className={spanStyle}>{dayObj.day}</span>;
+    useEffect(() => {
+        const fun = async () => {
+            const checkinMonth = await setCheckinMonthHandler();
+            const dateArr = getDateArrHandler(year, month);
 
-        });
+            const weeksTemp = dateArr.map((dayObj, index) => {
+                let spanStyle = (dayObj.month === month) ? style.DateCurrentMonth : style.DateNotCurrentMonth;
+                if (dayObj.year === currentYear && dayObj.month === currentMonth && dayObj.day === currentDate)
+                    spanStyle += ' ' + style.DateCurrentDate;
+                if (checkinMonth
+                        && checkinMonth.some(date => date.getFullYear() === dayObj.year
+                        && date.getMonth() === dayObj.month && date.getDate() === dayObj.day)) {
+                    spanStyle += ' ' + style.DateCheckinDate;
+                }
+                return <span key={index} className={spanStyle}>{dayObj.day}</span>;
+            });
 
-        setWeeks(weeksTemp)
+            setWeeks(weeksTemp)
+        }
+        fun().then();
+    }, [year, month]);
 
-    }, [currentYear, currentMonth]);
+    const leftMonthHandle = () => {
+        let target = month - 1
+        if (target === 0) {
+            setYear(year - 1)
+            target = 12
+        }
+        setMonth(target)
+    }
+
+    const rightMonthHandle = () => {
+        let target = month + 1
+        if (target === 13) {
+            setYear(year + 1)
+            target = 1
+        }
+        setMonth(target)
+    }
 
     return (
         <div-container className={style.Calendar}>
-            <div className={style.CalendarTitle} ref={titleRef}>
+            <div className={style.CalendarTitle}>
                 <span className={style.DateCurrentDay}>Sun</span>
                 <span>Mon</span>
                 <span>Tue</span>
@@ -88,9 +121,9 @@ function CheckinCalendar({year, month}) {
             {weeks}
             <hr></hr>
             <div className={style.CalendarBottom}>
-                <button className={style.RightButton}></button>
-                <button className={style.LeftButton}></button>
-                <p>2025/08</p>
+                <button className={style.RightButton} onClick={rightMonthHandle}></button>
+                <button className={style.LeftButton} onClick={leftMonthHandle}></button>
+                <p>{year}/{month}</p>
             </div>
         </div-container>
     );

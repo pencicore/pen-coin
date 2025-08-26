@@ -11,6 +11,15 @@ const dateUtil = {
 
         // 一天 = 86400 秒，取整得到 dayNumber
         return Math.floor(beijingTimestamp / 86400);
+    },
+    getCurrentYear() {
+        return new Date().getFullYear()
+    },
+    getCurrentMonth() {
+        return new Date().getMonth() + 1
+    },
+    getCurrentDay() {
+        return new Date().getDate()
     }
 }
 

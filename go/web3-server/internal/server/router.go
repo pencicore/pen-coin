@@ -8,26 +8,8 @@ import (
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.Use(func(c *gin.Context) {
-		origin := c.GetHeader("Origin")
-		c.Writer.Header().Set("Access-Control-Allow-Origin", origin) // allow this specific origin
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization")
-		c.Writer.Header().Set("Access-Control-Expose-Headers", "Content-Length")
-		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(200)
-			return
-		}
-		c.Next()
-	})
+	r.Use(corsHandler)
 
-	eth := r.Group("/eth")
-	{
-		eth.GET("/ping", func(c *gin.Context) {
-			c.JSON(200, gin.H{"message": "hello"})
-		})
-	}
 	faucet := r.Group("/faucet")
 	{
 		faucet.GET("/receiveETHBalance", service.ReceiveETHBalanceHandler)
@@ -40,4 +22,18 @@ func SetupRouter() *gin.Engine {
 		erc20.GET("/getMonthCheckin", service.GetMonthCheckin)
 	}
 	return r
+}
+
+func corsHandler(c *gin.Context) {
+	origin := c.GetHeader("Origin")
+	c.Writer.Header().Set("Access-Control-Allow-Origin", origin) // allow this specific origin
+	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization")
+	c.Writer.Header().Set("Access-Control-Expose-Headers", "Content-Length")
+	c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+	if c.Request.Method == "OPTIONS" {
+		c.AbortWithStatus(200)
+		return
+	}
+	c.Next()
 }
