@@ -400,11 +400,11 @@
 	},
 	"sources": {
 		"contracts/PenERC20.sol": {
-			"keccak256": "0x8a6a4b7b1420c9b7dba049171f871813f765a57632603884ff29b03b6a12724e",
+			"keccak256": "0xc91afccab529aafd3d8d414039e8bec5edebc32abd755f4fc20e0bbf3a25827a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8b97d4812794d692f8744bbd022b7b80e3ca7e0f7bc0edb4f100227c6e1706a6",
-				"dweb:/ipfs/QmR7XYvnWFzBd8BtprK3Lymq1Hy2PyEykCRuGBUeH8fKBZ"
+				"bzz-raw://0235423fc56676ad9d7d23e4ef822cc99fc841d3ffd8753db66abb3474b16885",
+				"dweb:/ipfs/QmP3DEPkAHvFFBaiQ1ArEefZ9QyEESetQLGSoaCDDo2W6z"
 			]
 		},
 		"contracts/interface/IERC20.sol": {

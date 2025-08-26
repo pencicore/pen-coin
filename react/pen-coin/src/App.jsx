@@ -22,7 +22,7 @@ import erc20ContractApi from "./api/erc20ContractApi.js";
 
 function App() {
 
-    const {login, setLogin, setAddress, setEthCount, setPenCount} = userStore()
+    const {login, setLogin, setAddress, setEthCount, setPenCount, playCount} = userStore()
 
     useEffect(() => {
         async function fun() {
@@ -43,7 +43,7 @@ function App() {
             console.log("登录成功", address)
         }
         fun().then()
-    }, [login]);
+    }, [login, playCount]);
 
   return (
       <BrowserRouter>

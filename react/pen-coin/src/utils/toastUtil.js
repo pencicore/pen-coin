@@ -28,6 +28,7 @@ const toastUtil = {
                 justifyContent: 'center',
                 textAlign: 'center',
                 padding: '0 0px',
+                marginTop: '90px',
                 boxShadow: 'none',
             }
         });

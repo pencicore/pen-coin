@@ -6,8 +6,8 @@ import strUtil from "../utils/strUtil.js";
 
 const HeaderInfo = ({handleClick}) => {
     const {penCount, ethCount, address} = userStore()
-    const [showETH, setShowETH] = useState(false)
-    const [showPEN, setShowPEN] = useState(false)
+    const [showETH, setShowETH] = useState(true)
+    const [showPEN, setShowPEN] = useState(true)
     const [copyText, setCopyText] = useState('复制')
 
     function copyAddress() {

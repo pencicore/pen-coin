@@ -17,6 +17,22 @@ const erc20ContractApi = {
     async balanceOf(address) {
         if (address === null) return 0
         return (await this.getContract()).balanceOf(address)
+    },
+    async getCheckinReward(oldCheckinStreak) {
+        return (await this.getContract()).getCheckinReward(oldCheckinStreak)
+    },
+    async checkin() {
+        console.log((await this.getContract()))
+        const tx = await (await this.getContract()).checkin();
+        const receipt = await tx.wait();
+        return receipt.state === 1
+    },
+    async checkinDate(address) {
+        if (address === null) return 0
+        return (await this.getContract()).checkinDate(address)
+    },
+    async checkinStreak(address) {
+        return (await this.getContract()).checkinStreak(address)
     }
 }
 
@@ -67,6 +83,31 @@ const ABI = [
             }
         ],
         "name": "Approval",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "reward",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "streak",
+                "type": "uint256"
+            }
+        ],
+        "name": "Checkin",
         "type": "event"
     },
     {
@@ -163,12 +204,95 @@ const ABI = [
     },
     {
         "inputs": [],
+        "name": "checkin",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "reward",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "checkinBase",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "checkinDate",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "checkinStreak",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "decimals",
         "outputs": [
             {
                 "internalType": "uint8",
                 "name": "",
                 "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "oldCheckinStreak",
+                "type": "uint256"
+            }
+        ],
+        "name": "getCheckinReward",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",

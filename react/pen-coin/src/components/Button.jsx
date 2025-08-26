@@ -24,3 +24,9 @@ export const GreenButton = ({name, clickHandle}) => {
     )
 }
 
+export const GreenButtonStop = ({name}) => {
+    return  (
+        <div className={style.Button + ' ' + style.Green + ' ' + style.Stop}>{name}</div>
+    )
+}
+

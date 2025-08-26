@@ -1,10 +1,53 @@
 import style from "./HomeCheckin.module.scss"
 import Notice from "../../components/Notice.jsx";
-import {GreenButton} from "../../components/Button.jsx";
+import {GreenButton, GreenButtonStop} from "../../components/Button.jsx";
 import CheckinCalendar from "./CheckinCalendar.jsx";
+import {useEffect, useState} from "react";
+import userStore from "../../store/userStore.js";
+import erc20ContractApi from "../../api/erc20ContractApi.js";
+import maskUtil from "../../utils/maskUtil.js";
+import dateUtil from "../../utils/dateUtil.js";
+import toastUtil from "../../utils/toastUtil.js";
 
 function HomeCheckin()
 {
+    const {playCount, setPlayCount, login} = userStore()
+    const [checkinReward, setCheckinReward] = useState(0n)
+    const [checkinStreak, setCheckinStreak] = useState(0)
+    const [haveCheckin, setHaveCheckin] = useState(false)
+
+    const updateInfo = async () => {
+        let useHaveCheckin = false
+        let useCheckinReward = 0n
+        let useCheckinStreak = 0
+
+        const address = maskUtil.getAddress()
+        if (address) {
+            const checkDay = await erc20ContractApi.checkinDate(address)
+            const today = dateUtil.getTodayNumber()
+            useHaveCheckin = today.toString() === checkDay.toString()
+            useCheckinStreak = await erc20ContractApi.checkinStreak(address)
+            useCheckinReward = await erc20ContractApi.getCheckinReward(useCheckinStreak)
+        }
+
+        setHaveCheckin(useHaveCheckin)
+        setCheckinStreak(useCheckinStreak)
+        setCheckinReward(useCheckinReward)
+    }
+
+    const checkinHandle = async () => {
+        setHaveCheckin(true)
+        let res = await erc20ContractApi.checkin()
+        if (res) {
+            toastUtil.log(`签到成功，获取${res}PEN`)
+        }
+        setPlayCount()
+    }
+
+    useEffect(() => {
+        updateInfo().then()
+    }, [playCount, login]);
+
     return (
         <div className={style.HomeCheckin}>
             <div className={style.Left}>
@@ -12,19 +55,19 @@ function HomeCheckin()
                 <h5>点击签到，领取PEN代币！！！</h5>
                 <div-back>
                     <p>今日可获代币</p>
-                    <h2>+ 200 sats</h2>
+                    <h2>+ {checkinReward / (10n ** 18n)} PEN</h2>
                 </div-back>
                 <div-back>
                     <p>已连续签到</p>
-                    <h2>7天</h2>
+                    <h2>{checkinStreak}天</h2>
                 </div-back>
                 <div-back>
                     <p>累计签到</p>
-                    <h2>14天</h2>
+                    <h2>0天</h2>
                 </div-back>
                 <div-back className={style.LastCheckinInfo}>
                     <p>本周累计签到</p>
-                    <h2>5天</h2>
+                    <h2>0天</h2>
                     <small>&nbsp;/ 7天</small>
                 </div-back>
                 <br></br>
@@ -45,7 +88,8 @@ function HomeCheckin()
                     ]}></Notice>
                 </div>
                 <div className={style.ButtonArea}>
-                    <GreenButton name={"立即签到"}></GreenButton>
+                    {!haveCheckin && <GreenButton name={"立即签到"} clickHandle={async () => await checkinHandle()}></GreenButton>}
+                    {haveCheckin && <GreenButtonStop name={"已签到"}></GreenButtonStop>}
                 </div>
             </div>
             <div className={style.Right}>

@@ -98,7 +98,7 @@ contract PenERC20 is IERC20 {
         }
         uint256 today = (block.timestamp + 8 hours) / 1 days;
         uint256 weekday = (today + 4) % 7;
-        if (weekday == 0) {
+        if (weekday == 0 && oldCheckinStreak != 0) {
             res += 1;
         }
         res *= checkinBase * 10 ** uint256(decimals);
