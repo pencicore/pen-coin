@@ -20,6 +20,10 @@ func SetupRouter() *gin.Engine {
 	erc20 := r.Group("/erc20")
 	{
 		erc20.GET("/getMonthCheckin", service.GetMonthCheckin)
+		erc20.GET("/getMonthCheckinCount", service.GetMonthCheckinCount)
+		erc20.GET("/getCheckinCount", service.GetCheckinCount)
+		erc20.GET("/getCheckinInfo", service.GetCheckinInfo)
+		erc20.GET("/getCheckinReward", service.GetCheckinReward)
 	}
 	return r
 }

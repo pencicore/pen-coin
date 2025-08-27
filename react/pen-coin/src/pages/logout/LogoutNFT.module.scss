@@ -1,4 +1,65 @@
 .LogoutNFT {
-  width: 470px;
+  width: 100%;
+  height: 100%;
+
+  i {
+    background-image: url("../../assets/images/i-ownnftlist.png");
+  }
+}
+
+.NFTArea {
   height: 420px;
+  margin-top: 20px;
+  width: calc(100% - 20px);
+  //background-color: wheat;
+  overflow-y: scroll;
+}
+
+.NFTAreaScroll {
+  width: calc(100% - 20px);
+}
+
+.NFTItem {
+  width: 80px;
+  height: 100px;
+  margin: 0 8px 20px 6px;
+  float: left;
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+
+  p {
+    height: 20px;
+    width: 80px;
+    text-align: center;
+    line-height: 20px;
+    color: #555555;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+/* 整体滚动条 */
+.NFTArea::-webkit-scrollbar {
+  width: 8px;          /* 垂直滚动条宽度 */
+  height: 8px;         /* 水平滚动条高度 */
+}
+
+/* 滚动条轨道 */
+.NFTArea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+/* 滚动条滑块 */
+.NFTArea::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d4fc79 0%, #96e621 100%);
+  border-radius: 4px;
+}
+
+/* 滚动条滑块 hover 状态 */
+.NFTArea::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

@@ -5,10 +5,11 @@ import erc20ContractApi from "../../api/erc20ContractApi.js";
 import {metamaskApi} from "../../utils/metaMaskUtil.js";
 import {GetMonthCheckin} from "../../api/erc20BackendApi.js";
 import userStore from "../../store/userStore.js";
+import maskUtil from "../../utils/maskUtil.js";
 
 function CheckinCalendar() {
 
-    const {login} = userStore()
+    const {login, playCount} = userStore()
     const [year, setYear] = useState(dateUtil.getCurrentYear)
     const [month, setMonth] = useState(dateUtil.getCurrentMonth)
 
@@ -55,7 +56,7 @@ function CheckinCalendar() {
 
     const setCheckinMonthHandler = async () => {
         const checkinMonth = []
-        const address = await metamaskApi.getAddress();
+        const address = await maskUtil.getAddress();
         if (address) {
             const data = (await GetMonthCheckin(address, year, month)).data
             for (let i = 0; i < 31; i++) {
@@ -87,7 +88,7 @@ function CheckinCalendar() {
             setWeeks(weeksTemp)
         }
         fun().then();
-    }, [year, month]);
+    }, [year, month, playCount]);
 
     const leftMonthHandle = () => {
         let target = month - 1

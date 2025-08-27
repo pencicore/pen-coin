@@ -8,6 +8,13 @@ import erc20ContractApi from "../../api/erc20ContractApi.js";
 import maskUtil from "../../utils/maskUtil.js";
 import dateUtil from "../../utils/dateUtil.js";
 import toastUtil from "../../utils/toastUtil.js";
+import {
+    GetCheckinCount,
+    GetCheckinInfo,
+    GetCheckinReward,
+    GetMonthCheckin,
+    GetMonthCheckinCount
+} from "../../api/erc20BackendApi.js";
 
 function HomeCheckin()
 {
@@ -15,24 +22,46 @@ function HomeCheckin()
     const [checkinReward, setCheckinReward] = useState(0n)
     const [checkinStreak, setCheckinStreak] = useState(0)
     const [haveCheckin, setHaveCheckin] = useState(false)
+    const [checkinCount, setCheckinCount] = useState(0)
+    const [checkinMonthCount, setCheckinMonthCount] = useState(0)
+    const [netMonthCount, setNetMonthCount] = useState(0)
+    const [netTodayCount, setNetTodayCount] = useState(0)
+    const [netAllCount, setNetAllCount] = useState(0)
 
     const updateInfo = async () => {
         let useHaveCheckin = false
         let useCheckinReward = 0n
         let useCheckinStreak = 0
+        let useCheckinCount = 0
+        let useCheckinMonthCount = 0
+        let useNetMonthCount = 0
+        let useNetTodayCount = 0
+        let useAllCount = 0
 
-        const address = maskUtil.getAddress()
+        const address =await maskUtil.getAddress()
         if (address) {
             const checkDay = await erc20ContractApi.checkinDate(address)
             const today = dateUtil.getTodayNumber()
             useHaveCheckin = today.toString() === checkDay.toString()
             useCheckinStreak = await erc20ContractApi.checkinStreak(address)
-            useCheckinReward = await erc20ContractApi.getCheckinReward(useCheckinStreak)
+            if(!useHaveCheckin) useCheckinReward = (await erc20ContractApi.getCheckinReward(useCheckinStreak)) / (10n ** 18n)
+            else useCheckinReward = (await GetCheckinReward(address)).data
+            useCheckinMonthCount = (await GetMonthCheckinCount(address, dateUtil.getCurrentYear(), dateUtil.getCurrentMonth())).data
+            useCheckinCount = (await GetCheckinCount(address)).data
+            const data = (await GetCheckinInfo()).data
+            useNetTodayCount = data.today
+            useNetMonthCount = data.month
+            useAllCount = data.all
         }
 
         setHaveCheckin(useHaveCheckin)
         setCheckinStreak(useCheckinStreak)
         setCheckinReward(useCheckinReward)
+        setCheckinCount(useCheckinCount)
+        setCheckinMonthCount(useCheckinMonthCount)
+        setNetTodayCount(useNetTodayCount)
+        setNetMonthCount(useNetMonthCount)
+        setNetAllCount(useAllCount)
     }
 
     const checkinHandle = async () => {
@@ -53,30 +82,35 @@ function HomeCheckin()
             <div className={style.Left}>
                 <h1>今日签到</h1>
                 <h5>点击签到，领取PEN代币！！！</h5>
-                <div-back>
-                    <p>今日可获代币</p>
-                    <h2>+ {checkinReward / (10n ** 18n)} PEN</h2>
-                </div-back>
+                {!haveCheckin &&
+                    <div-back>
+                        <p>今日可获代币</p>
+                        <h2>+ {checkinReward} PEN</h2>
+                    </div-back>}
+                {haveCheckin &&
+                    <div-back>
+                        <p>今日已获代币</p>
+                        <h2>+ {checkinReward} PEN</h2>
+                    </div-back>}
                 <div-back>
                     <p>已连续签到</p>
                     <h2>{checkinStreak}天</h2>
                 </div-back>
                 <div-back>
                     <p>累计签到</p>
-                    <h2>0天</h2>
+                    <h2>{checkinCount}天</h2>
                 </div-back>
                 <div-back className={style.LastCheckinInfo}>
-                    <p>本周累计签到</p>
-                    <h2>0天</h2>
-                    <small>&nbsp;/ 7天</small>
+                    <p>本月累计签到</p>
+                    <h2>{checkinMonthCount}天</h2>
                 </div-back>
                 <br></br>
                 <br></br>
-                <p>账户PEN代币余额网络排名 <mark>34</mark> 名</p>
+                <p>今日玩家打卡 <mark> {netTodayCount} </mark> 次</p>
                 <br></br>
-                <p>连续签到网络排名 <mark>34</mark> 名</p>
+                <p>本月玩家打卡 <mark> {netMonthCount} </mark> 次</p>
                 <br></br>
-                <p>累计签到网络排名 <mark>34</mark> 名</p>
+                <p>累计玩家打卡 <mark> {netAllCount} </mark> 次</p>
                 <div className={style.NoticeArea}>
                     <Notice textArr={[
                         "首次签到，签到获得代币奖励 <mark>X10</mark>",

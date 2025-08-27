@@ -15,7 +15,7 @@ import faucetContractApi from "../../api/faucetContractApi.js";
 
 function HomeGuide() {
 
-    const {address, login, setEthCount, setPenCount} = userStore()
+    const {address, login, setEthCount, setPenCount, setPlayCount} = userStore()
     const [arrowMargin, setArrowMargin] = useState("25px");
 
     const [ETHReceived, setETHReceived] = useState(0)
@@ -55,9 +55,6 @@ function HomeGuide() {
         setPENBalance(usePENBalance)
         setHaveReceivedETH(useHaveReceivedETH)
         setHaveReceivedPEN(useHaveReceivedPEN)
-
-        setEthCount((await maskUtil.getBalance()).toString())
-        setPenCount((await erc20ContractApi.balanceOf(address)).toString())
     }
 
     useEffect(()=>{
@@ -71,6 +68,7 @@ function HomeGuide() {
         if(res.code === 0) {
             toastUtil.log("领取成功")
         }
+        setPlayCount()
     }
 
     const receivePEN = async () => {
@@ -80,6 +78,7 @@ function HomeGuide() {
         if(res) {
             toastUtil.log("领取成功")
         }
+        setPlayCount()
     }
 
     return (
@@ -119,7 +118,7 @@ function HomeGuide() {
                 {haveReceivedPEN && <MiniGreenButtonStop name={"已领取"}></MiniGreenButtonStop>}
                 <small>
                     当前已领取：
-                    <mark>{PENReceived} PEN</mark>
+                    <mark>{strUtil.ethStringToString(PENReceived)} PEN</mark>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     当前未领取：
                     <mark>{strUtil.ethBalanceToString(PENBalance)} PEN</mark>
