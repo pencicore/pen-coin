@@ -18,7 +18,7 @@ func ReceiveETHBalanceHandler(c *gin.Context) {
 		Select("SUM(amount) as total").
 		Scan(&totalStr).Error
 	if err != nil {
-		panic(err)
+		totalStr = "0"
 	}
 	c.JSON(200, utils.Success(totalStr))
 }
@@ -81,7 +81,7 @@ func ReceivePENBalanceHandler(c *gin.Context) {
 		Select("SUM(amount) as total").
 		Scan(&totalStr).Error
 	if err != nil {
-		panic(err)
+		totalStr = "0"
 	}
 	c.JSON(200, utils.Success(totalStr))
 }

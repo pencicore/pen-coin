@@ -1,17 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.18;
 
-import "./interface/IERC20.sol";
+import "./base/ERC20.sol";
 
-contract PenERC20 is IERC20 {
+contract PenERC20V2 is ERC20 {
 
-    mapping(address => uint256) public override balanceOf;
-    mapping(address => mapping(address => uint256)) public override allowance;
-    uint256 public override totalSupply;
-
-    string public name;
-    string public symbol;
-    uint8 public decimals = 18;
+    // ======================= 签到部分 ===========================
 
     // Checkin related
     mapping(address => uint256) public checkinDate;     // last checkin day number
@@ -20,46 +14,7 @@ contract PenERC20 is IERC20 {
 
     event Checkin(address indexed user, uint256 reward, uint256 streak);
 
-    constructor(string memory name_, string memory symbol_, address owner_) {
-        name = name_;
-        symbol = symbol_;
-        unchecked {
-            mint(owner_, 200000 * 10 ** uint256(decimals));
-        }
-    }
-
-    function transfer(address recipient, uint amount) public override returns (bool) {
-        require(balanceOf[msg.sender] >= amount, "ERC20: insufficient balance");
-        balanceOf[msg.sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(msg.sender, recipient, amount);
-        return true;
-    }
-
-    function approve(address spender, uint amount) public override returns (bool) {
-        allowance[msg.sender][spender] = amount;
-        emit Approval(msg.sender, spender, amount);
-        return true;
-    }
-
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint amount
-    ) public override returns (bool) {
-        require(balanceOf[sender] >= amount, "ERC20: insufficient balance");
-        require(allowance[sender][msg.sender] >= amount, "ERC20: allowance too low");
-        allowance[sender][msg.sender] -= amount;
-        balanceOf[sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(sender, recipient, amount);
-        return true;
-    }
-
-    function mint(address recipient, uint256 amount) private {
-        balanceOf[recipient] += amount;
-        totalSupply += amount;
-        emit Transfer(address(0), recipient, amount);
+    constructor(string memory name_, string memory symbol_, address owner_) ERC20(name_, symbol_, owner_) {
     }
 
     // ✅ Checkin function
@@ -105,12 +60,75 @@ contract PenERC20 is IERC20 {
         return res;
     }
 
+    // ======================= 抽奖部分 ===========================
+
+    // Lucky draw related
+    mapping(address => uint256) public luckyDrawDate;   // 上次抽奖日期
+    mapping(address => uint256) public luckyDrawCount;  // 当日已抽次数
+
+    event LuckyDraw(address indexed user, string reward, uint256 cost);
+
+    // ✅ Lucky Draw function
+    function luckyDraw(uint seed) external returns (string memory reward) {
+        uint256 today = (block.timestamp + 8 hours) / 1 days;
+        uint256 cost = 0;
+
+        // 如果是新的一天，重置抽奖次数
+        if (luckyDrawDate[msg.sender] < today) {
+            luckyDrawDate[msg.sender] = today;
+            luckyDrawCount[msg.sender] = 0;
+        }
+
+        require(luckyDrawCount[msg.sender] < 3, "Max 3 draws per day");
+
+        // 按照抽奖次数扣费
+        if (luckyDrawCount[msg.sender] == 1) {
+            require(balanceOf[msg.sender] >= 100 * 10 ** uint256(decimals), "Not enough PEN");
+            balanceOf[msg.sender] -= 100 * 10 ** uint256(decimals);
+            totalSupply -= 100 * 10 ** uint256(decimals); // 销毁
+            cost = 100;
+            emit Transfer(msg.sender, address(0), 100 * 10 ** uint256(decimals));
+        } else if (luckyDrawCount[msg.sender] == 2) {
+            require(balanceOf[msg.sender] >= 200 * 10 ** uint256(decimals), "Not enough PEN");
+            balanceOf[msg.sender] -= 200 * 10 ** uint256(decimals);
+            totalSupply -= 200 * 10 ** uint256(decimals); // 销毁
+            cost = 200;
+            emit Transfer(msg.sender, address(0), 200 * 10 ** uint256(decimals));
+        }
+        luckyDrawCount[msg.sender] += 1;
+
+        // 奖励规则
+        uint code = (random(seed) % 100 + 1);
+        if (0 <= code && code <= 1) {
+            reward = "token";
+        }
+        if (2 <= code && code <= 5) {
+            reward = "reset";
+            luckyDrawCount[msg.sender] = 0;
+        }
+        if (6 <= code && code <= 10) {
+            reward = "888 PEN";
+            mint(msg.sender, 888 * 10 ** uint256(decimals));
+        }
+        if (11 <= code && code <= 20) {
+            reward = "nothing";
+        }
+        if (21 <= code && code <= 50) {
+            reward = "200 PEN";
+            mint(msg.sender, 200 * 10 ** uint256(decimals));
+        }
+        if (51 <= code && code <= 100) {
+            reward = "100 PEN";
+            mint(msg.sender, 100 * 10 ** uint256(decimals));
+        }
+
+        emit LuckyDraw(msg.sender, reward, cost);
+    }
+
     function random(uint seed) public view returns (uint) {
         return uint(keccak256(
             abi.encodePacked(block.timestamp, block.prevrandao, msg.sender, seed)
         ));
     }
-
-    function LuckyDraw()
 
 }

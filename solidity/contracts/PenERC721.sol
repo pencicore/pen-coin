@@ -2,7 +2,7 @@
 // by 0xAA
 pragma solidity ^0.8.4;
 
-import "./ERC721.sol";
+import "./base/ERC721.sol";
 
 contract PenERC721 is ERC721{
     uint public MAX_APES = 1000; // 总量

@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.30+commit.73712a01"
+		"version": "0.8.18+commit.87f61d96"
 	},
 	"language": "Solidity",
 	"output": {
@@ -390,9 +390,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ERC721.sol": "ERC721"
+			"contracts/base/ERC721.sol": "ERC721"
 		},
-		"evmVersion": "prague",
+		"evmVersion": "paris",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -404,12 +404,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/ERC721.sol": {
-			"keccak256": "0x7419f69bbdb4530b62212ed79d51167097695bdcd7933e858359646988db544a",
+		"contracts/base/ERC721.sol": {
+			"keccak256": "0x934a6be9baa5b089f3553d5d231f802b33468a1d5df763a7eed70482e97bdda8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://724a37aed0bb740dd224cbcee64659cdd0ee648137a4c240b632682198fb5c0d",
-				"dweb:/ipfs/QmcZEyzCHNxSqKF4QKJ5cCoePGGsUnRgid9mGoEvsskxqq"
+				"bzz-raw://c3888d8dec90dba971fdb7455bf7a4b7043f04baf28c316341ea207f125111da",
+				"dweb:/ipfs/QmdV3SkSSmsM5bytG6Q8KcZu6iN6UXuupV1gMnTZA512df"
 			]
 		},
 		"contracts/interface/IERC165.sol": {
@@ -445,11 +445,11 @@
 			]
 		},
 		"contracts/lib/String.sol": {
-			"keccak256": "0x35879cd15c16fb1e05bdf649d3768db9b2a32aa99aa9d22172a9550a63946f64",
+			"keccak256": "0x13372fee1e5dfe684344c3c80d064da29b53e50e8f7f149b4702ffa5758f6848",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a239a5a36d6a5beb4c049f16061c3577b02cca9b90893c863629315f731fd61c",
-				"dweb:/ipfs/QmWi1okMLtNhrCC798UGdehZFrekr16iYu4gWPfL8iDCAJ"
+				"bzz-raw://9c2d37389dd54c6157a96c999fd979ce9defd79760857780d7660663194843c8",
+				"dweb:/ipfs/QmTvMqo7t1CMP1MpfMiQUEwYvDphEmdZoRSuM4pG3zYMha"
 			]
 		}
 	},
