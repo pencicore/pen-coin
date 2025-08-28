@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/shopspring/decimal"
 	"net/http"
+	"strconv"
 	"time"
 	"web3-server/internal/db"
 	model "web3-server/internal/models"
@@ -52,6 +53,57 @@ func GetBalanceHistory(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, utils.Success(result))
+}
+
+func PageEventHistory(c *gin.Context) {
+	address := c.Query("address")
+	pageStr := c.Query("page")
+	sizeStr := c.Query("size")
+
+	// 默认分页参数
+	page := 1
+	size := 10
+
+	// 转换分页参数
+	if pageStr != "" {
+		if p, err := strconv.Atoi(pageStr); err == nil && p > 0 {
+			page = p
+		}
+	}
+	if sizeStr != "" {
+		if s, err := strconv.Atoi(sizeStr); err == nil && s > 0 {
+			size = s
+		}
+	}
+
+	// 查询总数
+	var total int64
+	if err := db.D.Model(&model.Event{}).
+		Where("address = ?", address).
+		Count(&total).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, utils.Error(err.Error()))
+		return
+	}
+
+	// 查询列表
+	var events []model.Event
+	if err := db.D.
+		Where("address = ?", address).
+		Order("created_at DESC").
+		Offset((page - 1) * size).
+		Limit(size).
+		Find(&events).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, utils.Error(err.Error()))
+		return
+	}
+
+	// 返回结果
+	c.JSON(http.StatusOK, utils.Success(gin.H{
+		"list":  events,
+		"total": total,
+		"page":  page,
+		"size":  size,
+	}))
 }
 
 func GetUserInfo(c *gin.Context) {

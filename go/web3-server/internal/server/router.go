@@ -33,6 +33,7 @@ func SetupRouter() *gin.Engine {
 	{
 		user.GET("/getBalanceHistory", service.GetBalanceHistory)
 		user.GET("/getUserInfo", service.GetUserInfo)
+		user.GET("/pageEventHistory", service.PageEventHistory)
 	}
 	return r
 }

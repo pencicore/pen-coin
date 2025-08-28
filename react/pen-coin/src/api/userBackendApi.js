@@ -28,3 +28,14 @@ export const GetUserInfo = async (address) => {
     })
     return response.data
 }
+
+export const PageEventHistory = async (address, page, size) => {
+    const response = await api.get('/pageEventHistory', {
+        params: {
+            address: address,
+            page: page,
+            size: size,
+        }
+    })
+    return response.data
+}
