@@ -16,7 +16,12 @@ const strUtil = {
     ethStringToString(balance) {
         const d = new Decimal(balance);
         return d.toSignificantDigits(8).toString();
-    }
+    },
+    dateTimeToString(dateTime) {
+        if (!dateTime) return "";
+        const date = new Date(dateTime);
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    },
 }
 
 export default strUtil

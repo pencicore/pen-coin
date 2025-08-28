@@ -1,19 +1,45 @@
 import style from './DrawHistory.module.scss'
 import {useEffect, useState} from "react";
+import userStore from "../../store/userStore.js";
+import maskUtil from "../../utils/maskUtil.js";
+import {PageDrawHistory} from "../../api/drawBackendApi.js";
+import strUtil from "../../utils/strUtil.js";
 
 function DrawHistory()
 {
+    const {login, playCount} = userStore()
+    const [historyPage, setHistoryPage] = useState([])
     const [history, setHistory] = useState([])
+
+    const updateInfo = async () => {
+        let useHistoryPage = []
+
+        const address = await maskUtil.getAddress()
+        if (address) {
+            useHistoryPage = (await PageDrawHistory(1, 9)).data.list
+            console.log(useHistoryPage)
+        }
+
+        setHistoryPage(useHistoryPage)
+    }
+
+    useEffect(() => {
+        updateInfo().then()
+    }, [login, playCount]);
 
     const updateHistory = () => {
         const temp = []
-        for(let i=1;i<10;i++) {
+        const n = historyPage.length
+        for(let i=0;i<n;i++) {
+            const address = historyPage[i].Address
+            const reward = historyPage[i].Reward
+            const time = historyPage[i].CreatedAt
             temp.push(
                 <tr key={i}>
-                   <td style={{width: '175px'}}><p>FOOD**DFGH</p></td>
-                    <td style={{width: '135px'}}><p>100 PEN</p></td>
+                    <td style={{width: '175px'}}><p>{strUtil.maskAddress(address)}</p></td>
+                    <td style={{width: '135px'}}><p>{reward}</p></td>
                     <td style={{width: '200px'}}>
-                        <p style={{color: 'rgba(144, 147, 153, 1)'}} >2025/08/07 22:45:20</p>
+                        <p style={{color: 'rgba(144, 147, 153, 1)'}} >{strUtil.dateTimeToString(time)}</p>
                     </td>
                 </tr>
             )
@@ -23,7 +49,7 @@ function DrawHistory()
 
     useEffect(() => {
         updateHistory()
-    }, []);
+    }, [historyPage])
 
     return (
         <div-container className={style.DrawHistory}>

@@ -12,7 +12,6 @@ function Wheel()
 {
     const {login, playCount, setPlayCount} = userStore()
     const wheelRef = useRef(null);
-
     const [drawCount, setDrawCount] = useState(0)
     const [drawCost, setDrawCost] = useState("")
 
@@ -38,9 +37,8 @@ function Wheel()
 
     const handleDraw = async () => {
         if (wheelRef.current) {
-            console.log("抽奖")
             const prize = await wheelRef.current.luckyDraw();
-            // console.log("抽中的奖品:", prize)
+            console.log("抽中的奖品:", prize)
             setPlayCount()
 
         }

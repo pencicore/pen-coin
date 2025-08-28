@@ -19,6 +19,6 @@ type DrawHistory struct {
 	Address   string          `gorm:"size:255;not null;index"`
 	Reward    string          `gorm:"size:255;not null"`
 	Cost      decimal.Decimal `gorm:"type:decimal(30,18);not null"`
-	CheckDate time.Time       `gorm:"type:date;not null;"`
+	DrawDate  time.Time       `gorm:"type:date;not null;"`
 	CreatedAt time.Time       `gorm:"autoCreateTime"`
 }

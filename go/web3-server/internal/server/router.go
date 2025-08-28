@@ -27,7 +27,7 @@ func SetupRouter() *gin.Engine {
 	}
 	draw := r.Group("/draw")
 	{
-		draw.GET("/getDrawHistory", service.PageDrawHistory)
+		draw.GET("/pageDrawHistory", service.PageDrawHistory)
 	}
 	return r
 }

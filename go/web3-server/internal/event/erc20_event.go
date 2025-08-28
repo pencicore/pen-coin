@@ -84,10 +84,10 @@ func LuckyDrawHandle(vLog types.Log, parsedABI abi.ABI) error {
 
 	now := time.Now()
 	record := model.DrawHistory{
-		Address:   e.User.Hex(),
-		Reward:    e.Reward,
-		Cost:      decimal.NewFromBigInt(e.Cost, -18),
-		CheckDate: time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location()),
+		Address:  e.User.Hex(),
+		Reward:   e.Reward,
+		Cost:     decimal.NewFromBigInt(e.Cost, -18),
+		DrawDate: time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location()),
 	}
 	if err := db.D.Create(&record).Error; err != nil {
 		log.Println("保存抽奖事件失败:", err)
