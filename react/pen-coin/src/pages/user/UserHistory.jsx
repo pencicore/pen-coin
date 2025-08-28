@@ -30,7 +30,9 @@ function UserHistory() {
         <i></i>
         <p>&nbsp;&nbsp;活动记录</p>
         <table>
-            {history}
+            <tbody>
+                {history}
+            </tbody>
         </table>
     </div-container>
   )

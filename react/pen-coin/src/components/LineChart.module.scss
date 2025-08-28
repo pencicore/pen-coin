@@ -12,13 +12,13 @@
     color: rgba(96, 98, 102, 1);
     text-align: center;
     margin: 15px 26px 0 26px;
-    border-radius: 6px;
+    border-radius: 12px;
     cursor: pointer; // 增加鼠标指针提示
     transition: background-color 0.3s; // 增加渐变效果
   }
 
   span:hover {
-    background-color: rgba(243, 243, 243, 1);
+    background-color: rgba(243, 243, 243, 1) !important;
   }
 }
 

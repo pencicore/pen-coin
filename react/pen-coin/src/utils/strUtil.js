@@ -20,8 +20,13 @@ const strUtil = {
     dateTimeToString(dateTime) {
         if (!dateTime) return "";
         const date = new Date(dateTime);
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    },
+
+        const pad = (n) => String(n).padStart(2, "0");
+
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} `
+            + `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    }
+
 }
 
 export default strUtil

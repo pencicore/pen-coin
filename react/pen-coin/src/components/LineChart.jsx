@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import style from './LineChart.module.scss';
 
-const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280}) => {
+const LineChart = ({ arr = [], updateInfo, unit = 'PEN', canvasWidth=550, canvasHeight=280}) => {
     const canvasRef = useRef(null);
-    const [labels, setLabels] = useState([]);
+    const [labels, setLabels] = useState([0,0]);
+    const [activeRange, setActiveRange] = useState('day'); // 默认选中
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -27,8 +28,7 @@ const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280})
             val
         }));
 
-        // --- 绘制轻微曲度折线（小 Catmull-Rom Bezier） ---
-        const curvature = 18; // 控制曲度，越大越平滑
+        const curvature = 18;
         ctx.strokeStyle = "rgba(61, 197, 93, 1)";
         ctx.lineWidth = 3;
         ctx.shadowColor = "rgba(61, 197, 93, 0.8)";
@@ -54,7 +54,6 @@ const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280})
         }
         ctx.stroke();
 
-        // --- 生成折线高度表 ---
         const yMap = [];
         for (let x = 0; x < width; x++) {
             let idx = Math.floor(x / stepX);
@@ -66,7 +65,6 @@ const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280})
             yMap[x] = p1.y + (p2.y - p1.y) * t;
         }
 
-        // --- 绘制网格点 ---
         ctx.shadowColor = "rgba(61, 197, 93, 0.6)";
         ctx.shadowBlur = 4;
         ctx.shadowOffsetX = 0;
@@ -83,8 +81,7 @@ const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280})
             }
         }
 
-        // --- 最高点和最低点 ---
-        const maxPoint = points.reduce((prev, cur) => cur.val > prev.val ? cur : prev, points[0]);
+        const maxPoint = points.reduce((prev, cur) => cur.val >= prev.val ? cur : prev, points[0]);
         const minPoint = points.reduce((prev, cur) => cur.val < prev.val ? cur : prev, points[0]);
 
         setLabels([
@@ -92,6 +89,8 @@ const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280})
             { x: minPoint.x, y: minPoint.y - 42, val: minValue }
         ]);
     }, [arr]);
+
+    const ranges = ['day', 'week', 'month', 'year'];
 
     return (
         <div className={style.LineChart} style={{ position: 'relative' }}>
@@ -110,10 +109,24 @@ const LineChart = ({ arr = [], unit = 'PEN', canvasWidth=550, canvasHeight=280})
                     {label.val} {unit}
                 </div>
             ))}
-            <span>1 day</span>
-            <span>1 week</span>
-            <span>1 month</span>
-            <span>1 year</span>
+
+            <div>
+                {ranges.map((r) => (
+                    <span
+                        key={r}
+                        onClick={() => {
+                            updateInfo(r)
+                            setActiveRange(r)
+                        }}
+                        style={{
+                            backgroundColor: activeRange === r ? "rgba(243, 243, 243, 1)" : "transparent",
+                            cursor: 'pointer',
+                        }}
+                    >
+                        1 {r}
+                    </span>
+                ))}
+            </div>
         </div>
     );
 };
