@@ -17,7 +17,6 @@ function DrawHistory()
         const address = await maskUtil.getAddress()
         if (address) {
             useHistoryPage = (await PageDrawHistory(1, 9)).data.list
-            console.log(useHistoryPage)
         }
 
         setHistoryPage(useHistoryPage)

@@ -5,21 +5,57 @@ import UserHistory from "./UserHistory.jsx";
 import {useEffect, useState} from "react";
 import userStore from "../../store/userStore.js";
 import UserHandle from "./UserHandle.js";
+import {GetUserInfo} from "../../api/userBackendApi.js";
+import strUtil from "../../utils/strUtil.js";
 
 const User = () => {
 
     const {address} = userStore()
     const [type, setType] = useState("day")
     const [balanceHistory, setBalanceHistory] = useState([0,0])
+    const [balance, setBalance] = useState(0)
+    const [balanceChange, setBalanceChange] = useState(0.0)
+    const [count, setCount] = useState(0)
+    const [countChange, setCountChange] = useState(0.0)
+    const [balanceUp, setBalanceUp] = useState(true)
+    const [countUp, setCountUp] = useState(true)
+
+    function calculateUseBalanceChange(todayBalance, yesterdayBalance) {
+        const today = Number(todayBalance);
+        const yesterday = Number(yesterdayBalance);
+        const maxVal = Math.max(today, yesterday);
+        if (maxVal === 0) return 0;
+        return Math.abs(today - yesterday) * 100.0 / maxVal;
+    }
 
     const updateInfo = async () => {
         let useBalanceHistory = []
+        let useBalance = 0n
+        let useCount = 0
+        let useBalanceChange = 0.0
+        let useCountChange = 0.0
+        let useBalanceUp = true
+        let useCountUp = true
 
         if (address) {
             useBalanceHistory = await UserHandle.getBalanceHistory(type)
+            const info = (await GetUserInfo(address)).data
+            console.log(info)
+            useBalance = info.todayBalance
+            useCount = info.todayCount
+            useBalanceChange = calculateUseBalanceChange(info.todayBalance, info.yesterdayBalance)
+            useCountChange = calculateUseBalanceChange(info.todayCount, info.yesterdayCount)
+            useBalanceUp = info.todayBalance > info.yesterdayBalance
+            useCountUp = info.todayCount > info.yesterdayCount
         }
 
         setBalanceHistory(useBalanceHistory)
+        setBalance(useBalance)
+        setBalanceChange(useBalanceChange)
+        setCount(useCount)
+        setCountChange(useCountChange)
+        setBalanceUp(useBalanceUp)
+        setCountUp(useCountUp)
     }
 
     useEffect(() => {
@@ -30,7 +66,6 @@ const User = () => {
         UserHandle.getBalanceHistory(type)
             .then((res) => {
                 setBalanceHistory(res)
-                console.log(res)
             })
     }, [type]);
 
@@ -41,14 +76,19 @@ const User = () => {
                 <h5>查看个人账户与活动记录</h5>
                 <div-back>
                     <p>代币资产</p>
-                    <h2>3456.6879 PEN</h2>
-                    <small>相对于上周下降 <mark className={style.Down}>20.4%</mark> </small>
+                    <h2>{balance} PEN</h2>
+                    <small>
+                        相对于上周{balanceUp?'上升':'下降'}
+                        <mark className={balanceUp ? style.Up : style.Down}>{balanceChange}%</mark>
+                    </small>
                 </div-back>
                 &nbsp;
                 <div-back>
                     <p>本周活动</p>
-                    <h2>223 次</h2>
-                    <small>相对于上周活跃度上升   <mark className={style.Up}>2.0%</mark> </small>
+                    <h2>{count} 次</h2>
+                    <small>相对于上周活跃度{countUp?'上升':'下降'}
+                        <mark className={countUp ? style.Up : style.Down}>{countChange}%</mark>
+                    </small>
                 </div-back>
                 <br></br><br></br>
                 <LineChart arr={balanceHistory} updateInfo = {setType}></LineChart>

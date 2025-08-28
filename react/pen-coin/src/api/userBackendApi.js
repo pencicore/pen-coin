@@ -19,3 +19,12 @@ export const GetBalanceHistory = async (address, begin, end) => {
     })
     return response.data
 }
+
+export const GetUserInfo = async (address) => {
+    const response = await api.get('/getUserInfo', {
+        params: {
+            address: address,
+        }
+    })
+    return response.data
+}
