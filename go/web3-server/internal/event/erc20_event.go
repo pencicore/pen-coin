@@ -25,7 +25,13 @@ func CheckinHandle(vLog types.Log, parsedABI abi.ABI) error {
 		return err
 	}
 	e.User = common.HexToAddress(vLog.Topics[1].Hex())
-	log.Printf("[Checkin] user=%s, reward=%s, streak=%s\n", e.User.Hex(), e.Reward.String(), e.Streak.String())
+	EventHandler(&model.Event{
+		Address:     e.User.Hex(),
+		Amount:      decimal.NewFromBigInt(e.Reward, -18),
+		EventName:   "Checkin",
+		EventCnName: "打卡",
+		EventData:   "",
+	}, vLog)
 
 	now := time.Now()
 	record := model.ERC20CheckIn{
@@ -71,6 +77,21 @@ func CheckinHandle(vLog types.Log, parsedABI abi.ABI) error {
 }
 
 func LuckyDrawHandle(vLog types.Log, parsedABI abi.ABI) error {
+	getAmountChange := func(reward string, cost *big.Int) decimal.Decimal {
+		rewardMap := map[string]int64{
+			"100 PEN": 100,
+			"200 PEN": 200,
+			"888 PEN": 888,
+		}
+		// 获取奖励数值（默认 0）
+		rewardValue := rewardMap[reward]
+		// 转换成 decimal，并调整到 18 位精度
+		rewardNum := decimal.NewFromInt(rewardValue)
+		// 扣除消耗
+		costNum := decimal.NewFromBigInt(cost, -18)
+		return rewardNum.Sub(costNum)
+	}
+
 	var e struct {
 		User   common.Address
 		Reward string
@@ -80,7 +101,13 @@ func LuckyDrawHandle(vLog types.Log, parsedABI abi.ABI) error {
 		return err
 	}
 	e.User = common.HexToAddress(vLog.Topics[1].Hex())
-	log.Printf("[LuckyDraw] user=%s, reward=%s, cost=%s\n", e.User.Hex(), e.Reward, e.Cost.String())
+	EventHandler(&model.Event{
+		Address:     e.User.Hex(),
+		Amount:      getAmountChange(e.Reward, e.Cost),
+		EventName:   "LuckyDraw",
+		EventCnName: "抽奖",
+		EventData:   e.Reward,
+	}, vLog)
 
 	now := time.Now()
 	record := model.DrawHistory{
