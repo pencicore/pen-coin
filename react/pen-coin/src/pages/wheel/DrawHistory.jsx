@@ -9,7 +9,7 @@ function DrawHistory()
         const temp = []
         for(let i=1;i<10;i++) {
             temp.push(
-                <tr>
+                <tr key={i}>
                    <td style={{width: '175px'}}><p>FOOD**DFGH</p></td>
                     <td style={{width: '135px'}}><p>100 PEN</p></td>
                     <td style={{width: '200px'}}>
@@ -29,7 +29,11 @@ function DrawHistory()
         <div-container className={style.DrawHistory}>
             <i></i>
             <p>&nbsp;&nbsp;最近中奖内容</p>
-            <table style={{marginTop: '10px'}}>{history}</table>
+            <table style={{marginTop: '10px'}}>
+                <tbody>
+                    {history}
+                </tbody>
+            </table>
         </div-container>
     )
 }

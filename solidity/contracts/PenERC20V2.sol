@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+pragma solidity ^0.8.4;
 
 import "./base/ERC20.sol";
 
@@ -98,27 +98,22 @@ contract PenERC20V2 is ERC20 {
         luckyDrawCount[msg.sender] += 1;
 
         // 奖励规则
-        uint code = (random(seed) % 100 + 1);
-        if (0 <= code && code <= 1) {
+        uint code = (random(seed) % 100 + 1);    
+        if (code <= 1) {
             reward = "token";
-        }
-        if (2 <= code && code <= 5) {
+        } else if (code <= 5) {
             reward = "reset";
             luckyDrawCount[msg.sender] = 0;
-        }
-        if (6 <= code && code <= 10) {
+        } else if (code <= 10) {
             reward = "888 PEN";
             mint(msg.sender, 888 * 10 ** uint256(decimals));
-        }
-        if (11 <= code && code <= 20) {
+        } else if (code <= 20) {
             reward = "nothing";
-        }
-        if (21 <= code && code <= 50) {
+        } else if (code <= 50) {
             reward = "200 PEN";
             mint(msg.sender, 200 * 10 ** uint256(decimals));
-        }
-        if (51 <= code && code <= 100) {
-            reward = "100 PEN";
+        } else {
+            reward = "100 PEN"; // 51~100
             mint(msg.sender, 100 * 10 ** uint256(decimals));
         }
 
@@ -127,7 +122,7 @@ contract PenERC20V2 is ERC20 {
 
     function random(uint seed) public view returns (uint) {
         return uint(keccak256(
-            abi.encodePacked(block.timestamp, block.prevrandao, msg.sender, seed)
+            abi.encodePacked(block.timestamp, block.difficulty, msg.sender, seed)
         ));
     }
 

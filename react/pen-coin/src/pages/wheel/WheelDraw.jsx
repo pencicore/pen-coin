@@ -1,31 +1,46 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import style from './WheelDraw.module.scss';
+import { erc20DrawContractApi } from "../../api/erc20ContractApi.js";
 
-const WheelDraw = forwardRef(({ n = 6, prizes, radius = 225 }, ref) => {
+const WheelDraw = forwardRef(({ n = 6, prizes, prizesSimple, radius = 225 }, ref) => {
     const [hoverIndex, setHoverIndex] = useState(null);
-    const [rotation, setRotation] = useState(0);
-    const [lastIndex, setLastIndex] = useState(n-1);
-
-    const luckyDraw = () => {
-        return new Promise(resolve => {
-            const randomIndex = Math.floor(Math.random() * n);
-            const anglePerSector = 360 / n;
-            const targetAngle = anglePerSector * (n*2 - randomIndex + lastIndex);
-            // console.log('lastIndex', lastIndex, 'randomIndex', randomIndex)
-            setLastIndex(randomIndex)
-
-            setRotation(prev => prev + targetAngle);
-
-            // 动画结束后 resolve
-            setTimeout(() => {
-                resolve(prizes[randomIndex]);
-            }, 4000); // 动画时间与 CSS transition 保持一致
-        });
-    };
+    const [rotation, setRotation] = useState(0);       // 记录当前角度
+    const [lastIndex, setLastIndex] = useState(n - 1);
+    const [isSpinning, setIsSpinning] = useState(false); // 是否无限旋转
+    const [targetRotation, setTargetRotation] = useState(null); // 目标角度
 
     useImperativeHandle(ref, () => ({
         luckyDraw
     }));
+
+    const luckyDraw = () => {
+        return new Promise(resolve => {
+            setIsSpinning(true); // 开始无限旋转
+
+            (async () => {
+                const prize = await erc20DrawContractApi.luckyDraw();
+                console.log("中奖结果:", prize);
+                const randomIndex = prizesSimple.indexOf(prize);
+
+                const anglePerSector = 360 / n;
+                const targetAngle = anglePerSector * (n * 5 - randomIndex + lastIndex);
+                setLastIndex(randomIndex);
+
+                // 停掉无限旋转
+                setIsSpinning(false);
+
+                // 稍微延迟，给 CSS 有时间清掉无限旋转
+                setTimeout(() => {
+                    setTargetRotation(prev => (prev || rotation) + targetAngle);
+                }, 50);
+
+                // 动画结束后 resolve
+                setTimeout(() => {
+                    resolve(prizes[randomIndex]);
+                }, 4000);
+            })();
+        });
+    };
 
     const cx = radius + 14;
     const cy = radius + 14;
@@ -93,10 +108,13 @@ const WheelDraw = forwardRef(({ n = 6, prizes, radius = 225 }, ref) => {
             >
                 <g
                     style={{
-                        transform: `rotate(${rotation}deg)`,
+                        transform: `rotate(${targetRotation ?? rotation}deg)`,
                         transformOrigin: `${cx}px ${cy}px`,
-                        transition: "transform 4s cubic-bezier(0.25, 1, 0.5, 1)"
+                        transition: isSpinning
+                            ? "none"
+                            : "transform 4s cubic-bezier(0.25, 1, 0.5, 1)"
                     }}
+                    className={isSpinning ? style.spinning : ""}
                 >
                     {createSectors()}
                     <circle

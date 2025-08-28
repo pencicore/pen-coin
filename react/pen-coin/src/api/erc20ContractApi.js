@@ -25,7 +25,7 @@ const erc20ContractApi = {
         console.log((await this.getContract()))
         const tx = await (await this.getContract()).checkin();
         const receipt = await tx.wait();
-        return receipt.state === 1
+        return receipt.status === 1
     },
     async checkinDate(address) {
         if (address === null) return 0
@@ -34,6 +34,39 @@ const erc20ContractApi = {
     async checkinStreak(address) {
         return (await this.getContract()).checkinStreak(address)
     }
+}
+
+export const erc20DrawContractApi = {
+    async getContract() {
+        return await erc20ContractApi.getContract()
+    },
+    async getDrawCount(address) {
+        return (await this.getContract()).luckyDrawCount(address)
+    },
+    async luckyDraw() {
+        const contract = await this.getContract();
+
+        // 1. 发送交易
+        const tx = await contract.luckyDraw(0, { gasLimit: 200000 });
+
+        // 2. 等待交易确认，拿到 receipt
+        const receipt = await tx.wait();
+
+        // 3. 解析日志
+        const iface = contract.interface;
+        for (const log of receipt.logs) {
+            try {
+                const parsed = iface.parseLog(log);
+                if (parsed && parsed.name === "LuckyDraw") {
+                    return parsed.args.reward;
+                }
+            } catch (e) {
+                // 不是本合约的日志就忽略
+            }
+        }
+
+        return null; // 如果没找到事件
+    },
 }
 
 export default erc20ContractApi
@@ -108,6 +141,31 @@ const ABI = [
             }
         ],
         "name": "Checkin",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "reward",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "cost",
+                "type": "uint256"
+            }
+        ],
+        "name": "LuckyDraw",
         "type": "event"
     },
     {
@@ -200,6 +258,19 @@ const ABI = [
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "burn",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -299,6 +370,63 @@ const ABI = [
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "seed",
+                "type": "uint256"
+            }
+        ],
+        "name": "luckyDraw",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "reward",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "luckyDrawCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "luckyDrawDate",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "name",
         "outputs": [
@@ -306,6 +434,25 @@ const ABI = [
                 "internalType": "string",
                 "name": "",
                 "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "seed",
+                "type": "uint256"
+            }
+        ],
+        "name": "random",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",

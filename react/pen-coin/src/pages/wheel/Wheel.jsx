@@ -1,19 +1,48 @@
 import style from './Wheel.module.scss'
 import WheelDraw from "./WheelDraw.jsx";
 import {GreenButton} from "../../components/Button.jsx";
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import DrawHistory from "./DrawHistory.jsx";
 import Notice from "../../components/Notice.jsx";
+import maskUtil from "../../utils/maskUtil.js";
+import userStore from "../../store/userStore.js";
+import {erc20DrawContractApi} from "../../api/erc20ContractApi.js";
 
 function Wheel()
 {
+    const {login, playCount, setPlayCount} = userStore()
     const wheelRef = useRef(null);
+
+    const [drawCount, setDrawCount] = useState(0)
+    const [drawCost, setDrawCost] = useState("")
+
+    const updateInfo = async () => {
+        let useDrawCount = 0
+        let useDrawCost = ""
+
+        const address = await maskUtil.getAddress()
+        if (address) {
+            useDrawCount = 3n - await erc20DrawContractApi.getDrawCount(address)
+            if (useDrawCount === 3n) useDrawCost = <>，本次抽奖 <mark>免费</mark></>
+            if (useDrawCount === 2n) useDrawCost = <>，本次抽奖消耗 <mark>100</mark> pen</>
+            if (useDrawCount === 1n) useDrawCost = <>，本次抽奖消耗 <mark>200</mark> pen</>
+        }
+
+        setDrawCount(useDrawCount)
+        setDrawCost(useDrawCost)
+    }
+
+    useEffect(() => {
+        updateInfo().then()
+    }, [login, playCount]);
 
     const handleDraw = async () => {
         if (wheelRef.current) {
+            console.log("抽奖")
             const prize = await wheelRef.current.luckyDraw();
-            // alert(`抽中的奖品:${prize}`);
-            console.log("抽中的奖品:", prize)
+            // console.log("抽中的奖品:", prize)
+            setPlayCount()
+
         }
     };
 
@@ -22,20 +51,18 @@ function Wheel()
             <div className={style.Left}>
                 <h1>幸运抽奖</h1>
                 <h5>点击抽奖，获取随机代币奖励！！！</h5>
-                <p>今日剩余 <mark>3</mark> 次抽奖机会，本次抽奖 <mark>免费</mark></p>
+                <p>今日剩余 <mark>{drawCount.toString()}</mark> 次抽奖机会{drawCost}</p>
                 <br></br>
                 <br></br>
                 <WheelDraw
                     ref={wheelRef}
                     n={6}
                     prizes={[
-                    "100 pen",
-                    "感谢参与",
-                    "200 pen",
-                    "神秘token",
-                    "888 pen",
-                    "再来两次"
+                    "100 pen", "感谢参与", "200 pen", "神秘token", "888 pen", "重置次数"
                     ]}
+                    prizesSimple={
+                        ["100 PEN", "nothing", "200 PEN", "token", "888 PEN", "reset"]
+                    }
                 >
                 </WheelDraw>
                 <div className={style.ButtonArea}>
