@@ -3,6 +3,7 @@ package model
 import (
 	"github.com/shopspring/decimal"
 	"log"
+	"time"
 	"web3-server/internal/db"
 )
 
@@ -21,5 +22,5 @@ type Event struct {
 	EventCnName string          `gorm:"size:50;not null"`
 	EventData   string          `gorm:"size:255;not null"` // 可能较大
 	Amount      decimal.Decimal `gorm:"type:decimal(30,18);not null"`
-	CreatedAt   int64           `gorm:"autoCreateTime;index"` // 时间索引
+	CreatedAt   time.Time       `gorm:"autoCreateTime;index"` // 时间索引
 }
