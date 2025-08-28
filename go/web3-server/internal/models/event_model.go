@@ -15,13 +15,13 @@ func init() {
 
 type Event struct {
 	ID          uint64          `gorm:"primaryKey;autoIncrement"`
-	Address     string          `gorm:"size:42;not null;index:idx_address_count,priority:1"` // 组合索引
-	BlockNum    uint64          `gorm:"not null;index"`                                      // 按区块号查询加索引
-	TxHash      string          `gorm:"size:66;not null;uniqueIndex"`                        // 唯一索引
+	Address     string          `gorm:"size:42;not null;index:idx_address_count,priority:1"`
+	BlockNum    uint64          `gorm:"not null;index"`
+	TxHash      string          `gorm:"size:66;not null;uniqueIndex"`
 	EventName   string          `gorm:"size:100;not null"`
 	EventCnName string          `gorm:"size:50;not null"`
-	EventData   string          `gorm:"size:255;not null"` // 可能较大
+	EventData   string          `gorm:"size:255;not null"`
 	Amount      decimal.Decimal `gorm:"type:decimal(30,18);not null"`
 	Count       uint64          `gorm:"not null;index:idx_address_count,priority:2"`
-	CreatedAt   time.Time       `gorm:"autoCreateTime;index"` // 时间索引
+	CreatedAt   time.Time       `gorm:"autoCreateTime;index:idx_address_created,priority:2"` // 新增组合索引
 }

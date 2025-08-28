@@ -32,6 +32,7 @@ func SetupRouter() *gin.Engine {
 	user := r.Group("/user")
 	{
 		user.GET("/getBalanceHistory", service.GetBalanceHistory)
+		user.GET("/getUserInfo", service.GetUserInfo)
 	}
 	return r
 }

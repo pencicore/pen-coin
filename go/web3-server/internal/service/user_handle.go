@@ -2,7 +2,9 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/shopspring/decimal"
 	"net/http"
+	"time"
 	"web3-server/internal/db"
 	model "web3-server/internal/models"
 	"web3-server/internal/utils"
@@ -50,4 +52,57 @@ func GetBalanceHistory(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, utils.Success(result))
+}
+
+func GetUserInfo(c *gin.Context) {
+	address := c.Query("address")
+
+	// 今天
+	now := time.Now()
+	todayCount := getDailyOpCount(address, now)
+
+	// 昨天
+	yesterday := now.AddDate(0, 0, -1)
+	yesterdayCount := getDailyOpCount(address, yesterday)
+
+	// 今天
+	todayBalance := getLatestBalanceBefore(address, now)
+
+	// 昨天
+	yesterdayBalance := getLatestBalanceBefore(address, yesterday)
+
+	c.JSON(http.StatusOK, utils.Success(map[string]interface{}{
+		"todayCount":       todayCount,
+		"yesterdayCount":   yesterdayCount,
+		"todayBalance":     todayBalance,
+		"yesterdayBalance": yesterdayBalance,
+	}))
+}
+
+func getDailyOpCount(address string, day time.Time) int64 {
+	dayStart := time.Date(day.Year(), day.Month(), day.Day(), 0, 0, 0, 0, day.Location())
+	dayEnd := dayStart.Add(24 * time.Hour).Add(-time.Second)
+
+	var total int64
+	err := db.D.
+		Model(&model.Event{}).
+		Where("address = ? AND created_at BETWEEN ? AND ?", address, dayStart, dayEnd).
+		Count(&total).Error
+	if err != nil {
+		return 0
+	}
+	return total
+}
+
+func getLatestBalanceBefore(address string, day time.Time) decimal.Decimal {
+	var bal model.Balance
+	err := db.D.
+		Where("address = ? AND created_at < ?", address, day).
+		Order("created_at DESC").
+		Limit(1).
+		First(&bal).Error
+	if err != nil {
+		return decimal.NewFromInt(0)
+	}
+	return bal.Balance
 }
