@@ -22,7 +22,7 @@ func SendTokenHandle(vLog types.Log, parsedABI abi.ABI) error {
 	}
 	e.Receiver = common.HexToAddress(vLog.Topics[1].Hex())
 	e.Amount = new(big.Int).SetBytes(vLog.Topics[2].Bytes())
-	EventHandler(&model.Event{
+	Handler(&model.Event{
 		Address:     e.Receiver.Hex(),
 		EventName:   "SendToken",
 		EventCnName: "发放代币",

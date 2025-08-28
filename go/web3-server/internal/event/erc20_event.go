@@ -25,7 +25,7 @@ func CheckinHandle(vLog types.Log, parsedABI abi.ABI) error {
 		return err
 	}
 	e.User = common.HexToAddress(vLog.Topics[1].Hex())
-	EventHandler(&model.Event{
+	Handler(&model.Event{
 		Address:     e.User.Hex(),
 		Amount:      decimal.NewFromBigInt(e.Reward, -18),
 		EventName:   "Checkin",
@@ -101,7 +101,7 @@ func LuckyDrawHandle(vLog types.Log, parsedABI abi.ABI) error {
 		return err
 	}
 	e.User = common.HexToAddress(vLog.Topics[1].Hex())
-	EventHandler(&model.Event{
+	Handler(&model.Event{
 		Address:     e.User.Hex(),
 		Amount:      getAmountChange(e.Reward, e.Cost),
 		EventName:   "LuckyDraw",
