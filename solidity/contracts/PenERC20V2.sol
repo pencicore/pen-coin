@@ -83,17 +83,17 @@ contract PenERC20V2 is ERC20 {
 
         // 按照抽奖次数扣费
         if (luckyDrawCount[msg.sender] == 1) {
-            require(balanceOf[msg.sender] >= 100 * 10 ** uint256(decimals), "Not enough PEN");
-            balanceOf[msg.sender] -= 100 * 10 ** uint256(decimals);
-            totalSupply -= 100 * 10 ** uint256(decimals); // 销毁
-            cost = 100;
-            emit Transfer(msg.sender, address(0), 100 * 10 ** uint256(decimals));
+            cost = 100 * 10 ** uint256(decimals);
+            require(balanceOf[msg.sender] >= cost, "Not enough PEN");
+            balanceOf[msg.sender] -= cost;
+            totalSupply -= cost; // 销毁
+            emit Transfer(msg.sender, address(0), cost);
         } else if (luckyDrawCount[msg.sender] == 2) {
-            require(balanceOf[msg.sender] >= 200 * 10 ** uint256(decimals), "Not enough PEN");
-            balanceOf[msg.sender] -= 200 * 10 ** uint256(decimals);
-            totalSupply -= 200 * 10 ** uint256(decimals); // 销毁
-            cost = 200;
-            emit Transfer(msg.sender, address(0), 200 * 10 ** uint256(decimals));
+            cost = 200 * 10 ** uint256(decimals);
+            require(balanceOf[msg.sender] >= cost, "Not enough PEN");
+            balanceOf[msg.sender] -= cost;
+            totalSupply -= cost; // 销毁
+            emit Transfer(msg.sender, address(0), cost);
         }
         luckyDrawCount[msg.sender] += 1;
 
