@@ -25,6 +25,10 @@ func SetupRouter() *gin.Engine {
 		erc20.GET("/getCheckinInfo", service.GetCheckinInfo)
 		erc20.GET("/getCheckinReward", service.GetCheckinReward)
 	}
+	draw := r.Group("/draw")
+	{
+		draw.GET("/getDrawHistory", service.PageDrawHistory)
+	}
 	return r
 }
 
