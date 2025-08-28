@@ -7,8 +7,8 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
+	"web3-server/internal/blockchain"
 	"web3-server/internal/config"
 )
 
@@ -49,14 +49,10 @@ func (m *EventManager) BuildQuery() ethereum.FilterQuery {
 
 // Start 启动监听
 func (m *EventManager) Start() error {
-	client, err := ethclient.Dial(config.EthRpcUrlWebsocket)
-	if err != nil {
-		log.Fatal(err)
-	}
 	query := m.BuildQuery()
 
 	logs := make(chan types.Log)
-	sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
+	sub, err := blockchain.Client.SubscribeFilterLogs(context.Background(), query, logs)
 	if err != nil {
 		return err
 	}
