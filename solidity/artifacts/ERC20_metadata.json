@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.18+commit.87f61d96"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
@@ -263,14 +263,6 @@
 			}
 		],
 		"devdoc": {
-			"events": {
-				"Approval(address,address,uint256)": {
-					"details": "释放条件：当 `value` 单位的货币从账户 (`owner`) 授权给另一账户 (`spender`)时."
-				},
-				"Transfer(address,address,uint256)": {
-					"details": "释放条件：当 `value` 单位的货币从账户 (`from`) 转账到另一账户 (`to`)时."
-				}
-			},
 			"kind": "dev",
 			"methods": {
 				"approve(address,uint256)": {
@@ -300,7 +292,7 @@
 		"compilationTarget": {
 			"contracts/base/ERC20.sol": "ERC20"
 		},
-		"evmVersion": "paris",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -313,11 +305,11 @@
 	},
 	"sources": {
 		"contracts/base/ERC20.sol": {
-			"keccak256": "0x2181c066c9685de6cf3187df3d2751d2b5e7db32a7cbc0cc86268fb70754810d",
+			"keccak256": "0xb903b8cabb703ccc33bba522f472b9e16e92e26823479fd9b29ff06b459d0fb5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://93f627f2e9badf0e600c42ad607a606cf338135dba898cdc3c561ae8c58e593f",
-				"dweb:/ipfs/QmQRhzF5cVgWcJgXKBLmniUXMSdHyRZyusxY6wHyXZTQzJ"
+				"bzz-raw://2ce32618b11942ea0cc13fc37f582482cf9924bfec6e4848f2f870bbada5e1ca",
+				"dweb:/ipfs/QmahhzopFMuWxfj4x1jSZAQJZ571ZsmJiyUGqSypTVMSCr"
 			]
 		},
 		"contracts/interface/IERC20.sol": {

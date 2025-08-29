@@ -44,7 +44,7 @@ function HomeCheckin()
             const today = dateUtil.getTodayNumber()
             useHaveCheckin = today.toString() === checkDay.toString()
             useCheckinStreak = await erc20ContractApi.checkinStreak(address)
-            if(!useHaveCheckin) useCheckinReward = (await erc20ContractApi.getCheckinReward(useCheckinStreak)) / (10n ** 18n)
+            if(!useHaveCheckin) useCheckinReward = (await erc20ContractApi.getCheckinReward()) / (10n ** 18n)
             else useCheckinReward = (await GetCheckinReward(address)).data
             useCheckinMonthCount = (await GetMonthCheckinCount(address, dateUtil.getCurrentYear(), dateUtil.getCurrentMonth())).data
             useCheckinCount = (await GetCheckinCount(address)).data

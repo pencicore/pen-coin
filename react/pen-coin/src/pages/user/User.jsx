@@ -85,9 +85,9 @@ const User = () => {
                 </div-back>
                 &nbsp;
                 <div-back>
-                    <p>本周活动</p>
+                    <p>今日活动</p>
                     <h2>{count} 次</h2>
-                    <small>相对于上周活跃度{countUp?'上升':'下降'}
+                    <small>相对于昨日活跃度{countUp?'上升':'下降'}
                         <mark className={countUp ? style.Up : style.Down}>{countChange}%</mark>
                     </small>
                 </div-back>

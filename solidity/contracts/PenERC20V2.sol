@@ -5,7 +5,7 @@ import "./base/ERC20.sol";
 
 contract PenERC20V2 is ERC20 {
 
-    // ======================= 签到部分 ===========================
+    // ======================= 签到部分 ===========================1
 
     // Checkin related
     mapping(address => uint256) public checkinDate;     // last checkin day number
@@ -21,7 +21,6 @@ contract PenERC20V2 is ERC20 {
     function checkin() external returns (uint256 reward) {
         // ✅ 使用北京时间
         uint256 today = (block.timestamp + 8 hours) / 1 days;
-        uint256 oldCheckinStreak = checkinStreak[msg.sender];
 
         require(checkinDate[msg.sender] < today, "Already checked in today");
 
@@ -33,27 +32,27 @@ contract PenERC20V2 is ERC20 {
             checkinStreak[msg.sender] = 1;
         }
 
+        // 奖励规则：基础奖励 * 连续天数
+        reward = getCheckinReward();
+
         // 更新最后签到日期
         checkinDate[msg.sender] = today;
-
-        // 奖励规则：基础奖励 * 连续天数
-        reward = getCheckinReward(oldCheckinStreak);
         mint(msg.sender, reward);
 
         emit Checkin(msg.sender, reward, checkinStreak[msg.sender]);
     }
 
-    function getCheckinReward(uint256 oldCheckinStreak) public view returns (uint256) {
+    function getCheckinReward() public view returns (uint256) {
         uint256 res = 1;
-        if (oldCheckinStreak == 0) {
+        if (checkinDate[msg.sender] == 0) {
             res += 9;
         }
-        if (checkinStreak[msg.sender]%5 == 0) {
+        if (checkinStreak[msg.sender]%5 == 0 && checkinDate[msg.sender] != 0) {
             res += 1;
         }
         uint256 today = (block.timestamp + 8 hours) / 1 days;
         uint256 weekday = (today + 4) % 7;
-        if (weekday == 0 && oldCheckinStreak != 0) {
+        if (weekday == 0) {
             res += 1;
         }
         res *= checkinBase * 10 ** uint256(decimals);
@@ -67,6 +66,12 @@ contract PenERC20V2 is ERC20 {
     mapping(address => uint256) public luckyDrawCount;  // 当日已抽次数
 
     event LuckyDraw(address indexed user, string reward, uint256 cost);
+    
+    function getLuckyDrawCount(address user) public view returns (uint256 count) { 
+        count = 3 - luckyDrawCount[user]; 
+        uint256 today = (block.timestamp + 8 hours) / 1 days; 
+        if (today != luckyDrawDate[user]) { count = 3; } 
+    }
 
     // ✅ Lucky Draw function
     function luckyDraw(uint seed) external returns (string memory reward) {

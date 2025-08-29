@@ -9,7 +9,7 @@ import maskUtil from "../../utils/maskUtil.js";
 
 function CheckinCalendar() {
 
-    const {login, playCount} = userStore()
+    const {address, playCount} = userStore()
     const [year, setYear] = useState(dateUtil.getCurrentYear)
     const [month, setMonth] = useState(dateUtil.getCurrentMonth)
 
@@ -88,7 +88,7 @@ function CheckinCalendar() {
             setWeeks(weeksTemp)
         }
         fun().then();
-    }, [year, month, playCount]);
+    }, [year, month, playCount, address]);
 
     const leftMonthHandle = () => {
         let target = month - 1

@@ -23,30 +23,20 @@ contract ERC20 is IERC20 {
     }
 
     function transfer(address recipient, uint amount) public override returns (bool) {
-        require(balanceOf[msg.sender] >= amount, "ERC20: insufficient balance");
-        balanceOf[msg.sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(msg.sender, recipient, amount);
+        _transfer(msg.sender, recipient, amount);
+        return true;
+    }
+
+    function transferFrom(address sender, address recipient, uint amount) public override returns (bool) {
+        require(allowance[sender][msg.sender] >= amount, "ERC20: allowance too low");
+        allowance[sender][msg.sender] -= amount;
+        _transfer(sender, recipient, amount);
         return true;
     }
 
     function approve(address spender, uint amount) public override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
-        return true;
-    }
-
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint amount
-    ) public override returns (bool) {
-        require(balanceOf[sender] >= amount, "ERC20: insufficient balance");
-        require(allowance[sender][msg.sender] >= amount, "ERC20: allowance too low");
-        allowance[sender][msg.sender] -= amount;
-        balanceOf[sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(sender, recipient, amount);
         return true;
     }
 
@@ -61,5 +51,17 @@ contract ERC20 is IERC20 {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
         emit Transfer(msg.sender, address(0), amount);
+    }
+
+    function _transfer(address from, address to, uint256 value) internal {
+        require(from != address(0), "ERC20: transfer from zero address");
+        require(to != address(0), "ERC20: transfer to zero address");
+        require(balanceOf[from] >= value, "ERC20: insufficient balance");
+
+        unchecked {
+            balanceOf[from] -= value;
+            balanceOf[to] += value;
+        }
+        emit Transfer(from, to, value);
     }
 }

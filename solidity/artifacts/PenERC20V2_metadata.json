@@ -284,18 +284,31 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "oldCheckinStreak",
-						"type": "uint256"
-					}
-				],
+				"inputs": [],
 				"name": "getCheckinReward",
 				"outputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "getLuckyDrawCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "count",
 						"type": "uint256"
 					}
 				],
@@ -503,19 +516,19 @@
 	},
 	"sources": {
 		"contracts/PenERC20V2.sol": {
-			"keccak256": "0x144d43631fe2a0629fe8e7ebdc32e74efa15a0cc2399089e86c74ce52b3020d6",
+			"keccak256": "0x8d356ae8044c1f001e34c794d1e8b24fcb25ca2b3cead3c478f53afc2bc73cbb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6d7beffbbc8b5481b2be37e4ff90c6768ccecc7133faf1de917a45a6aeec4e11",
-				"dweb:/ipfs/QmUmTVu4yuDQcBH4iC71W3TmgsXSNM4TumMfJTGJsPfEFj"
+				"bzz-raw://072356639757b26fd27ae2d88442f2e73ad59ba01e2d4782dd4e9222dee17565",
+				"dweb:/ipfs/QmaCskV9avS7FcS36HfZpVYe2QJXtpQsizhy1m9oMPJ1Yd"
 			]
 		},
 		"contracts/base/ERC20.sol": {
-			"keccak256": "0x2181c066c9685de6cf3187df3d2751d2b5e7db32a7cbc0cc86268fb70754810d",
+			"keccak256": "0xb903b8cabb703ccc33bba522f472b9e16e92e26823479fd9b29ff06b459d0fb5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://93f627f2e9badf0e600c42ad607a606cf338135dba898cdc3c561ae8c58e593f",
-				"dweb:/ipfs/QmQRhzF5cVgWcJgXKBLmniUXMSdHyRZyusxY6wHyXZTQzJ"
+				"bzz-raw://2ce32618b11942ea0cc13fc37f582482cf9924bfec6e4848f2f870bbada5e1ca",
+				"dweb:/ipfs/QmahhzopFMuWxfj4x1jSZAQJZ571ZsmJiyUGqSypTVMSCr"
 			]
 		},
 		"contracts/interface/IERC20.sol": {

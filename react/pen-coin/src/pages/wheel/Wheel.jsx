@@ -7,6 +7,7 @@ import Notice from "../../components/Notice.jsx";
 import maskUtil from "../../utils/maskUtil.js";
 import userStore from "../../store/userStore.js";
 import {erc20DrawContractApi} from "../../api/erc20ContractApi.js";
+import dateUtil from "../../utils/dateUtil.js";
 
 function Wheel()
 {
@@ -25,6 +26,8 @@ function Wheel()
             if (useDrawCount === 3n) useDrawCost = <>，本次抽奖 <mark>免费</mark></>
             if (useDrawCount === 2n) useDrawCost = <>，本次抽奖消耗 <mark>100</mark> pen</>
             if (useDrawCount === 1n) useDrawCost = <>，本次抽奖消耗 <mark>200</mark> pen</>
+            const drawDateNumber = await erc20DrawContractApi.getDrawDate(address)
+            if (drawDateNumber.toString() === dateUtil.getTodayNumber().toString()) useDrawCount = 3n
         }
 
         setDrawCount(useDrawCount)
