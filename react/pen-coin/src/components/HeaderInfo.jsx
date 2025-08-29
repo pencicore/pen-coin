@@ -6,17 +6,17 @@ import strUtil from "../utils/strUtil.js";
 import {useLocation} from "react-router-dom";
 import ammContractApi from "../api/ammContractApi.js";
 import {ethers} from "ethers";
+import tradeStore from "../store/tradeStore.js";
 
 const HeaderInfo = ({handleClick}) => {
+
+    const {pricePEN, setPricePEN, priceETH, setPriceETH} = tradeStore()
     const {penCount, ethCount, address, playCount} = userStore()
     const location = useLocation(); // 新增
     const [showETH, setShowETH] = useState(true)
     const [showPEN, setShowPEN] = useState(true)
     const [showPricePEN, setShowPricePEN] = useState(true)
     const [copyText, setCopyText] = useState('复制')
-
-    const [pricePEN, setPricePEN] = useState(0.0)
-    const [priceETH, setPriceETH] = useState(0.0)
 
     function copyAddress() {
         navigator.clipboard.writeText(address).then(() => {
@@ -36,7 +36,7 @@ const HeaderInfo = ({handleClick}) => {
                 setPriceETH(ethers.formatUnits(price, 18))
             })
         }
-    }, [address, playCount]);
+    }, [location, playCount]);
 
     return (
         <div className={style.HeaderInfo}>
@@ -59,10 +59,15 @@ const HeaderInfo = ({handleClick}) => {
                 <h4>{showPEN ? strUtil.ethBalanceToString(penCount) : '********'} PEN</h4>
             </div>
             {location.pathname === '/trade' && (
-                <div className={style.Balance}>
+                <div className={style.Balance} style={{width: "auto", minWidth: "140px", marginRight: "15px"}}>
                     <p>PEN代币价格</p>
                     <small onClick={() => setShowPricePEN(!showPricePEN)}>切换</small>
-                    <h4>{showPricePEN ? pricePEN : priceETH} {showPricePEN ? 'ETH/PEN' : 'PEN/ETH'}</h4>
+                    <h4>
+                        {showPricePEN
+                            ? Number(pricePEN).toPrecision(5)
+                            : Number(priceETH).toPrecision(5)
+                        } {showPricePEN ? 'ETH/PEN' : 'PEN/ETH'}
+                    </h4>
                 </div>
             )}
         </div>

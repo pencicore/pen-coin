@@ -27,7 +27,7 @@ function Wheel()
             if (useDrawCount === 2n) useDrawCost = <>，本次抽奖消耗 <mark>100</mark> pen</>
             if (useDrawCount === 1n) useDrawCost = <>，本次抽奖消耗 <mark>200</mark> pen</>
             const drawDateNumber = await erc20DrawContractApi.getDrawDate(address)
-            if (drawDateNumber.toString() === dateUtil.getTodayNumber().toString()) useDrawCount = 3n
+            if (drawDateNumber.toString() !== dateUtil.getTodayNumber().toString()) useDrawCount = 3n
         }
 
         setDrawCount(useDrawCount)

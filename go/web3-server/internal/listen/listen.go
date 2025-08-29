@@ -36,6 +36,12 @@ func Listen() {
 		ABI:     erc20ABI,
 		Handler: event.LuckyDrawHandle,
 	})
+	manager.Events = append(manager.Events, EventSubscription{
+		Address: common.HexToAddress(erc20Address),
+		EventID: erc20ABI.Events["Swap"].ID,
+		ABI:     erc20ABI,
+		Handler: event.SwapHandle,
+	})
 
 	if err := manager.Start(); err != nil {
 		log.Fatal(err)
