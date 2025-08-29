@@ -1,5 +1,6 @@
 import {networkData} from "../config/metamaskConfig.js";
 import {ethers} from "ethers";
+import {ContractAddressConfig} from "../config/contractAddressConfig.js";
 
 const LOGIN_INFO = "login_info";
 const LOGIN_YES = "login_metamask"
@@ -69,6 +70,36 @@ export const metamaskApi = {
             return null
         }
     },
+    async addTokenToMetaMask() {
+        const tokenAddress = ContractAddressConfig.ERC20
+        const tokenSymbol = "PEN";
+        const tokenDecimals = 18;
+        const tokenImage = "https://tse1-mm.cn.bing.net/th/id/OIP-C.DPFqf-DHxiMQPr4GdHUY6AHaII?w=169&h=188&c=7&r=0&o=5&pid=1.7"; // 可选
+
+        try {
+            const wasAdded = await window.ethereum.request({
+                method: "wallet_watchAsset",
+                params: {
+                    type: "ERC20",
+                    options: {
+                        address: tokenAddress,
+                        symbol: tokenSymbol,
+                        decimals: tokenDecimals,
+                        image: tokenImage,
+                    },
+                },
+            });
+
+            if (wasAdded) {
+                console.log("代币已添加到钱包");
+            } else {
+                console.log("用户拒绝添加代币");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 }
 
 const metaMaskUtil = {

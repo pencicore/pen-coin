@@ -7,6 +7,7 @@ import userStore from "../../store/userStore.js";
 import UserHandle from "./UserHandle.js";
 import {GetUserInfo} from "../../api/userBackendApi.js";
 import strUtil from "../../utils/strUtil.js";
+import metaMaskUtil, {metamaskApi} from "../../utils/metaMaskUtil.js";
 
 const User = () => {
 
@@ -93,7 +94,7 @@ const User = () => {
                 <br></br><br></br>
                 <LineChart arr={balanceHistory} updateInfo = {setType}></LineChart>
                 <div className={style.ButtonAreaAdd}>
-                    <GreenButton name={"添加到钱包"}></GreenButton>
+                    <GreenButton name={"添加到钱包"} clickHandle={metamaskApi.addTokenToMetaMask}></GreenButton>
                     <small>将pen代币添加到钱包中</small>
                 </div>
                 <div className={style.ButtonAreaRate}>
