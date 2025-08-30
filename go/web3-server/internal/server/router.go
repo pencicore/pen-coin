@@ -35,6 +35,11 @@ func SetupRouter() *gin.Engine {
 		user.GET("/getUserInfo", service.GetUserInfo)
 		user.GET("/pageEventHistory", service.PageEventHistory)
 	}
+	swap := r.Group("/swap")
+	{
+		swap.GET("/pageSwapHistory", service.PageSwapHistory)
+		swap.GET("/getSwapHistory", service.GetSwapHistory)
+	}
 	return r
 }
 

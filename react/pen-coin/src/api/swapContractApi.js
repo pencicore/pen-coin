@@ -1,6 +1,6 @@
 import erc20ContractApi from "./erc20ContractApi.js";
 
-const ammContractApi = {
+const swapContractApi = {
     async getContract() {
         return await erc20ContractApi.getContract()
     },
@@ -28,4 +28,4 @@ const ammContractApi = {
     },
 }
 
-export default ammContractApi;
+export default swapContractApi;

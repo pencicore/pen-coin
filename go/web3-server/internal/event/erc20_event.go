@@ -174,7 +174,7 @@ func SwapHandle(vLog types.Log, parsedABI abi.ABI) error {
 	}
 	reserveETH := resReserveETH[0].(*big.Int)
 	priceRecord := model.SwapPool{
-		ReservePEN: decimal.NewFromBigInt(reservePEN, -18),
+		ReservePEN: decimal.NewFromBigInt(reservePEN, -18).Neg(),
 		ReserveETH: decimal.NewFromBigInt(reserveETH, -18),
 	}
 	if err := db.D.Create(&priceRecord).Error; err != nil {

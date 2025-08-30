@@ -81,7 +81,7 @@ const LineChart = ({ arr = [], updateInfo, unit = 'PEN', canvasWidth=550, canvas
             }
         }
 
-        const maxPoint = points.reduce((prev, cur) => cur.val >= prev.val ? cur : prev, points[0]);
+        const maxPoint = points.reduce((prev, cur) => cur.val > prev.val ? cur : prev, points[0]);
         const minPoint = points.reduce((prev, cur) => cur.val < prev.val ? cur : prev, points[0]);
 
         setLabels([
@@ -106,7 +106,7 @@ const LineChart = ({ arr = [], updateInfo, unit = 'PEN', canvasWidth=550, canvas
                     }}
                     className={style.Extremum}
                 >
-                    {label.val} {unit}
+                    {Number(label.val).toPrecision(5)} {unit}
                 </div>
             ))}
 

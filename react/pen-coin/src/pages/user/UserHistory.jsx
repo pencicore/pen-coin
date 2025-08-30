@@ -16,9 +16,9 @@ function UserHistory() {
             const amount = Number(historyData[i].Amount)
             temp.push(
                 <tr>
-                    <td style={{width: '200px'}}><p>{historyData[i].EventCnName}</p></td>
-                    <td style={{width: '110px'}}><p className={amount>0 ? style.Up : style.Down}>
-                        {amount>0 ? '+' : '-'} {Math.abs(amount)} PEN
+                    <td style={{width: '160px'}}><p>{historyData[i].EventCnName}</p></td>
+                    <td style={{width: '140px'}}><p className={amount>0 ? style.Up : style.Down}>
+                        {amount>0 ? '+' : '-'} {Math.abs(amount).toPrecision(6)} PEN
                     </p></td>
                     <td style={{width: '156px'}}>
                         <small>{strUtil.dateTimeToString(historyData[i].CreatedAt)}</small>

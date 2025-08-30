@@ -6,8 +6,7 @@ import {useEffect, useState} from "react";
 import userStore from "../../store/userStore.js";
 import UserHandle from "./UserHandle.js";
 import {GetUserInfo} from "../../api/userBackendApi.js";
-import strUtil from "../../utils/strUtil.js";
-import metaMaskUtil, {metamaskApi} from "../../utils/metaMaskUtil.js";
+import {metamaskApi} from "../../utils/metaMaskUtil.js";
 
 const User = () => {
 
@@ -77,7 +76,7 @@ const User = () => {
                 <h5>查看个人账户与活动记录</h5>
                 <div-back>
                     <p>代币资产</p>
-                    <h2>{balance} PEN</h2>
+                    <h2>{Number(balance).toPrecision(6)} PEN</h2>
                     <small>
                         相对于上周{balanceUp?'上升':'下降'}
                         <mark className={balanceUp ? style.Up : style.Down}>{balanceChange}%</mark>

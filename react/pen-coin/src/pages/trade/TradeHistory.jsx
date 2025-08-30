@@ -1,19 +1,27 @@
 import style from './TradeHistory.module.scss'
 import {useEffect, useState} from "react";
+import userStore from "../../store/userStore.js";
+import {PageSwapHistory} from "../../api/swapBackendApi.js";
+import strUtil from "../../utils/strUtil.js";
 
 const TradeHistory = () => {
 
+    const {address, playCount} = userStore()
     const [history, setHistory] = useState([])
+    const [historyData, setHistoryData] = useState([])
 
     const updateHistory = () => {
         let temp = []
-        for (let i=1;i<=10;i++) {
+        for (let i=0;i<historyData.length;i++) {
+            const item = historyData[i]
+            const price = item.TokenIn === 'PEN' ? Number(item.AmountOut)/Number(item.AmountIn)  : Number(item.AmountIn)/Number(item.AmountOut)
+            const amount = Number(item.TokenIn === 'PEN' ? item.AmountIn : item.AmountOut)
             temp.push(
-                <tr className>
-                    <td><p>0.00435 PEN/ETH</p></td>
-                    <td><p>234.0023 PEN</p></td>
-                    <td><small>2025/08/09 22:22:22</small></td>
-                    <td><p className={style.Up}>ETH to PEN</p></td>
+                <tr key={i}>
+                    <td><p>{price.toPrecision(6)} ETH/PEN</p></td>
+                    <td><p>{amount.toPrecision(6)} PEN</p></td>
+                    <td><small>{strUtil.dateTimeToString(item.CreatedAt)}</small></td>
+                    <td><p className={item.TokenIn==='PEN' ? style.Up : style.Down}>{item.TokenIn + " to "+ item.TokenOut}</p></td>
                 </tr>
             )
         }
@@ -22,7 +30,21 @@ const TradeHistory = () => {
 
     useEffect(() => {
         updateHistory()
-    }, [])
+    }, [historyData])
+
+    const updateInfo = async () => {
+        let useHistoryData = []
+
+        if (address) {
+            useHistoryData = (await PageSwapHistory(1, 10)).data.list
+        }
+
+        setHistoryData(useHistoryData)
+    }
+
+    useEffect(() => {
+        updateInfo().then()
+    }, [address, playCount]);
 
     return (
         <div-container className={style.TradeHistory}>
@@ -31,8 +53,8 @@ const TradeHistory = () => {
             <table>
                 <thead>
                     <tr>
-                        <th style={{width: '149px'}}>成交价格</th>
-                        <th style={{width: '120px'}}>成交量</th>
+                        <th style={{width: '159px'}}>成交价格</th>
+                        <th style={{width: '110px'}}>成交量</th>
                         <th style={{width: '157px'}}>成交时间 </th>
                         <th style={{width: '98px'}}>方向</th>
                     </tr>

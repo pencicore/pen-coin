@@ -2,20 +2,27 @@ import style from './Trade.module.scss'
 import {GreenButton} from "../../components/Button.jsx";
 import LineChart from "../../components/LineChart.jsx";
 import TradeHistory from "./TradeHistory.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import tradeStore from "../../store/tradeStore.js";
 import userStore from "../../store/userStore.js";
 import {ethers} from "ethers";
-import ammContractApi from "../../api/ammContractApi.js";
+import swapContractApi from "../../api/swapContractApi.js";
 import toastUtil from "../../utils/toastUtil.js";
+import TradeHandle from "./TradeHandle.js";
 
 function Trade() {
 
     const {pricePEN, priceETH} = tradeStore()
-    const {penCount, ethCount, playCount, setPlayCount} = userStore()
+    const {penCount, ethCount, address, playCount, setPlayCount} = userStore()
     const [penToEth, setPenToEth] = useState(true)
     const [inputAmount, setInputAmount] = useState("")
     const [outputAmount, setOutputAmount] = useState("")
+    const [type, setType] = useState("day")
+    const [swapHistory, setSwapHistory] = useState([])
+
+    useEffect(() => {
+        TradeHandle.getPriceHistory(type).then(res => {setSwapHistory(res)})
+    }, [address, playCount, type]);
 
     function handleInputChange(value) {
         if (!value || isNaN(value)) {
@@ -57,10 +64,10 @@ function Trade() {
         }
         console.log(value)
         if (penToEth) {
-            await ammContractApi.swapPENForETH(value)
+            await swapContractApi.swapPENForETH(value)
         }
         else {
-            await ammContractApi.swapETHForPEN(value)
+            await swapContractApi.swapETHForPEN(value)
         }
         setInputAmount("")
         setOutputAmount("")
@@ -112,7 +119,7 @@ function Trade() {
                 <br></br>
                 <br></br>
                 <br></br>
-                <LineChart arr={[1,2,3,5,7,9,11,11.9,12.1,12.2,12.2,12.2,11,11,1,2,4,8,9,19,9,8,4,2,1,3,6,8,9,8,9,8,9,8]}></LineChart>
+                <LineChart arr={swapHistory} updateInfo={setType}></LineChart>
             </div>
             <div className={style.Right}>
                 <TradeHistory></TradeHistory>

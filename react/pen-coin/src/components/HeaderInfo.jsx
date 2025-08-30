@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import userStore from "../store/userStore.js";
 import strUtil from "../utils/strUtil.js";
 import {useLocation} from "react-router-dom";
-import ammContractApi from "../api/ammContractApi.js";
+import swapContractApi from "../api/swapContractApi.js";
 import {ethers} from "ethers";
 import tradeStore from "../store/tradeStore.js";
 
@@ -29,10 +29,10 @@ const HeaderInfo = ({handleClick}) => {
 
     useEffect(() => {
         if (location.pathname === '/trade') {
-            ammContractApi.getPENPriceInETH().then(price => {
+            swapContractApi.getPENPriceInETH().then(price => {
                 setPricePEN(ethers.formatUnits(price, 18))
             })
-            ammContractApi.getETHPriceInPEN().then(price => {
+            swapContractApi.getETHPriceInPEN().then(price => {
                 setPriceETH(ethers.formatUnits(price, 18))
             })
         }
