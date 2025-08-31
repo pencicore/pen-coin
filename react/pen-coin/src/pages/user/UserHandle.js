@@ -45,6 +45,9 @@ const UserHandle= {
         });
 
         // 前向填充逻辑
+        if (arr.length!=0) {
+            res[0] = arr[0].balance;
+        }
         for (let i = 1; i < res.length; i++) {
             if (res[i] === 0) {
                 res[i] = res[i - 1]; // 没有新余额，沿用前一个

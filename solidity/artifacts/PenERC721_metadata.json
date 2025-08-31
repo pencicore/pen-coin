@@ -564,7 +564,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/PenERC721.sol": "PenERC721"
+			"contracts/base/PenERC721.sol": "PenERC721"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -578,14 +578,6 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/PenERC721.sol": {
-			"keccak256": "0xbcc49698f41f05087855f3683252d909a19a3b62709cb8757042d3a41ad2fb9c",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://ea607067fd637a9f6359fdbc29a48b7d8aec73c94f3aad4d94a0c123da9c91ac",
-				"dweb:/ipfs/QmY7KHgjbB7M6dtQzc1Er1zg75kNQpKjauyyTykQbT9J8n"
-			]
-		},
 		"contracts/base/ERC20.sol": {
 			"keccak256": "0xb903b8cabb703ccc33bba522f472b9e16e92e26823479fd9b29ff06b459d0fb5",
 			"license": "MIT",
@@ -600,6 +592,14 @@
 			"urls": [
 				"bzz-raw://be5b7ebe77fed47cf10c4e178ff378bfd8ec0cedd3ac108132a804722efddf6e",
 				"dweb:/ipfs/Qmasew5VUPpswyRVKUrcTcadAeB1UftyZ1f2EBE8E2GWfE"
+			]
+		},
+		"contracts/base/PenERC721.sol": {
+			"keccak256": "0xef4ebc110ffba3a738fe6caf6a3f62b9cf8af991af1f8bd1b659b933d88092c8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c6b45d71772fa1f6428354bbb4a99fa0f97646ff42c8db41374026bee7302ddc",
+				"dweb:/ipfs/QmNeP4t2rNs8FkKU1Mahd1FhNP1K6bgRsGXwcGeGsk1cyL"
 			]
 		},
 		"contracts/interface/IERC165.sol": {

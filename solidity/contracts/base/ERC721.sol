@@ -142,7 +142,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         address from,
         address to,
         uint tokenId
-    ) external override {
+    ) public override {
         address owner = ownerOf(tokenId);
         require(
             _isApprovedOrOwner(owner, msg.sender, tokenId),

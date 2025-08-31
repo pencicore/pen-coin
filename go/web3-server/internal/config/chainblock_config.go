@@ -12,4 +12,4 @@ const NftMainAccountAddress = "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"
 var FaucetAmount = new(big.Int).Mul(big.NewInt(1), big.NewInt(1e17)) // 0.5 ETH
 const ERC20Address = "0xD172e923F593e9175EE18924F17842b100F65575"
 const FaucetAddress = "0xad8bfcdC4a75aEA6759488C44735E132ffbACa38"
-const ERC721Address = "0xc0FbF6Dc2039B8A387ACD1171353697D09315e4C"
+const ERC721Address = "0x44f06cA690bd05E92a01D77E4810Fd6690D924A6"

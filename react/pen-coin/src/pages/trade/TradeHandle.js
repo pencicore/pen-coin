@@ -46,6 +46,9 @@ const TradeHandle= {
         });
 
         // 前向填充逻辑
+        if(arr.length !== 0) {
+            res[0] = Number(arr[0].reserveETH)/Number(arr[0].reservePEN);
+        }
         for (let i = 1; i < res.length; i++) {
             if (res[i] === 0) {
                 res[i] = res[i - 1]; // 没有新余额，沿用前一个
