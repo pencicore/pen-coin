@@ -33,7 +33,15 @@ const erc20ContractApi = {
     },
     async checkinStreak(address) {
         return (await this.getContract()).checkinStreak(address)
-    }
+    },
+    async allowance(userAddress, allowAddress) {
+        return (await this.getContract()).allowance(userAddress, allowAddress)
+    },
+    async approve(allowAddress, amount) {
+        const tx = await (await this.getContract()).approve(allowAddress, amount, { gasLimit: 200000 });
+        const receipt = await tx.wait();
+        return receipt.status === 1
+    },
 }
 
 export const erc20DrawContractApi = {
@@ -69,7 +77,7 @@ export const erc20DrawContractApi = {
         }
 
         return null; // 如果没找到事件
-    },
+    }
 }
 
 

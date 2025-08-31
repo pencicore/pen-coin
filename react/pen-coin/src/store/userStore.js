@@ -6,12 +6,14 @@ const userStore = create((set) => ({
   ethCount: 0,
   penCount: 0,
   nftPenCount: 0,
+  penTradeCount: 0,
   playCount: 0,
   setLogin: (login) => set(() => ({ login })),
   setAddress: (address) => set(() => ({ address })),
   setEthCount: (ethCount) => set(() => ({ ethCount })),
   setPenCount: (penCount) => set(() => ({ penCount })),
   setNftPenCount: (nftPenCount) => set(() => ({ nftPenCount })),
+  setPenTradeCount: (penTradeCount) => set(() => ({ penTradeCount })),
   setPlayCount: () => set((state) => ({ playCount: state.playCount + 1 })),
 }));
 

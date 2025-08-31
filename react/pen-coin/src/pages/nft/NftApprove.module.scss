@@ -1,0 +1,142 @@
+.LoginKey {
+  height: 500px;
+  width: 400px;
+  box-shadow: 0 1px 8px  rgba(0, 0, 0, 0.35);
+  background-repeat: no-repeat; /* 只出现一次 */
+  background-position: center;  /* 居中 */
+  background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
+  display: inline-block;        /* 让宽高生效 */
+  image-rendering: pixelated;      /* 强制像素化缩放 */
+  position: relative;
+  background-image: url(https://img.js.design/assets/img/68a46947d94adb56e49be2e2.png#0372cc085149236a6d88bda4bf77860e);
+
+  h4 {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 20px;
+  }
+
+  button {
+    position: absolute;
+    width: 50px;
+    height: 20px;
+    opacity: 1;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    background: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  button:hover {
+    background-image: none;
+    background-color: rgba(243, 243, 243, 1);
+  }
+
+}
+
+.ButtonReady {
+  position: absolute;
+  cursor: no-drop;
+  left: 40px;
+  top: 440px;
+  width: 320px;
+  height: 32px;
+  opacity: 1;
+  border-radius: 16px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+
+  background-color: rgba(243, 243, 243, 1);
+  color: rgba(96, 98, 102, 1);
+}
+
+.ButtonOk {
+  cursor: pointer;
+  position: absolute;
+  left: 40px;
+  top: 440px;
+  width: 320px;
+  height: 32px;
+  opacity: 1;
+  border-radius: 16px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+
+  background-color: rgba(21, 126, 250, 1) ;
+  color: white;
+}
+
+.Description {
+  position: absolute;
+  left: 20px;
+  top: 70px;
+  font-size: 16px;
+}
+
+
+.Input {
+  height: 37px;
+  width: 350px;
+  background-color: rgba(243, 243, 243, 1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  position: absolute;
+  left: 20px;
+  top: 115px;
+
+  input {
+    background: none;
+    border: none;
+    height: 37px;
+    width: 230px;
+    line-height: 37px;
+    font-size: 16px;
+    vertical-align: top; /* 或 middle, bottom，看你需要 */
+  }
+
+  input::placeholder {
+    line-height: 37px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  button {
+    width: 36px;
+    height: 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 1);
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-top: 9px;
+    margin-left: 10px;
+  }
+
+  span {
+    height: 37px;
+    line-height: 37px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(96, 98, 102, 1);
+    margin-left: 10px;
+  }
+}
+
+
+.Address {
+  position: absolute;
+  left: 30px;
+  top: 390px;
+  font-size: 14px;
+  font-weight: 500;
+}

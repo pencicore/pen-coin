@@ -1,0 +1,113 @@
+{
+	"compiler": {
+		"version": "0.8.4+commit.c7e474f2"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"details": "In v4, deployer becomes the initial owner."
+				}
+			},
+			"title": "Ownable (OpenZeppelin Contracts v4.9.x)",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"owner()": {
+					"notice": "Returns the current owner."
+				},
+				"renounceOwnership()": {
+					"notice": "Leaves the contract without an owner (disables `onlyOwner`)."
+				},
+				"transferOwnership(address)": {
+					"notice": "Transfers ownership to `newOwner` (must not be zero)."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/lib/Ownable.sol": "Ownable"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/lib/Ownable.sol": {
+			"keccak256": "0xa95140e86ffa19e18b8c9b9da70da4bfdb62e5f6393d75ecd71c3f81d5c39143",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://222e145da7a71458f6e4ad89af3aa0a9f4a521915045dfe62356c58fd2337264",
+				"dweb:/ipfs/QmesyYnQpe3H3YCf64L6VD1cMNMHBmYJqtoDdUrQoMiWeU"
+			]
+		}
+	},
+	"version": 1
+}

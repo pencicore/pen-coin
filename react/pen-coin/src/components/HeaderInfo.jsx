@@ -11,7 +11,7 @@ import tradeStore from "../store/tradeStore.js";
 const HeaderInfo = ({handleClick}) => {
 
     const {pricePEN, setPricePEN, priceETH, setPriceETH} = tradeStore()
-    const {penCount, ethCount, address, playCount} = userStore()
+    const {penCount, ethCount, address, playCount, penTradeCount} = userStore()
     const location = useLocation(); // 新增
     const [showETH, setShowETH] = useState(true)
     const [showPEN, setShowPEN] = useState(true)
@@ -59,7 +59,7 @@ const HeaderInfo = ({handleClick}) => {
                 <h4>{showPEN ? strUtil.ethBalanceToString(penCount) : '********'} PEN</h4>
             </div>
             {location.pathname === '/trade' && (
-                <div className={style.Balance} style={{width: "auto", minWidth: "140px", marginRight: "15px"}}>
+                <div className={style.Balance}>
                     <p>PEN代币价格</p>
                     <small onClick={() => setShowPricePEN(!showPricePEN)}>切换</small>
                     <h4>
@@ -70,6 +70,13 @@ const HeaderInfo = ({handleClick}) => {
                     </h4>
                 </div>
             )}
+            {(location.pathname === '/NFT' || location.pathname === '/Auction') && (
+                <div className={style.Balance}>
+                    <p>已授权代币余额</p>
+                    <h4>{Number(ethers.formatUnits(penTradeCount, 18)).toPrecision(6)} PEN</h4>
+                </div>
+            )
+            }
         </div>
     )
 }

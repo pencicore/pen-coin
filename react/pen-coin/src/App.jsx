@@ -20,10 +20,11 @@ import maskUtil from "./utils/maskUtil.js";
 import Logout from "./pages/logout/Logout.jsx";
 import erc20ContractApi from "./api/erc20ContractApi.js";
 import nftContractApi from "./api/nftContractApi.js";
+import {ContractAddressConfig} from "./config/contractAddressConfig.js";
 
 function App() {
 
-    const {login, setLogin, setAddress, setEthCount, setPenCount, playCount, setNftPenCount} = userStore()
+    const {login, setLogin, setAddress, setEthCount, setPenCount, playCount, setNftPenCount, setPenTradeCount} = userStore()
 
     useEffect(() => {
         async function fun() {
@@ -39,9 +40,10 @@ function App() {
             if (!login) return
             const address = await maskUtil.getAddress()
             setAddress(address)
-            setEthCount((await maskUtil.getBalance()).toString())
-            setPenCount((await erc20ContractApi.balanceOf(address)).toString())
+            setEthCount((await maskUtil.getBalance()))
+            setPenCount((await erc20ContractApi.balanceOf(address)))
             setNftPenCount(await nftContractApi.balanceOf(address))
+            setPenTradeCount(await erc20ContractApi.allowance(address, ContractAddressConfig.ERC721))
             console.log("登录成功", address)
         }
         fun().then()

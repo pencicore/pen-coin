@@ -32,7 +32,7 @@ function Login() {
         {
             key &&
             <RndWindow closeHandle={()=>setKey(false)}>
-                <LoginKey closeHandle={()=>setMask(false)}></LoginKey>
+                <LoginKey></LoginKey>
             </RndWindow>
         }
     </div>

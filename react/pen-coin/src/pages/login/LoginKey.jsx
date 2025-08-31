@@ -5,7 +5,7 @@ import userStore from "../../store/userStore.js";
 import {FullWindowController} from "../../containers/ScreenWindow.jsx";
 import toastUtil from "../../utils/toastUtil.js";
 
-const LoginKey = ({closeHandle}) => {
+const LoginKey = () => {
 
     const [privateKey, setPrivateKey] = useState('')
     const [address, setAddress] = useState('')
@@ -40,7 +40,6 @@ const LoginKey = ({closeHandle}) => {
 
     const handleLogin = () => {
         localMaskUtil.login(privateKey)
-        closeHandle()
         FullWindowController.close()
         setLogin(true)
         toastUtil.log('登录成功')

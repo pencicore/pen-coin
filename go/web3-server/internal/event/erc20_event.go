@@ -129,7 +129,7 @@ func SwapHandle(vLog types.Log, parsedABI abi.ABI) error {
 		if TokenIn == "PEN" {
 			return decimal.NewFromBigInt(AmountIn, -18)
 		} else {
-			return decimal.NewFromBigInt(AmountOut, -18)
+			return decimal.NewFromBigInt(AmountOut, -18).Neg()
 		}
 	}
 
@@ -174,7 +174,7 @@ func SwapHandle(vLog types.Log, parsedABI abi.ABI) error {
 	}
 	reserveETH := resReserveETH[0].(*big.Int)
 	priceRecord := model.SwapPool{
-		ReservePEN: decimal.NewFromBigInt(reservePEN, -18).Neg(),
+		ReservePEN: decimal.NewFromBigInt(reservePEN, -18),
 		ReserveETH: decimal.NewFromBigInt(reserveETH, -18),
 	}
 	if err := db.D.Create(&priceRecord).Error; err != nil {
