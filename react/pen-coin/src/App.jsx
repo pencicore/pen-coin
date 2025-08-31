@@ -19,10 +19,11 @@ import {useEffect} from "react";
 import maskUtil from "./utils/maskUtil.js";
 import Logout from "./pages/logout/Logout.jsx";
 import erc20ContractApi from "./api/erc20ContractApi.js";
+import nftContractApi from "./api/nftContractApi.js";
 
 function App() {
 
-    const {login, setLogin, setAddress, setEthCount, setPenCount, playCount} = userStore()
+    const {login, setLogin, setAddress, setEthCount, setPenCount, playCount, setNftPenCount} = userStore()
 
     useEffect(() => {
         async function fun() {
@@ -40,6 +41,7 @@ function App() {
             setAddress(address)
             setEthCount((await maskUtil.getBalance()).toString())
             setPenCount((await erc20ContractApi.balanceOf(address)).toString())
+            setNftPenCount(await nftContractApi.balanceOf(address))
             console.log("登录成功", address)
         }
         fun().then()

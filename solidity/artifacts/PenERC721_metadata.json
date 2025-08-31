@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.18+commit.87f61d96"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
@@ -77,6 +77,25 @@
 					{
 						"indexed": true,
 						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
 						"name": "from",
 						"type": "address"
 					},
@@ -128,6 +147,49 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "auction",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "erc20Token",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -147,6 +209,13 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "buy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -160,6 +229,19 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCurrentPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -221,6 +303,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -237,6 +332,13 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -304,6 +406,39 @@
 					}
 				],
 				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "erc20Token",
+						"type": "address"
+					}
+				],
+				"name": "startAuction",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -381,6 +516,19 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -395,11 +543,20 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {
+				"owner()": {
+					"notice": "Returns the current owner."
+				},
+				"renounceOwnership()": {
+					"notice": "Leaves the contract without an owner (disables `onlyOwner`)."
+				},
 				"safeTransferFrom(address,address,uint256,bytes)": {
 					"notice": "实现IERC721的safeTransferFrom，安全转账，调用了_safeTransfer函数。"
 				},
 				"tokenURI(uint256)": {
 					"notice": "实现IERC721Metadata的tokenURI函数，查询metadata。"
+				},
+				"transferOwnership(address)": {
+					"notice": "Transfers ownership to `newOwner` (must not be zero)."
 				}
 			},
 			"version": 1
@@ -409,7 +566,7 @@
 		"compilationTarget": {
 			"contracts/PenERC721.sol": "PenERC721"
 		},
-		"evmVersion": "paris",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -422,19 +579,27 @@
 	},
 	"sources": {
 		"contracts/PenERC721.sol": {
-			"keccak256": "0xa733d7c902f03bb3c83c7aec3f48a4b84153cdb2a04d3e16549d41dc009b50fa",
+			"keccak256": "0xbcc49698f41f05087855f3683252d909a19a3b62709cb8757042d3a41ad2fb9c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8ddf110fee97e6bf9673f3496988ca38235c8f6255321b5058263a3ffc7593fd",
-				"dweb:/ipfs/Qmam4AiRekVTZBGmj5nWEfWfZfTvmZQLxi4j4n9bCf6HrF"
+				"bzz-raw://ea607067fd637a9f6359fdbc29a48b7d8aec73c94f3aad4d94a0c123da9c91ac",
+				"dweb:/ipfs/QmY7KHgjbB7M6dtQzc1Er1zg75kNQpKjauyyTykQbT9J8n"
+			]
+		},
+		"contracts/base/ERC20.sol": {
+			"keccak256": "0xb903b8cabb703ccc33bba522f472b9e16e92e26823479fd9b29ff06b459d0fb5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2ce32618b11942ea0cc13fc37f582482cf9924bfec6e4848f2f870bbada5e1ca",
+				"dweb:/ipfs/QmahhzopFMuWxfj4x1jSZAQJZ571ZsmJiyUGqSypTVMSCr"
 			]
 		},
 		"contracts/base/ERC721.sol": {
-			"keccak256": "0x934a6be9baa5b089f3553d5d231f802b33468a1d5df763a7eed70482e97bdda8",
+			"keccak256": "0x9897cf0ba6c44904fcba1bb6af35b3285ca51b98db3b0329f913dbf3443374b5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c3888d8dec90dba971fdb7455bf7a4b7043f04baf28c316341ea207f125111da",
-				"dweb:/ipfs/QmdV3SkSSmsM5bytG6Q8KcZu6iN6UXuupV1gMnTZA512df"
+				"bzz-raw://be5b7ebe77fed47cf10c4e178ff378bfd8ec0cedd3ac108132a804722efddf6e",
+				"dweb:/ipfs/Qmasew5VUPpswyRVKUrcTcadAeB1UftyZ1f2EBE8E2GWfE"
 			]
 		},
 		"contracts/interface/IERC165.sol": {
@@ -443,6 +608,14 @@
 			"urls": [
 				"bzz-raw://2587358108ce107c79ad10f7b3f6172713087a5656197a4390dc1a594cb337de",
 				"dweb:/ipfs/QmRDAFxyyFVXnCMmL7Dx31fEYtrJvuhdZuSytPSTMofrAm"
+			]
+		},
+		"contracts/interface/IERC20.sol": {
+			"keccak256": "0x45e083595645ce346eca36a83c5aea73e3955314709dadab861fa7fa091c1af3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6910705030ee7e44f036c5de940030badc4d8070ce1c5ca8cfdf2f4366a693c0",
+				"dweb:/ipfs/QmfNzDH2pwu92sAsz4LdeBhx1cwauZvNUcyhMC85oVhNgb"
 			]
 		},
 		"contracts/interface/IERC721.sol": {
@@ -467,6 +640,14 @@
 			"urls": [
 				"bzz-raw://b4a6160635d5c7fbe3e69d748bf91e5243ebc9772be37e4bf828dd4ca18b2cc7",
 				"dweb:/ipfs/QmfMhjmHsAznHnCVULKmEFv6wgw5dEdXUDz5j6nxz4nYhY"
+			]
+		},
+		"contracts/lib/Ownable.sol": {
+			"keccak256": "0xa95140e86ffa19e18b8c9b9da70da4bfdb62e5f6393d75ecd71c3f81d5c39143",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://222e145da7a71458f6e4ad89af3aa0a9f4a521915045dfe62356c58fd2337264",
+				"dweb:/ipfs/QmesyYnQpe3H3YCf64L6VD1cMNMHBmYJqtoDdUrQoMiWeU"
 			]
 		},
 		"contracts/lib/String.sol": {

@@ -124,7 +124,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         address from,
         address to,
         uint tokenId
-    ) private {
+    ) internal {
         require(from == owner, "not owner");
         require(to != address(0), "transfer to the zero address");
 
@@ -252,7 +252,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         require(_owners[tokenId] != address(0), "Token Not Exist");
 
         string memory baseURI = _baseURI();
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
+        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json")) : "";
     }
 
     /**

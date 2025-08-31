@@ -11,3 +11,7 @@
 /solidity/.remix/
 /solidity/.states/
 /solidity/.deps/
+/python/.output/
+/python/.idea/
+/python/.input/
+/python/config.py

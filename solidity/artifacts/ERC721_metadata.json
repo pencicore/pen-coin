@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.18+commit.87f61d96"
+		"version": "0.8.4+commit.c7e474f2"
 	},
 	"language": "Solidity",
 	"output": {
@@ -392,7 +392,7 @@
 		"compilationTarget": {
 			"contracts/base/ERC721.sol": "ERC721"
 		},
-		"evmVersion": "paris",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -405,11 +405,11 @@
 	},
 	"sources": {
 		"contracts/base/ERC721.sol": {
-			"keccak256": "0x934a6be9baa5b089f3553d5d231f802b33468a1d5df763a7eed70482e97bdda8",
+			"keccak256": "0x9897cf0ba6c44904fcba1bb6af35b3285ca51b98db3b0329f913dbf3443374b5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c3888d8dec90dba971fdb7455bf7a4b7043f04baf28c316341ea207f125111da",
-				"dweb:/ipfs/QmdV3SkSSmsM5bytG6Q8KcZu6iN6UXuupV1gMnTZA512df"
+				"bzz-raw://be5b7ebe77fed47cf10c4e178ff378bfd8ec0cedd3ac108132a804722efddf6e",
+				"dweb:/ipfs/Qmasew5VUPpswyRVKUrcTcadAeB1UftyZ1f2EBE8E2GWfE"
 			]
 		},
 		"contracts/interface/IERC165.sol": {

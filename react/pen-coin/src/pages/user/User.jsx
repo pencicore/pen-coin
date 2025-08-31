@@ -79,7 +79,7 @@ const User = () => {
                     <h2>{Number(balance).toPrecision(6)} PEN</h2>
                     <small>
                         相对于上周{balanceUp?'上升':'下降'}
-                        <mark className={balanceUp ? style.Up : style.Down}>{balanceChange}%</mark>
+                        <mark className={balanceUp ? style.Up : style.Down}>{Number(balanceChange).toPrecision(4)}%</mark>
                     </small>
                 </div-back>
                 &nbsp;
@@ -87,7 +87,7 @@ const User = () => {
                     <p>今日活动</p>
                     <h2>{count} 次</h2>
                     <small>相对于昨日活跃度{countUp?'上升':'下降'}
-                        <mark className={countUp ? style.Up : style.Down}>{countChange}%</mark>
+                        <mark className={countUp ? style.Up : style.Down}>{Number(countChange).toPrecision(4)}%</mark>
                     </small>
                 </div-back>
                 <br></br><br></br>

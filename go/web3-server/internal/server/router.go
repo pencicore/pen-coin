@@ -40,6 +40,10 @@ func SetupRouter() *gin.Engine {
 		swap.GET("/pageSwapHistory", service.PageSwapHistory)
 		swap.GET("/getSwapHistory", service.GetSwapHistory)
 	}
+	nft := r.Group("/nft")
+	{
+		nft.GET("/getNftList", service.GetNftListHandler)
+	}
 	return r
 }
 

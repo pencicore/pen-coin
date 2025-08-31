@@ -8,21 +8,17 @@
 
 ### 前端部分
 
-前端部分使用 React + Vite 构建
+前端部分使用 React 构建, 对接后端服务 实现链上交互
 
 组件使用
-- ethers.js v6 框架
+- vite 构建项目
+- ethers.js v6 链上交互
 - react-router-dom 路由
 - sass 样式
 - zustand 变量管理
 - react-toastify 提示框
 - react-avatar 头像
 - axios 请求框架
-
-文件描述
-- src/main.jsx 入口文件：渲染根组件, 不做任何更改
-- src/App.jsx 根组件,：网页主体内容
-- src/Common.css 通用样式：定义了网页大部分基础样式，由App.jsx引入，所有组件共用
 
 ### 后端部分
 
@@ -34,3 +30,10 @@
 - redis 缓存
 - go-ethereum 链上交互与监听
 - logrus 日志
+
+### 脚本部分
+
+使用 python 进行nft代币图像生成，并批量上传ipsf服务器，提供nft代币信息功能
+
+python库使用
+- Stable Diffusion 图像生成模型
