@@ -14,7 +14,7 @@ const LogoutInfo = () => {
 
     const logoutHandle = () => {
         console.log('logout')
-        FullWindowController.close()
+        FullWindowController.close("logout")
         maskUtil.logout()
         setLogin(false)
     }

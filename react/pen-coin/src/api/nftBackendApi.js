@@ -16,3 +16,12 @@ export const GetNftList = async (address) =>{
     })
     return response.data
 }
+
+export const GetNftInfo = async (tokenId) =>{
+    const response = await api.get('/getNftInfo', {
+        params: {
+            tokenId
+        }
+    })
+    return response.data
+}

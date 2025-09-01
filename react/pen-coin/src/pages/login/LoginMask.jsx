@@ -26,7 +26,7 @@ const LoginMask = () => {
         }
         await metaMaskUtil.login()
         setLogin(true)
-        FullWindowController.close()
+        FullWindowController.close("login")
         toastUtil.log("登录成功")
     }
 

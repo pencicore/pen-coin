@@ -1,0 +1,126 @@
+.NftInfoHistory {
+  height: 410px;
+  width: 580px;
+
+  i {
+    height: 16px;
+    width: 16px;
+    margin: 0;
+    background-image: url("../../assets/images/i-history.png");
+
+  }
+
+  p {
+    font-size: 15px;
+    height: 16px;
+    line-height: 16px;
+    margin-left: 10px;
+  }
+
+  th {
+    font-size: 12px;
+    height: 30px;
+    color: rgba(85, 85, 85, 1);
+    text-align: left;
+  }
+
+  table {
+    border-collapse: collapse;
+    //width: 300px;
+  }
+
+  thead {
+    display: table;
+    width: calc(100% - 0px);
+    table-layout: fixed;
+  }
+
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  th td tr {
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  tbody {
+    display: block;
+    max-height: 300px;   /* 限制高度 */
+    overflow-y: auto;    /* 设置滚动 */
+  }
+
+}
+
+.TradeItem {
+  height: 45px;
+  border-bottom: 0.4px solid rgba(204, 204, 204, 1);
+
+  .TextFirst {
+    height: 18px;
+    line-height: 18px;
+    font-size: 11px;
+    font-weight: 500;
+    color: black;
+    margin: 0;
+  }
+
+  .TextSecond {
+    height: 15px;
+    line-height: 15px;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(107, 114, 128, 1);
+    margin: 0;
+  }
+
+  .Type {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 1);
+  }
+
+  .Avatar {
+    height: 30px;
+    width: 20px;
+    display: inline-block;
+    vertical-align: middle; /* top | middle | bottom */
+  }
+
+  .Address {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 1);
+    display: inline-block;
+    vertical-align: middle; /* top | middle | bottom */
+  }
+}
+
+
+/* 整体滚动条 */
+.HistoryTbody::-webkit-scrollbar {
+  width: 8px;          /* 垂直滚动条宽度 */
+  height: 8px;         /* 水平滚动条高度 */
+}
+
+/* 滚动条轨道 */
+.HistoryTbody::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+/* 滚动条滑块 */
+.HistoryTbody::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d4fc79 0%, #96e621 100%);
+  border-radius: 4px;
+}
+
+/* 滚动条滑块 hover 状态 */
+.HistoryTbody::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

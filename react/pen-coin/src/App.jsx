@@ -3,8 +3,8 @@ import './Common.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MenuButton from "./components/MenuButton.jsx";
 import LoginButton from "./components/LoginButton.jsx";
-import HomeGuide from "./pages/home_guide/HomeGuide.jsx";
-import HomeCheckin from "./pages/home_checkin/HomeCheckin.jsx";
+import HomeGuide from "./pages/guide/HomeGuide.jsx";
+import HomeCheckin from "./pages/checkin/HomeCheckin.jsx";
 import Wheel from "./pages/wheel/Wheel.jsx";
 import Auction from "./pages/auction/Auction.jsx";
 import NftTrade from "./pages/nft/NftTrade.jsx";
@@ -21,9 +21,13 @@ import Logout from "./pages/logout/Logout.jsx";
 import erc20ContractApi from "./api/erc20ContractApi.js";
 import nftContractApi from "./api/nftContractApi.js";
 import {ContractAddressConfig} from "./config/contractAddressConfig.js";
+import swapContractApi from "./api/swapContractApi.js";
+import tradeStore from "./store/tradeStore.js";
+import {ethers} from "ethers";
 
 function App() {
 
+    const {setPricePEN, setPriceETH} = tradeStore()
     const {login, setLogin, setAddress, setEthCount, setPenCount, playCount, setNftPenCount, setPenTradeCount} = userStore()
 
     useEffect(() => {
@@ -44,6 +48,12 @@ function App() {
             setPenCount((await erc20ContractApi.balanceOf(address)))
             setNftPenCount(await nftContractApi.balanceOf(address))
             setPenTradeCount(await erc20ContractApi.allowance(address, ContractAddressConfig.ERC721))
+            swapContractApi.getPENPriceInETH().then(price => {
+                setPricePEN(ethers.formatUnits(price, 18))
+            })
+            swapContractApi.getETHPriceInPEN().then(price => {
+                setPriceETH(ethers.formatUnits(price, 18))
+            })
             console.log("登录成功", address)
         }
         fun().then()
@@ -62,8 +72,8 @@ function App() {
                   <MenuButton name={"Trade"} url={"/trade"}></MenuButton>
               </div>
               <div className="Header">
-                  {!login && <LoginButton name={"LOGIN"} handleClick={()=>{FullWindowController.open(<Login></Login>)}}></LoginButton>}
-                  {login && <HeaderInfo handleClick={()=>{FullWindowController.open(<Logout></Logout>)}}></HeaderInfo>}
+                  {!login && <LoginButton name={"LOGIN"} handleClick={()=>{FullWindowController.open("login", <Login></Login>)}}></LoginButton>}
+                  {login && <HeaderInfo handleClick={()=>{FullWindowController.open("logout", <Logout></Logout>)}}></HeaderInfo>}
               </div>
               <div className="Main">
                 <Routes>

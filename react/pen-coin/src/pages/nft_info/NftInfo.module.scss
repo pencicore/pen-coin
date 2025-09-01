@@ -1,0 +1,127 @@
+.NftInfo {
+  height: 500px;
+  width: 100%;
+  position: relative;
+  align-content: center;
+}
+
+.NextNft {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  top: calc(50% - 50px);
+}
+
+.Main {
+  height: 500px;
+  width: 1040px;
+  margin: 0 auto;
+}
+
+.Left {
+  height: 100%;
+  width: 400px;
+  float: left;
+
+  .Info {
+    height: 24px;
+    width: 400px;
+    margin-top: 20px;
+
+    .AvatarArea {
+      height: 24px;
+      width: 24px;
+      float: left;
+    }
+
+    .OwnerAddress {
+      height: 24px;
+      line-height: 24px;
+      width: auto;
+      font-size: 10px;
+      font-weight: 700;
+      margin-left: 15px;
+      color: rgba(108, 92, 231, 1);
+      float: left;
+    }
+
+    .OwnerIcon {
+      height: 16px;
+      line-height: 14px;
+      width: 42px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 500;
+      margin: 3px 0 3px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(108, 92, 231, 1);
+      color: rgba(108, 92, 231, 1);
+      float: left;
+    }
+  }
+
+  .NftDescription {
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    color: rgba(96, 98, 102, 1);
+    font-weight: 500;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .NftImage {
+    height: 350px;
+    width: 350px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px  rgba(0, 0, 0, 0.25);
+  }
+
+}
+
+.Line {
+  height: 400px;
+  margin: 50px 0 50px 0;
+  width: 1px;
+  border-left: 1px solid rgba(85, 85, 85, 1);
+  box-shadow: 0 2px 4px  rgba(0, 0, 0, 0.25);
+  float: left;
+}
+
+.Right {
+  padding-top: 30px;
+  height: 100%;
+  margin-left: 45px;
+  width: 590px;
+  box-sizing: border-box;
+  float: left;
+
+  .InfoBack {
+    height: 50px;
+    width: auto;
+    padding: 2px 15px 0 10px;
+    margin-right: 20px;
+    border-radius: 10px;
+    background: rgba(243, 244, 246, 1);
+    display: inline-block;
+
+    .InfoSecondText {
+      height: 20px;
+      line-height: 20px;
+      width: auto;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(107, 114, 128, 1);
+    }
+
+    .InfoFirstText {
+      height: 25px;
+      line-height: 25px;
+      width: auto;
+      font-size: 14px;
+      font-weight: 500;
+      color: black;
+    }
+  }
+}

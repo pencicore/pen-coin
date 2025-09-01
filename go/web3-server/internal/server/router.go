@@ -43,6 +43,7 @@ func SetupRouter() *gin.Engine {
 	nft := r.Group("/nft")
 	{
 		nft.GET("/getNftList", service.GetNftListHandler)
+		nft.GET("/getNftInfo", service.GetNftInfoHandler)
 	}
 	return r
 }

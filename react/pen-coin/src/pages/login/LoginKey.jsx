@@ -40,7 +40,7 @@ const LoginKey = () => {
 
     const handleLogin = () => {
         localMaskUtil.login(privateKey)
-        FullWindowController.close()
+        FullWindowController.close("login")
         setLogin(true)
         toastUtil.log('登录成功')
     }

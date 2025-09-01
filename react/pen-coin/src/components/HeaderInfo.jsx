@@ -10,7 +10,7 @@ import tradeStore from "../store/tradeStore.js";
 
 const HeaderInfo = ({handleClick}) => {
 
-    const {pricePEN, setPricePEN, priceETH, setPriceETH} = tradeStore()
+    const {pricePEN, priceETH} = tradeStore()
     const {penCount, ethCount, address, playCount, penTradeCount} = userStore()
     const location = useLocation(); // 新增
     const [showETH, setShowETH] = useState(true)
@@ -26,17 +26,6 @@ const HeaderInfo = ({handleClick}) => {
             }, 2000); // 2 seconds
         });
     }
-
-    useEffect(() => {
-        if (location.pathname === '/trade') {
-            swapContractApi.getPENPriceInETH().then(price => {
-                setPricePEN(ethers.formatUnits(price, 18))
-            })
-            swapContractApi.getETHPriceInPEN().then(price => {
-                setPriceETH(ethers.formatUnits(price, 18))
-            })
-        }
-    }, [location, playCount]);
 
     return (
         <div className={style.HeaderInfo}>
