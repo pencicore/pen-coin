@@ -4,7 +4,6 @@ import os
 import config
 
 # ========== 配置部分 ==========
-# 阿里云 OSS 配置信息
 ACCESS_KEY_ID = config.ACCESS_KEY_ID
 ACCESS_KEY_SECRET = config.ACCESS_KEY_SECRET
 ENDPOINT = config.ENDPOINT
@@ -26,7 +25,7 @@ os.makedirs(METADATA_DIR, exist_ok=True)
 def generate_metadata(token_id, image_url):
     """生成 NFT Metadata JSON"""
     metadata = {
-        "name": f"My NFT #{token_id}",
+        "name": f"PEN NFT #{token_id}",
         "description": f"这是第 {token_id} 个 NFT, 更多描述正在更新中...",
         "image": image_url,
         "attributes": [
@@ -39,8 +38,16 @@ def generate_metadata(token_id, image_url):
 
 def main():
     # 遍历本地图片文件夹
-    for idx, filename in enumerate(sorted(os.listdir(IMAGE_DIR)), start=1):
+    for filename in sorted(os.listdir(IMAGE_DIR)):
         if not filename.lower().endswith((".png", ".jpg", ".jpeg", ".gif")):
+            continue
+
+        # 直接从文件名提取 token_id
+        name, _ = os.path.splitext(filename)
+        try:
+            token_id = int(name)  # 文件名必须是数字，比如 "1.png"
+        except ValueError:
+            print(f"⚠️ 跳过无效文件名: {filename}")
             continue
 
         local_path = os.path.join(IMAGE_DIR, filename)
@@ -52,8 +59,8 @@ def main():
         print(f"✅ 上传图片: {image_url}")
 
         # 生成 Metadata JSON
-        metadata = generate_metadata(idx, image_url)
-        json_filename = f"{idx}.json"
+        metadata = generate_metadata(token_id, image_url)
+        json_filename = f"{token_id}.json"
         local_json_path = os.path.join(METADATA_DIR, json_filename)
 
         with open(local_json_path, "w", encoding="utf-8") as f:

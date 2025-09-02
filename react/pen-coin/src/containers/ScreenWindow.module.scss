@@ -37,6 +37,7 @@
   background-size: contain;     /* 按比例缩放，完整显示，不拉伸 */
   image-rendering: pixelated;   /* 强制像素化缩放 */
   cursor: pointer;
+  z-index: 1000;
 }
 
 .ExitButton:hover {

@@ -19,14 +19,14 @@ const LogoutNFT = () => {
     }
 
     useEffect(() => {
-        updateInfo()
+        updateInfo().then()
     }, [nftPenCount, address])   // 建议把 address 也放依赖
 
     const nftInfoHandle = (e) => {
         const target = e.target.closest("[data-id]");
         if (target) {
             console.log("clicked", target.dataset.id);
-            FullWindowController.open("nft"+target.dataset.id,
+            FullWindowController.open("token",
                 <NftInfo paramTokenId={target.dataset.id} paramTokenList={nftListPage.map(item => item.tokenId)}></NftInfo>)
         }
     }

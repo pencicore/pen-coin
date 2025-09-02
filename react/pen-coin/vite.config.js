@@ -11,6 +11,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/rpc/, ''),
       },
+      '/oss': {
+        target: 'https://pen-coin.oss-cn-chengdu.aliyuncs.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/oss/, ''),
+      }
     },
   },
 })

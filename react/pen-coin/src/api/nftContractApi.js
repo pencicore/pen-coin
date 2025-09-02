@@ -18,6 +18,11 @@ const nftContractApi = {
         const contract = await this.getContract()
         return await contract.balanceOf(address)
     },
+    async listNFT(tokenId, price, payToken) {
+        const contract = await this.getContract()
+        const tx = await contract.listNFT(tokenId, price, payToken)
+        return await tx.wait()
+    }
 }
 
 export default nftContractApi;

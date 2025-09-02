@@ -1,5 +1,5 @@
 .NftInfo {
-  height: 500px;
+  height: 100%;
   width: 100%;
   position: relative;
   align-content: center;
@@ -10,6 +10,54 @@
   width: 100px;
   position: absolute;
   top: calc(50% - 50px);
+}
+
+.Header {
+  position: absolute;
+  top: 0;
+  right: 120px;
+  height: 80px;
+  width: 400px;
+  direction: rtl;
+
+  button {
+    width: 100px;
+    margin-top: 25px;
+    margin-left: 30px;
+    height: 40px;
+    border-radius: 12px;        /* 圆角 */
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    display: inline-flex;      /* 图标和文字水平对齐 */
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+  }
+
+  .SendBtn {
+    background-color: #e5e7eb; /* 浅灰 */
+    color: #1f2937;           /* 深灰文字 */
+  }
+  .SendBtn:hover {
+    background-color: #d1d5db; /* hover 浅灰 */
+  }
+
+  .PlaceBtn {
+    background: linear-gradient(90deg, #4f46e5, #3b82f6); /* 渐变背景 */
+    color: #ffffff;
+  }
+
+  .SellBtn {
+    background-color: #10b981; /* 绿色 */
+    color: #ffffff;
+  }
+
+  .SellBtn:hover {
+    background-color: rgba(16, 185, 129, 0.9); /* hover 效果 */
+  }
+
 }
 
 .Main {

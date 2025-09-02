@@ -15,6 +15,8 @@ func Listen() {
 	faucetAddress := config.FaucetAddress
 	erc20ABI, _ := abi.JSON(strings.NewReader(event.ERC20Abi))
 	erc20Address := config.ERC20Address
+	erc721ABI, _ := abi.JSON(strings.NewReader(event.ERC721Abi))
+	erc721Address := config.ERC721Address
 
 	manager := &EventManager{}
 
@@ -41,6 +43,12 @@ func Listen() {
 		EventID: erc20ABI.Events["Swap"].ID,
 		ABI:     erc20ABI,
 		Handler: event.SwapHandle,
+	})
+	manager.Events = append(manager.Events, EventSubscription{
+		Address: common.HexToAddress(erc721Address),
+		EventID: erc721ABI.Events["NFTListed"].ID,
+		ABI:     erc721ABI,
+		Handler: event.NFTListedHandle,
 	})
 
 	if err := manager.Start(); err != nil {

@@ -1,0 +1,109 @@
+.NftCard {
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+.ImageBox {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+
+  img {
+    width: 400px;
+    height: 230px;
+    transition: transform 0.4s ease;
+    object-fit: contain; /* 或者 cover */
+  }
+}
+
+.Name {
+  flex: 0.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 16px;
+
+  input {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    color: #111;
+  }
+}
+
+.Form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px 35px 20px;
+  gap: 14px;
+
+  label {
+    font-size: 14px;
+    color: #6c6c6c;
+    font-weight: 500;
+  }
+
+  input {
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: rgba(255, 255, 255, 0.7);
+
+    &:focus {
+      border-color: #007aff;
+    }
+  }
+
+  .Preview {
+    font-size: 15px;
+    color: #333;
+    text-align: right;
+
+    span {
+      font-weight: 600;
+      color: #007aff;
+    }
+  }
+
+  button {
+    height: 46px;
+    width: 100px;
+    background: linear-gradient(135deg, #007aff, #0051d4);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #3399ff, #0066ff);
+    }
+
+    &:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+  }
+}

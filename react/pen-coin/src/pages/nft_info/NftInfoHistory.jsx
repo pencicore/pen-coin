@@ -11,7 +11,6 @@ function NftInfoHistory({historyList}) {
 
     useEffect(() => {
         updateHistory(historyList)
-        console.log(priceETH, pricePEN)
     }, [historyList]);
 
     const updateHistory = (historyList) => {

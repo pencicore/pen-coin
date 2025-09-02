@@ -32,7 +32,7 @@ const LoginKey = ({closeHandle}) => {
         if (!target) useNewPenTradeCount = (BigInt(penTradeCount) - BigInt(Number(amount) * 10 ** 9) * 10n ** 9n)
         else useNewPenTradeCount = (BigInt(penTradeCount) + BigInt(Number(amount) * 10 ** 9) * 10n ** 9n)
         setNewPenTradeCount(useNewPenTradeCount)
-        if (amount !== null && amount !== "" && useNewPenTradeCount > 0n) setIsOk(true)
+        if (amount !== null && amount !== "" && useNewPenTradeCount >= 0n) setIsOk(true)
         else setIsOk(false)
     }
 

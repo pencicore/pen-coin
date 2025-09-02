@@ -6,6 +6,10 @@ import NftInfoHistory from "./NftInfoHistory.jsx";
 import {useEffect, useState} from "react";
 import {GetNftInfo} from "../../api/nftBackendApi.js";
 import strUtil from "../../utils/strUtil.js";
+import userStore from "../../store/userStore.js";
+import {showModal} from "../../containers/ModelPortal.jsx";
+import NftSellCard from "./NftSellCard.jsx";
+import JsonUtil from "../../utils/jsonUtil.js";
 
 function formatIsoDate(isoString, fullMonth = false) {
     const date = new Date(isoString);
@@ -24,6 +28,7 @@ function formatIsoDate(isoString, fullMonth = false) {
 
 function NftInfo({paramTokenId, paramTokenList=[]}) {
 
+    const {address} = userStore()
     const [tokenId, setTokenId] = useState(paramTokenId);
     const [tokenName, setTokenName] = useState("PEN NFT #0");
     const [tokenDescription, setTokenDescription] = useState("描述");
@@ -35,8 +40,11 @@ function NftInfo({paramTokenId, paramTokenList=[]}) {
 
     const updateInfo = (res) => {
         if(res.nft) {
+            JsonUtil.fetchJsonByTokenId(tokenId).then(json => {
+                setTokenName(json.name)
+                setTokenDescription(json.description)
+            })
             const info = res.nft
-            setTokenName("PEN NFT #" + info.ID)
             setTokenOwner(info.Address)
             setTokenImage(info.ImageUrl)
             setTokenCreated(info.CreatedAt)
@@ -61,11 +69,23 @@ function NftInfo({paramTokenId, paramTokenList=[]}) {
         GetNftInfo(tokenId).then(res => {
             updateInfo(res.data)
         })
+        console.log(address, tokenOwner, address===tokenOwner)
     }, [tokenId]);
 
     return(
         <div className={style.NftInfo}>
             {paramTokenList.length > 1 && <img src={leftImg} alt={"left"} className={style.NextNft} style={{left: 0}} onClick={leftNftHandle}></img>}
+            {(address.toLowerCase() === tokenOwner.toLowerCase()) &&
+                <div className={style.Header}>
+                    <button className={style.SendBtn}>发送</button>
+                    <button className={style.PlaceBtn}>拍卖</button>
+                    <button className={style.SellBtn} onClick={() => showModal({
+                        content: (
+                            <NftSellCard tokenId={tokenId}></NftSellCard>
+                        ),
+                    })}>出售</button>
+                </div>
+            }
             <div className={style.Main}>
                 <div className={style.Left}>
                     <h1>{tokenName}</h1>
